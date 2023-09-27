@@ -39,15 +39,18 @@ const IndexPage = () => {
             <section className='flex justify-between section'>
                 <StaticImage src='../images/members.png' alt='' height={500} style={{height: '500px'}}/>
                 <div className={'w-[600px] order-first'}>
-                    <h1>Members</h1>
+                    <h1>Project Goals</h1>
                     {/* TODO: Members & Eughloh    */}
-                    <p>
-                        Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut
-                        aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit
-                        esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et
-                        iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait
-                        nulla facilisi.
-                    </p>
+                    <ul className='list-disc'>
+                        <li>for Europe and the world,</li>
+                        <li>decentralized, secure and state-of-the-art,</li>
+                        <li>compliant (e.g. GDPR, vendor-neutral),</li>
+                        <li>updates are easily possible,</li>
+                        <li>accessible,</li>
+                        <li>follow European jurisdiction requirements,</li>
+                        <li>community-governed free and open-source software,</li>
+                        <li>favourable adaption possible.</li>
+                    </ul>
                 </div>
             </section>
             <div>
