@@ -53,3 +53,4 @@ const AboutPage = () => {
 }
 
 export default AboutPage;
+export {default as Head} from '../components/head';

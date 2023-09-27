@@ -15,3 +15,4 @@ const ExamplesPage = () => {
 }
 
 export default ExamplesPage;
+export {default as Head} from '../components/head';

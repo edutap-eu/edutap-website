@@ -47,3 +47,4 @@ const FaqPage = () => {
 }
 
 export default FaqPage
+export {default as Head} from '../components/head';
