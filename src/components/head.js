@@ -2,7 +2,7 @@ import * as React from "react";
 
 const Head = () => (
     <>
-        <title>eduTap</title>
+        <title>eduTAP</title>
     </>
 )
 

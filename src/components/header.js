@@ -28,7 +28,7 @@ const Header = () => (
         <div className='w-36'>
             <Link to='/' className='text-4xl mr-40'>
                 <mark className='px-1 mr-1 rounded bg-primary text-white'>edu</mark>
-                <span className='text-accent'>Tap</span>
+                <span className='text-accent'>TAP</span>
             </Link>
         </div>
         <nav className='mt-2'>

@@ -6,7 +6,7 @@ const Hero = () => (
             <div className="max-w-md">
                 <h1 className="text-6xl font-bold">
                     <mark className='px-1 mr-1 rounded bg-white text-primary'>edu</mark>
-                    <span className='text-accent'>Tap</span>
+                    <span className='text-accent'>TAP</span>
                 </h1>
                 {/* TODO: replace text */}
                 <p className="text-xl mt-14 mb-10">
