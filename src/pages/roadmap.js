@@ -54,9 +54,27 @@ const milestones = [
         status: 'todo'
     },
     {
-        title: 'Milestone 6: Presentation of eduTAP Core',
+        title: 'Milestone 6: Presentation of eduTAP Components',
         description: 'ECCA Conference, Milan',
         date: '2024-04-15',
+        status: 'todo'
+    },
+    {
+        title: 'Milestone 7: Presentation of eduTAP Components',
+        description: 'EUGLOH Annual Summit, Sezeged',
+        date: '2024-06',
+        status: 'todo'
+    },
+    {
+        title: 'Milestone 8: EduTAP Go Live at LMU Munich',
+        description: 'Full Go-Live at LMU Munich',
+        date: '2024-07-19',
+        status: 'todo'
+    },
+    {
+        title: 'Support further Implemenations',
+        description: 'at other Higher Eductaion Institutions',
+        date: 'starting mid 2024',
         status: 'todo'
     }
 ];
