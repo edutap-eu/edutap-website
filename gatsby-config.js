@@ -5,9 +5,9 @@ module.exports = {
   // Note: Must be updated/removed when site is deployed on different path
   pathPrefix: "/",
   siteMetadata: {
-    title: `edutap`,
+    title: "eduTAP",
     // TODO: Update siteUrl to production URL
-    siteUrl: `https://www.yourdomain.tld`
+    siteUrl: ""`https://edutap.eu"
   },
   plugins: ["gatsby-plugin-postcss", "gatsby-plugin-image", "gatsby-plugin-sitemap", {
     resolve: 'gatsby-plugin-manifest',
