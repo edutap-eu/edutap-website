@@ -10,8 +10,7 @@ const Hero = () => (
                 </h1>
                 {/* TODO: replace text */}
                 <p className="text-xl mt-14 mb-10">
-                    Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi
-                    exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.
+                    Educational Tapping
                 </p>
                 <div className='space-x-4'>
                     <button className='btn btn-lg btn-accent text-white'>Newsletter</button>
