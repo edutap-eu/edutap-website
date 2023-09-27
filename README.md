@@ -26,7 +26,7 @@ Edit and save a file in `src/pages/` to see your site update in real-time!
 
 3.  **Deployment to GH Pages**
 
-Run `npm deploy`.
+Run `npm run deploy`.
 
 4.  **Learn more**
 
