@@ -7,7 +7,7 @@ module.exports = {
   siteMetadata: {
     title: "eduTAP",
     // TODO: Update siteUrl to production URL
-    siteUrl: ""`https://edutap.eu"
+    siteUrl: "https://edutap.eu"
   },
   plugins: ["gatsby-plugin-postcss", "gatsby-plugin-image", "gatsby-plugin-sitemap", {
     resolve: 'gatsby-plugin-manifest',
