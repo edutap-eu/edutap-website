@@ -14,18 +14,11 @@ const IndexPage = () => {
                 <div className={'w-[600px] order-first'}>
                     <h1>Mission</h1>
                     {/* TODO: Introduction & Goals */}
-                    <p>
-                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
-                        ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
-                        dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
-                        sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                        invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                        justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-                        ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                        eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos
-                        et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
-                        est Lorem ipsum dolor sit amet.
-                    </p>
+                    <p>We are developing the digital campus card of the future for the smartphone.</p>
+                    <p>It enables you to easily access services by tapping.</p>
+                    <p>Our mission is to fulfill the interoperability vision of the European Student Card.</p>
+                    <p>eduTAP is your educational ID and a collection of service passes in the digital wallet.
+                       It enables you to tap to identify yourself, tap to claim a discount, tap to pay, tap to open a door, tap to lend a book, tap to take a campus shuttle.</p>
                 </div>
             </section>
             <section className='flex section bg-base-200'>

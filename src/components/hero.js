@@ -13,8 +13,8 @@ const Hero = () => (
                     Educational Tapping
                 </p>
                 <div className='space-x-4'>
-                    <button className='btn btn-lg btn-accent text-white'>Newsletter</button>
-                    <a href="https://docs.edutap.eu/" className='btn btn-lg btn-accent text-white'>Docs</a>
+                    {/* <button className='btn btn-lg btn-accent text-white'>Newsletter</button> */}
+                    <a href="https://docs.edutap.eu/" className='btn btn-lg btn-accent text-white'>Documentation</a>
                 </div>
             </div>
         </div>
