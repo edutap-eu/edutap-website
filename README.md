@@ -4,7 +4,7 @@
   </a>
 </p>
 <h1 align="center">
-  Gatsby Minimal Starter
+  Edutap Gatby based Website
 </h1>
 
 ## 🚀 Quick start
