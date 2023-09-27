@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkedutap=self.webpackChunkedutap||[]).push([[437],{3413:function(e,t,n){var l=n(7294);t.Z=()=>l.createElement(l.Fragment,null,l.createElement("title",null,"eduTAP"))},5202:function(e,t,n){n.r(t),n.d(t,{Head:function(){return u.Z}});var l=n(7294),a=n(5292),u=n(3413);t.default=()=>l.createElement(a.Z,null,l.createElement("section",{className:"section"},l.createElement("h1",null,"Examples")))}}]);
+//# sourceMappingURL=component---src-pages-examples-js-7b2dfaf56c43b0ca146d.js.map

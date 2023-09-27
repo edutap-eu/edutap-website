@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkedutap=self.webpackChunkedutap||[]).push([[986],{3849:function(e,t,l){l.r(t);var a=l(7294),n=l(5292);t.default=()=>a.createElement(n.Z,null,a.createElement("section",{className:"section"},a.createElement("h1",{className:"text-5xl font-bold"},"Imprint"),a.createElement("p",null)))}}]);
+//# sourceMappingURL=component---src-pages-legal-imprint-js-25660e8a84a4ca6b761a.js.map

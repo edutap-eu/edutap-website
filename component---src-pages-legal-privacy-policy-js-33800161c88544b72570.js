@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkedutap=self.webpackChunkedutap||[]).push([[519],{6693:function(e,t,l){l.r(t);var a=l(7294),c=l(5292);t.default=()=>a.createElement(c.Z,null,a.createElement("section",{className:"section"},a.createElement("h1",{className:"text-5xl font-bold"},"Privacy Policy"),a.createElement("p",null)))}}]);
+//# sourceMappingURL=component---src-pages-legal-privacy-policy-js-33800161c88544b72570.js.map
