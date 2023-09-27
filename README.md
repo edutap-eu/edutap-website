@@ -4,43 +4,38 @@
   </a>
 </p>
 <h1 align="center">
-  Edutap Gatby based Website
+  eduTAP Website based on Gatby
 </h1>
 
 ## 🚀 Quick start
 
-1.  **Create a Gatsby site.**
+1.  **Start developing.**
 
-    Use the Gatsby CLI to create a new site, specifying the minimal starter.
+Make sure to have npm installed.
+If in doubt use nvm and install the stable version.
 
-    ```shell
-    # create a new Gatsby site using the minimal starter
-    npm init gatsby
-    ```
+In the repositories root directory:
 
-2.  **Start developing.**
+First run ``npm install`` one time.
 
-    Navigate into your new site’s directory and start it up.
+Then start the development server `npm run develop`.
 
-    ```shell
-    cd my-gatsby-site/
-    npm run develop
-    ```
+Your site is now running at http://localhost:8000!
 
-3.  **Open the code and start customizing!**
+Edit and save a file in `src/pages/` to see your site update in real-time!
 
-    Your site is now running at http://localhost:8000!
+3.  **Deployment to GH Pages**
 
-    Edit `src/pages/index.js` to see your site update in real-time!
+Run `npm deploy`.
 
 4.  **Learn more**
 
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-    - [Tutorials](https://www.gatsbyjs.com/docs/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-    - [Guides](https://www.gatsbyjs.com/docs/how-to/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+- [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+- [Tutorials](https://www.gatsbyjs.com/docs/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+- [Guides](https://www.gatsbyjs.com/docs/how-to/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+- [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+- [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+- [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
 
 ## 🚀 Quick start (Netlify)
 
