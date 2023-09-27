@@ -6,9 +6,9 @@ import {useEffect} from "react";
 
 const milestones = [
     {
-        title: 'Milestone 9',
-        description: 'Description',
-        date: '2023-09-01',
+        title: 'Milestone 2',
+        description: 'Presentation ECCA/DC4EU Workshop',
+        date: '2023-09-21',
         status: 'done'
     },
     {
