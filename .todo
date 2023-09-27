@@ -1,0 +1,3 @@
+- [ ] change font
+- [ ] prevent layout from unmounting when switching between pages (https://www.gatsbyjs.com/docs/how-to/routing/layout-components/)
+- [ ] todo create data directory for all data lists (team, faq, links, roadmap)
