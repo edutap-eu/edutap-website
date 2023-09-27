@@ -3,7 +3,7 @@
  */
 module.exports = {
   // Note: Must be updated/removed when site is deployed on different path
-  pathPrefix: "/edutap-website",
+  pathPrefix: "/",
   siteMetadata: {
     title: `edutap`,
     // TODO: Update siteUrl to production URL
