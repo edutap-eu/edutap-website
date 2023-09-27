@@ -2,8 +2,11 @@
  * @type {import('gatsby').GatsbyConfig}
  */
 module.exports = {
+  // Note: Must be updated/removed when site is deployed on different path
+  pathPrefix: "/edutap-website",
   siteMetadata: {
     title: `edutap`,
+    // TODO: Update siteUrl to production URL
     siteUrl: `https://www.yourdomain.tld`
   },
   plugins: ["gatsby-plugin-postcss", "gatsby-plugin-image", "gatsby-plugin-sitemap", {
