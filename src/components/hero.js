@@ -10,7 +10,7 @@ const Hero = () => (
                 </h1>
                 {/* TODO: replace text */}
                 <p className="text-xl mt-14 mb-10">
-                    Educational Tapping
+                    "Educational Tapping" describes the act of "tap" a smartphone on a reader device to perform a transaction.
                 </p>
                 <div className='space-x-4'>
                     {/* <button className='btn btn-lg btn-accent text-white'>Newsletter</button> */}
