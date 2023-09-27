@@ -6,33 +6,57 @@ import {useEffect} from "react";
 
 const milestones = [
     {
-        title: 'Milestone 2',
-        description: 'Presentation ECCA/DC4EU Workshop',
+        title: 'First Involvement',
+        description: 'to implement the European Student Card within the EUGLOH Alliance',
+        date: '2020-07-01',
+        status: 'done'
+    },
+    {
+        title: 'Initial Idea eduTAP',
+        description: 'Campus Life Meeting Online',
+        date: '2020-11-10',
+        status: 'done'
+    },
+    {
+        title: 'Milestone 1: Kickoff Vision',
+        description: 'EUGHLOH Annual Summit, Paris',
+        date: '2022-06-10',
+        status: 'done'
+    },
+    {
+        title: 'Milestone 2: Presentation ECC Pilot',
+        description: 'EUGLOH Annual Summit, Lund',
+        date: '2023-06-29',
+        status: 'done'
+    },
+    {
+        title: 'Presentation',
+        description: 'ECCA/DC4EU Workshop, Porto',
         date: '2023-09-21',
         status: 'done'
     },
     {
-        title: 'Milestone 1',
-        description: 'Description',
-        date: '2023-09-10',
-        status: 'done'
-    },
-    {
-        title: 'Milestone 2',
-        description: 'Description',
-        date: '2023-10-10',
+        title: 'Milestone 3: Presentation Prototype',
+        description: 'EAIE Conference, Rotterdam',
+        date: '2023-09-29',
         status: 'doing'
     },
     {
-        title: 'Milestone 3',
-        description: 'Description',
+        title: 'Milestone 4: Implementation Library ID',
+        description: 'at LMU Munich',
         date: '2023-12-10',
         status: 'todo'
     },
     {
-        title: 'Milestone 4',
-        description: 'Description',
-        date: '2024-01-10',
+        title: 'Milestone 5: Implementation Closed Loop Payment for Lunches',
+        description: 'at LMU Munich',
+        date: '2024-04-15',
+        status: 'todo'
+    },
+    {
+        title: 'Milestone 6: Presentation of eduTAP Core',
+        description: 'ECCA Conference, Milan',
+        date: '2024-04-15',
         status: 'todo'
     }
 ];
