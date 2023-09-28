@@ -1,44 +1,28 @@
 import * as React from "react";
-import {Link} from "gatsby";
+import {graphql, Link, useStaticQuery} from "gatsby";
 
-const LINKS = [
-    {
-        to: '/',
-        text: 'Start'
-    },
-    {
-        to: '/roadmap',
-        text: 'Roadmap'
-    },
-    {
-        to: '/examples',
-        text: 'Examples'
-    },
-    {
-        to: '/about',
-        text: 'About'
-    },
-    {
-        to: '/faq',
-        text: 'FAQ'
+const navLinksQuery = graphql`
+query navLinksQuery {
+  allNavJson {
+    nodes {
+      text
+      to
     }
-];
+  }
+}`;
 
-const NavLink = ({to, text}) => (
-    <Link to={to} className={'link link-hover text-lg decoration-4 decoration-primary underline-offset-4'}
-          activeClassName={'text-primary'}
-    >
-        {text}
-    </Link>
+const NavLink = ({to, text, index}) => (
+    <li key={index} className={'flex items-center'}>
+        <Link to={to} className={'nav-link'} activeClassName={'text-primary'}>
+            {text}
+        </Link>
+    </li>
 );
 
 // Not my best work ^^ but hey it works
 const NavBar = () => {
-    const navLinks =LINKS.map((link, index) => (
-        <li key={index} className={'flex items-center'}>
-            <NavLink to={link.to} text={link.text}/>
-        </li>
-    ));
+    const data = useStaticQuery(navLinksQuery);
+    const navLinks = data.allNavJson.nodes.map((navLink, index) => <NavLink key={index} {...navLink} index={index}/>);
 
     return (
         <nav className={'flex justify-end'}>
@@ -46,7 +30,7 @@ const NavBar = () => {
                 {navLinks}
             </ul>
             <div className="dropdown">
-                <label tabIndex={0} className="btn btn-ghost lg:hidden">
+                <label tabIndex="0" className="btn btn-ghost lg:hidden">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                          className="inline-block w-7 h-7 stroke-current">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
@@ -54,7 +38,8 @@ const NavBar = () => {
                     </svg>
                 </label>
                 {/* TODO: make full screen*/}
-                <ul tabIndex="0" className="dropdown-content translate-x-[-50%] left-[50%] menu p-2 border bg-base-100 w-52">
+                <ul tabIndex="0"
+                    className="dropdown-content translate-x-[-50%] left-[50%] menu p-2 border bg-base-100 w-52">
                     {navLinks}
                 </ul>
             </div>
