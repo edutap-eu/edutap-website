@@ -36,7 +36,7 @@ const TeamMember = ({name, org, role, image}) => {
                 </div>
             </div>
             <div className={'flex flex-col items-center'}>
-                <span className={'block font-bold'}>{name}</span>
+                <span className={'w-48  text-center block font-bold'}>{name}</span>
                 <span>({info})</span>
             </div>
         </div>
@@ -47,7 +47,7 @@ const Team = () => {
     const data = useStaticQuery(teamQuery);
 
     return (
-        <div className={'grid grid-cols-2 md:grid-cols-3 gap-x-2 md:gap-x-4 gap-y-4 md:gap-y-8'}>
+        <div className={'grid grid-cols-2 md:grid-cols-3 gap-x-4 lg:gap-x-8 gap-y-4 md:gap-y-8'}>
             {data.allTeamJson.nodes.map((member, index) => <TeamMember key={index} {...member}/>)}
         </div>
     );
