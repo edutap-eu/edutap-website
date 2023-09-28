@@ -1,6 +1,6 @@
 import * as React from "react";
 import {useStaticQuery, graphql} from "gatsby"
-import Layout from "../components/layout";
+import Layout from "../src/components/layout";
 
 // TODO: Add to nav links:
 //  {
@@ -49,4 +49,4 @@ const FaqPage = () => {
 }
 
 export default FaqPage
-export {default as Head} from '../components/head';
+export {default as Head} from '../src/components/head';
