@@ -8,7 +8,6 @@ const Hero = () => (
                     <mark className='px-1 mr-1 rounded bg-white text-primary'>edu</mark>
                     <span className='text-accent'>TAP</span>
                 </h1>
-                {/* TODO: replace text */}
                 <p className="text-xl mt-14 mb-10">
                     "Educational Tapping" describes the act of "tapping" a smart device (e.g. smartphone, smartwatch) on a reader device to perform a transaction.
                 </p>
