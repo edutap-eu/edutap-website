@@ -6,7 +6,7 @@ const AboutPage = () => {
     return (
         <Layout>
             {/*TODO: replace with normal text */}
-            <section className={'section space-y-8 text-lg mt-12'}>
+            <section className={'section space-y-4 md:space-y-8 md:text-lg md:mt-12'}>
                 <h1>About</h1>
                 <p>
                     LLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
