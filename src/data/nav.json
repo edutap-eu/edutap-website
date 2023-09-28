@@ -14,9 +14,5 @@
   {
     "to":"/about",
     "text":"About"
-  },
-  {
-    "to":"/faq",
-    "text":"FAQ"
   }
 ]

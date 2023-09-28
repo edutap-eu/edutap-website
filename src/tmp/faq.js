@@ -2,6 +2,12 @@ import * as React from "react";
 import {useStaticQuery, graphql} from "gatsby"
 import Layout from "../components/layout";
 
+// TODO: Add to nav links:
+//  {
+//     "to":"/faq",
+//     "text":"FAQ"
+//   }
+
 const faqQuery = graphql`
 query FaqQuery {
   allFaqJson {
