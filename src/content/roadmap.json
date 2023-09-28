@@ -1,0 +1,74 @@
+[
+  {
+    "title":"First Involvement",
+    "description":"to implement the European Student Card within the EUGLOH Alliance",
+    "date":"2020-07-01",
+    "status":"reached"
+  },
+  {
+    "title":"Initial Idea eduTAP",
+    "description":"Campus Life Meeting Online",
+    "date":"2020-11-10",
+    "status":"reached"
+  },
+  {
+    "title":"Milestone 1: Kickoff Vision",
+    "description":"EUGHLOH Annual Summit, Paris",
+    "date":"2022-06-10",
+    "status":"reached"
+  },
+  {
+    "title":"Milestone 2: Presentation ECC Pilot",
+    "description":"EUGLOH Annual Summit, Lund",
+    "date":"2023-06-29",
+    "status":"reached"
+  },
+  {
+    "title":"Presentation",
+    "description":"ECCA/DC4EU Workshop, Porto",
+    "date":"2023-09-21",
+    "status":"reached"
+  },
+  {
+    "title":"Milestone 3: Presentation Prototype",
+    "description":"EAIE Conference, Rotterdam",
+    "date":"2023-09-29",
+    "status":"next"
+  },
+  {
+    "title":"Milestone 4: Implementation Library ID",
+    "description":"at LMU Munich",
+    "date":"2023-12-10",
+    "status":"future"
+  },
+  {
+    "title":"Milestone 5: Implementation Closed Loop Payment for Lunches",
+    "description":"at LMU Munich",
+    "date":"2024-04-15",
+    "status":"future"
+  },
+  {
+    "title":"Milestone 6: Presentation of eduTAP Components",
+    "description":"ECCA Conference, Milan",
+    "date":"2024-04-15",
+    "status":"future"
+  },
+  {
+    "title":"Milestone 7: Presentation of eduTAP Components",
+    "description":"EUGLOH Annual Summit, Sezeged",
+    "date":"2024-06",
+    "status":"future"
+  },
+  {
+    "title":"Milestone 8: EduTAP Go Live at LMU Munich",
+    "description":"Full Go-Live at LMU Munich",
+    "date":"2024-07-19",
+    "status":"future"
+  },
+  {
+    "title":"Support further Implemenations",
+    "description":"at other Higher Eductaion Institutions",
+    "date":"starting mid 2024",
+    "status":"future"
+  }
+]
