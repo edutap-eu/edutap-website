@@ -15,10 +15,18 @@ const IndexPage = () => {
                     <h1>Mission</h1>
                     {/* TODO: Introduction & Goals */}
                     <p>We are developing the digital campus card of the future for the smartphone.</p>
+                    <p>For every member of the higher education community, students, faculty, staff and affiliates.</p>
                     <p>It enables you to easily access services by tapping.</p>
                     <p>Our mission is to fulfill the interoperability vision of the European Student Card.</p>
-                    <p>eduTAP is your educational ID and a collection of service passes in the digital wallet.
-                       It enables you to tap to identify yourself, tap to claim a discount, tap to pay, tap to open a door, tap to lend a book, tap to take a campus shuttle.</p>
+                    <p>eduTAP is your educational ID and a collection of service passes in the digital wallet. It enables you to:</p>
+                    <ul className='list-disc'>
+                        <li>tap to identify yourself,</li>
+                        <li>tap to claim a discount,</li>
+                        <li>tap to pay,</li>
+                        <li>tap to open a door,</li>
+                        <li>tap to lend a book,</li>
+                        <li>tap to take a campus shuttle.</li>
+                    </ul>
                 </div>
             </section>
             <section className='flex section bg-base-200'>
@@ -26,14 +34,15 @@ const IndexPage = () => {
                 <div className={'w-[600px] ml-32'}>
                     <h1>Features</h1>
                     {/*  TODO: Features  */}
-                    <p>
-                        Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel
-                        illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui
-                        blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum
-                        dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
-                        dolore magna aliquam erat volutpat.
-                    </p>
-
+                    <h2>For users</h2>
+                    <ul className='list-disc'>
+                        <li>easily obtaining passes for specific services</li>
+                        <li>ensure secure and repecting privacy</li>
+                    </ul>
+                    <h2>For Service Providers</h2>
+                    <ul className='list-disc'>
+                        <li>a secure and trustworthy solution to validate student status</li>
+                    </ul>
                 </div>
             </section>
             <section className='flex justify-between section'>
