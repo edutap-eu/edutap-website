@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 .nav-link {
-  @apply link font-bold;
+    @apply link font-bold;
 }
 
 .section {
-  @apply md:px-6 lg:px-12 xl:max-w-screen-xl mx-auto py-12;
+    @apply px-4 lg:px-12 xl:max-w-screen-xl mx-auto py-6 md:py-12;
 
 }
 
 h1 {
-  @apply mb-12 text-5xl font-bold;
+    @apply md:mb-12 text-4xl md:text-5xl md:font-bold;
 }
