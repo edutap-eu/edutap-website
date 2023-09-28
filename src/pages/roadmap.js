@@ -113,7 +113,6 @@ const Milestone = ({milestone}) => {
 const RoadmapPage = () => {
     return (
         <Layout>
-            {/*TODO: add image here */}
             <section className={'section space-y-4 md:space-y-8 md:text-lg md:mt-12'}>
                 <h1>Roadmap</h1>
                 <VerticalTimeline lineColor={"#24343D"}>
