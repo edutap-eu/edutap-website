@@ -22,19 +22,25 @@ const faqs = [
 ]
 
 const FaqPage = () => {
+    const [active, setActive] = React.useState(null);
+    const handler = (index) => () => {
+        if(active === index) setActive(null)
+        else setActive(index)
+    }
+
     return (
         <Layout>
-            <section className={'section'}>
+            <section className={'section space-y-6 md:space-y-8 md:mt-12'}>
                 <h1>F.A.Q.</h1>
-                <div className={'space-y-2'}>
+                <div className={'space-y-4'}>
                     {
                         faqs.map((faq, index) => (
                             <div className="collapse collapse-arrow bg-base-200" key={index}>
-                                <input type="radio" name="my-accordion" checked="checked"/>
-                                <div className="collapse-title text-xl font-medium">
+                                <input type="radio" name="faq" checked={active === index} onClick={handler(index)}/>
+                                <div className="collapse-title text-lg md:text-xl font-bold">
                                     {faq.question}
                                 </div>
-                                <div className="collapse-content">
+                                <div className="collapse-content text-md md:text-lg">
                                     <p>{faq.answer}</p>
                                 </div>
                             </div>
