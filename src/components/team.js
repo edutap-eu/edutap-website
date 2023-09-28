@@ -42,6 +42,16 @@ const Team = () => (
                                  style={{height: '120px'}}/>
                 </div>
             </div>
+            <span className={'font-bold'}>Christine Baumgartner • PM</span>
+        </div>
+
+        <div className={'flex flex-col space-y-2 items-center'}>
+            <div className="avatar">
+                <div className="w-28 mask mask-squircle">
+                    <StaticImage src="../images/team/mock.png" alt={''} height={120}
+                                 style={{height: '120px'}}/>
+                </div>
+            </div>
             <span className={'font-bold'}>Jens Klein • Dev</span>
         </div>
 
