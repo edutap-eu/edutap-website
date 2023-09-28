@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Alexander Loechel",
+    "org": "LMU Munich",
+    "image": "../images/team/mock.png"
+  },
+  {
+    "name": "Jose Filipe Alves",
+    "org": "U.Porto",
+    "image": "../images/team/mock.png"
+  },
+  {
+    "name": "Morgan Persson",
+    "role": "Lunds universitet",
+    "image": "../images/team/mock.png"
+  },
+  {
+    "name": "Christine Baumgartner",
+    "role": "PM",
+    "image": "../images/team/mock.png"
+  },
+  {
+    "name": "Jens Klein",
+    "role": "Dev",
+    "image": "../images/team/jens-klein.png"
+  },
+  {
+    "name": "Philip Auersperg",
+    "role": "Dev",
+    "image": "../images/team/mock.png"
+  }
+]
