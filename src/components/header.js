@@ -5,6 +5,10 @@ import {StaticImage} from "gatsby-plugin-image";
 
 const links = [
     {
+        to: '/',
+        text: 'Start'
+    },
+    {
         to: '/roadmap',
         text: 'Roadmap'
     },
