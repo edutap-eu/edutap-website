@@ -48,7 +48,7 @@ const Team = () => (
         <div className={'flex flex-col space-y-2 items-center'}>
             <div className="avatar">
                 <div className="w-28 mask mask-squircle">
-                    <StaticImage src="../images/team/mock.png" alt={''} height={120}
+                    <StaticImage src="../images/team/jensklein.jpg" alt={'Jensens'} height={120}
                                  style={{height: '120px'}}/>
                 </div>
             </div>
