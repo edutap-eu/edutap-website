@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .nav-link {
-    @apply link font-bold;
+    @apply link link-hover text-lg decoration-4 decoration-primary underline-offset-4;
 }
 
 .section {
