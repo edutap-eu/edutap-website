@@ -1,9 +1,22 @@
 import * as React from "react";
+import {useStaticQuery, graphql} from "gatsby";
 
-const Head = () => (
-    <>
-        <title>eduTAP</title>
-    </>
-)
+const metadataQuery = graphql`
+query MetadataQuery {
+    site {
+        siteMetadata {
+            title
+       }
+    }
+}`;
+
+const Head = () => {
+    const data = useStaticQuery(metadataQuery);
+    return (
+        <>
+            <title>{data.site.siteMetadata.title}</title>
+        </>
+    );
+}
 
 export default Head
