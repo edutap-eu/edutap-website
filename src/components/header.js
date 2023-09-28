@@ -6,7 +6,7 @@ import {StaticImage} from "gatsby-plugin-image";
 // TODO: Make sticky
 const Header = () => (
     <>
-        <header className={'flex-none navbar md:px-6 lg:px-12 xl:max-w-screen-xl mx-auto bg-base-100'}>
+        <header className={'flex-none navbar px-4 md:px-6 lg:px-12 xl:max-w-screen-xl mx-auto bg-base-100'}>
             <div className={'navbar-start'}>
                 <Link to='/' className='text-4xl mr-40'>
                     <mark className='px-1 mr-1 rounded bg-primary text-white'>edu</mark>
