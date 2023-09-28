@@ -3,11 +3,11 @@ import {useStaticQuery, graphql} from "gatsby";
 
 const metadataQuery = graphql`
 query MetadataQuery {
-    site {
-        siteMetadata {
-            title
-       }
+  site {
+    siteMetadata {
+      title
     }
+  }
 }`;
 
 const Head = () => {
