@@ -32,7 +32,7 @@ const TeamMember = ({name, org, role, image}) => {
         <div className={'flex flex-col space-y-2 items-center'}>
             <div className="avatar">
                 <div className="w-28 mask mask-squircle">
-                    <GatsbyImage alt={''} image={img} height={120} style={{height: '120px'}}/>
+                    <GatsbyImage alt={''} image={img} className={'w-[120px] h-[120px] object-scale-down'}/>
                 </div>
             </div>
             <div className={'flex flex-col items-center'}>
@@ -47,7 +47,7 @@ const Team = () => {
     const data = useStaticQuery(teamQuery);
 
     return (
-        <div className={'grid grid-cols-3 gap-4'}>
+        <div className={'grid grid-cols-2 md:grid-cols-3 gap-x-2 md:gap-x-4 gap-y-4 md:gap-y-8'}>
             {data.allTeamJson.nodes.map((member, index) => <TeamMember key={index} {...member}/>)}
         </div>
     );
