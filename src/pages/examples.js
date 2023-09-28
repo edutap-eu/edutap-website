@@ -6,7 +6,7 @@ import Layout from "../components/layout";
 const ExamplesPage = () => {
     return (
         <Layout>
-            <section className={'section'}>
+            <section className={'section space-y-4 md:space-y-8 md:text-lg md:mt-12'}>
                 <h1>Examples</h1>
                 {/* TODO: add examples/stories/showcases   */}
             </section>
