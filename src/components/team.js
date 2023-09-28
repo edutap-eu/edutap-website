@@ -13,7 +13,7 @@ const Team = () => (
                                  style={{height: '120px'}}/>
                 </div>
             </div>
-            <span className={'font-bold'}>John Doe • Dev</span>
+            <span className={'font-bold'}>Alexander Loechel • LMU Munich</span>
         </div>
         <div className={'flex flex-col space-y-2 items-center'}>
             <div className="avatar">
@@ -22,7 +22,7 @@ const Team = () => (
                                  style={{height: '120px'}}/>
                 </div>
             </div>
-            <span className={'font-bold'}>John Doe • Dev</span>
+            <span className={'font-bold'}>Jose Filipe Alves • U.Porto</span>
 
         </div>
         <div className={'flex flex-col space-y-2 items-center'}>
@@ -32,7 +32,37 @@ const Team = () => (
                                  style={{height: '120px'}}/>
                 </div>
             </div>
-            <span className={'font-bold'}>John Doe • Dev</span>
+            <span className={'font-bold'}>Morgan Persson • Lunds universitet</span>
+        </div>
+
+        <div className={'flex flex-col space-y-2 items-center'}>
+            <div className="avatar">
+                <div className="w-28 mask mask-squircle">
+                    <StaticImage src="../images/team/mock.png" alt={''} height={120}
+                                 style={{height: '120px'}}/>
+                </div>
+            </div>
+            <span className={'font-bold'}>Christine Baumgartner • PM</span>
+        </div>
+
+        <div className={'flex flex-col space-y-2 items-center'}>
+            <div className="avatar">
+                <div className="w-28 mask mask-squircle">
+                    <StaticImage src="../images/team/jensklein.jpg" alt={'Jensens'} height={120}
+                                 style={{height: '120px'}}/>
+                </div>
+            </div>
+            <span className={'font-bold'}>Jens Klein • Dev</span>
+        </div>
+
+        <div className={'flex flex-col space-y-2 items-center'}>
+            <div className="avatar">
+                <div className="w-28 mask mask-squircle">
+                    <StaticImage src="../images/team/mock.png" alt={''} height={120}
+                                 style={{height: '120px'}}/>
+                </div>
+            </div>
+            <span className={'font-bold'}>Philip Auersperg • Dev</span>
         </div>
     </div>
 )
