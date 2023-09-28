@@ -1,0 +1,22 @@
+[
+  {
+    "to":"/",
+    "text":"Start"
+  },
+  {
+    "to":"/roadmap",
+    "text":"Roadmap"
+  },
+  {
+    "to":"/examples",
+    "text":"Examples"
+  },
+  {
+    "to":"/about",
+    "text":"About"
+  },
+  {
+    "to":"/faq",
+    "text":"FAQ"
+  }
+]
