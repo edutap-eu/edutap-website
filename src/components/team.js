@@ -6,10 +6,20 @@ const teamQuery = graphql`
 query TeamQuery {
   allTeamJson {
     nodes {
-      image
       name
       org
       role
+      image {
+        childImageSharp {
+          gatsbyImageData(
+            placeholder: BLURRED
+            formats: [PNG, JPG]
+            layout: FULL_WIDTH
+            aspectRatio: 2
+            transformOptions: {cropFocus: ATTENTION}
+          )
+        }
+      }
     }
   }
 }`;
