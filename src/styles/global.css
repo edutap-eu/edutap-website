@@ -7,7 +7,8 @@
 }
 
 .section {
-  @apply px-60 py-12;
+  @apply md:px-6 lg:px-12 xl:max-w-screen-xl mx-auto py-12;
+
 }
 
 h1 {
