@@ -7,7 +7,7 @@ import Team from "../components/team";
 
 const IndexPage = () => {
     const sectionClass = 'flex flex-col !px-8 items-center md:flex-row justify-between section'
-    const imageClass = 'w-[250px] h-[250px] md:h-[350px] md:w-[350px] lg:w-[500px] lg:h-[500px] object-scale-down mb-10'
+    const imageClass = 'w-[280px] h-[280px] md:h-[340px] md:w-[340px] lg:w-[500px] lg:h-[500px] object-scale-down mb-10'
 
     return (
         <Layout>
@@ -78,11 +78,11 @@ const IndexPage = () => {
                     </div>
                 </section>
                 <div>
-                    <section className={'flex flex-col !px-0 items-center md:flex-row justify-between section'}>
+                    <section className={'flex flex-col !px-0 items-center md:flex-row section'}>
                         <div>
                             <StaticImage src={'../images/team.png'} alt={''} className={imageClass}/>
                         </div>
-                        <div className={'md:max-w-[450px]'}>
+                        <div className={'md:ml-0 mx-auto'}>
                             <h2 className={'!text-center'}>Team</h2>
                             <Team/>
                         </div>
