@@ -8,13 +8,13 @@
   {
     "name": "Jose Filipe Alves",
     "org": "U.Porto",
-    "role": "Subject Matter expert",
+    "//role": "Subject Matter Expert",
     "image": "../images/team/mock.png"
   },
   {
     "name": "Morgan Persson",
     "org": "Lunds universitet",
-    "role": "Subject Matter expert",
+    "//role": "Subject Matter Expert",
     "image": "../images/team/mock.png"
   },
   {
@@ -24,12 +24,12 @@
   },
   {
     "name": "Jens Klein",
-    "role": "Devloper",
+    "role": "Developer",
     "image": "../images/team/jens-klein.jpg"
   },
   {
     "name": "Philip Auersperg",
-    "role": "Devloper",
+    "role": "Developer",
     "image": "../images/team/mock.png"
   }
 ]

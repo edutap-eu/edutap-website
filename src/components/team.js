@@ -16,7 +16,6 @@ query TeamQuery {
             formats: [PNG, JPG]
             layout: FULL_WIDTH
             aspectRatio: 2
-            transformOptions: {cropFocus: ATTENTION}
           )
         }
       }
@@ -28,6 +27,7 @@ const TeamMember = ({name, org, role, image}) => {
     const info = [org, role].filter(Boolean).join(' • ')
     const img = getImage(image);
 
+    //  
     return (
         <div className={'flex flex-col space-y-2 items-center'}>
             <div className="avatar">
@@ -35,7 +35,7 @@ const TeamMember = ({name, org, role, image}) => {
                     <GatsbyImage alt={''} image={img} className={'w-[120px] h-[120px] object-scale-down'}/>
                 </div>
             </div>
-            <div className={'flex flex-col items-center'}>
+            <div className={'flex flex-col items-center text-center'}>
                 <span className={'w-48  text-center block font-bold'}>{name}</span>
                 <span>({info})</span>
             </div>
