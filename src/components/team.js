@@ -13,9 +13,10 @@ query TeamQuery {
         childImageSharp {
           gatsbyImageData(
             placeholder: BLURRED
-            formats: [PNG, JPG]
+            formats: [AUTO]
             layout: FULL_WIDTH
-            aspectRatio: 2
+            aspectRatio: 1
+            transformOptions: {fit: COVER, cropFocus: ATTENTION}
           )
         }
       }
