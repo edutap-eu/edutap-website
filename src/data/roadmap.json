@@ -33,13 +33,13 @@
     "title":"Milestone 3: Presentation Prototype",
     "description":"EAIE Conference, Rotterdam",
     "date":"2023-09-29",
-    "status":"next"
+    "status":"reached"
   },
   {
     "title":"Milestone 4: Implementation Library ID",
     "description":"at LMU Munich",
     "date":"2023-12-10",
-    "status":"future"
+    "status":"next"
   },
   {
     "title":"Milestone 5: Implementation Closed Loop Payment for Lunches",
