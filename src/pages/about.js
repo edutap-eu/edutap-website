@@ -5,7 +5,6 @@ import Layout from "../components/layout";
 const AboutPage = () => {
     return (
         <Layout>
-            {/*TODO: replace with normal text */}
             <section className={'section space-y-8 md:text-lg md:mt-12'}>
                 <h1>About</h1>
                 <div className={'space-y-4'}>
