@@ -12,7 +12,7 @@
 }
 
 .section h2 {
-    @apply mb-6 md:mb-12 text-center md:text-left text-3xl md:text-4xl md:font-bold;
+    @apply mb-6 md:mb-12 text-3xl md:text-4xl md:font-bold;
 }
 
 h1 {

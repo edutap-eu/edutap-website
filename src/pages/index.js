@@ -18,7 +18,7 @@ const IndexPage = () => {
                         <StaticImage src='../images/mission.png' alt='' className={imageClass}/>
                     </div>
                     <div className={'md:max-w-[450px] md:order-first'}>
-                        <h2>Mission</h2>
+                        <h2 className={'text-center md:text-left'}>Mission</h2>
                         <div className={''}>
                             <p className={'md:w-full'}>
                                 We are developing the digital campus card of the future for the smartphone.
@@ -46,7 +46,7 @@ const IndexPage = () => {
                             <StaticImage src='../images/features.png' alt='' className={imageClass}/>
                         </div>
                         <div className={'md:max-w-[450px]'}>
-                            <h2>Features</h2>
+                            <h2 className={'text-center md:text-left'}>Features</h2>
                             <span className={'block mb-2 font-bold'}>For users</span>
                             <ul className='list-disc mt-2 ml-6'>
                                 <li>easily obtaining passes for specific services</li>
@@ -64,7 +64,7 @@ const IndexPage = () => {
                         <StaticImage src='../images/members.png' alt='' className={imageClass}/>
                     </div>
                     <div className={'md:max-w-[450px] md:order-first'}>
-                        <h2>Project Goals</h2>
+                        <h2 className={'text-center md:text-left'}>Project Goals</h2>
                         <ul className='list-disc mt-2 ml-6'>
                             <li>for Europe and the world,</li>
                             <li>decentralized, secure and state-of-the-art,</li>
@@ -84,7 +84,7 @@ const IndexPage = () => {
                                          className={'w-[280px] h-[280px] md:hidden lg:block lg:w-[400px] lg:h-[511px] object-scale-down mb-10'}/>
                         </div>
                         <div className={'mx-auto'}>
-                            <h2 className={'!text-center'}>Team</h2>
+                            <h2 className={'text-center'}>Team</h2>
                             <Team/>
                         </div>
                     </section>
