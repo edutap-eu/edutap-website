@@ -1,6 +1,9 @@
 import * as React from "react";
 import clsx from "clsx";
 import {Link} from "gatsby";
+import HamburgerButton from "./hamburger-button";
+
+
 
 const FullScreenNav = ({nav}) => {
     const [isOpen, setIsOpen] = React.useState(false);
@@ -10,18 +13,7 @@ const FullScreenNav = ({nav}) => {
 
     return (
         <div className={'lg:hidden'}>
-            <button className={'btn btn-ghost'} onClick={toggle}>
-                {/*TODO: add x icon, make sure it does not shift in sight*/}
-                {
-                    isOpen
-                        ? <span>X</span>
-                        : <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                               className="inline-block w-7 h-7 stroke-current">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                                  d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                }
-            < /button>
+            <HamburgerButton onClick={toggle} isOpen={isOpen}/>
             <div
                 className={clsx('absolute left-0 top-18 overscroll-none w-screen h-screen bg-base-100 transition ease-in-out delay-150', !isOpen && 'hidden')}>
                 <div className={'flex h-full justify-center items-center'}>
