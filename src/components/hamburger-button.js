@@ -1,10 +1,10 @@
 import * as React from "react";
 
 const HamburgerButton = ({isOpen, onClick}) => (
-    <label className="btn btn-circle btn-ghost swap swap-rotate" onClick={onClick}>
+    <label className="btn btn-circle btn-ghost swap swap-rotate">
 
         {/* this hidden checkbox controls the state */}
-        <input type="checkbox" value={isOpen}/>
+        <input type="checkbox" value={isOpen} onChange={onClick}/>
 
         {/* hamburger icon */}
         <svg className="swap-off inline-block w-7 h-7 stroke-current" fill="none" viewBox="0 0 24 24">
