@@ -9,10 +9,12 @@ const roadmapQuery = graphql`
 query RoadmapQuery {
   allRoadmapJson {
     nodes {
+      milestone_type
       date
-      description
-      status
+      location
       title
+      description
+      status 
     }
   }
 }`;
