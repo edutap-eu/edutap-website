@@ -34,7 +34,8 @@ const Milestone = ({milestone}) => {
     }, [status, title]);
 
     return (
-        <VerticalTimelineElement iconStyle={{background: color}}
+        <VerticalTimelineElement iconStyle={{background: color, display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+                                 icon={status === "reached" && <span className={'text-4xl text-white'}>✓</span>}
                                  date={date}
                                  contentStyle={{border: `2px solid ${color}`}}
                                  contentArrowStyle={{borderRight: `7px solid ${color}`}}
