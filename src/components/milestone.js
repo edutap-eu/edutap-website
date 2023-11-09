@@ -6,6 +6,7 @@ const Milestone = ({milestone}) => {
         milestone_type = null,
         date,
         location = null,
+        event_name = null,
         title,
         description,
         status,
@@ -48,7 +49,7 @@ const Milestone = ({milestone}) => {
                 {/*Show if "description is set" AND ("at least one of the links is set" OR "location is set")*/}
                 {description && ([event_link, presentation_file, video_link].some(Boolean) || location) &&
                     <div className={'border-t mt-4 mb-3'}/>}
-
+                {event_name !== null && <h3>{event_name}</h3>}
                 {/*Show if at least one of the links is set*/}
                 {[event_link, presentation_file, video_link].some(Boolean) &&
                     <div className={'py-3 [&>*]:mb-2 [&>*]:btn [&>*]:btn-sm [&>*]:mr-2'}>

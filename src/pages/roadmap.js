@@ -15,6 +15,7 @@ query RoadmapQuery {
       title
       description
       status
+      event_name
       event_link
       video_link
       presentation_file
