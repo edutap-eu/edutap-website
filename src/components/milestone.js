@@ -10,7 +10,7 @@ const Milestone = ({milestone}) => {
         description,
         status,
         event_link = null,
-        presentation_link = null,
+        presentation_file = null,
         video_link = null
     } = milestone;
     console.log(milestone)
@@ -33,12 +33,12 @@ const Milestone = ({milestone}) => {
         }
     }, [status, title]);
 
-    return (
-        <VerticalTimelineElement iconStyle={{background: color, display: 'flex', alignItems: 'center', justifyContent: 'center'}}
-                                 icon={status === "reached" && <span className={'text-4xl text-white'}>✓</span>}
-                                 date={date}
-                                 contentStyle={{border: `2px solid ${color}`}}
-                                 contentArrowStyle={{borderRight: `7px solid ${color}`}}
+    return (<VerticalTimelineElement
+            iconStyle={{background: color, display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+            icon={status === "reached" && <span className={'text-4xl text-white'}>✓</span>}
+            date={date}
+            contentStyle={{border: `2px solid ${color}`}}
+            contentArrowStyle={{borderRight: `7px solid ${color}`}}
         >
             <div>
                 {milestone_type !== null && <span className={'text-base-content/70'}>{milestone_type}</span>}
@@ -46,32 +46,24 @@ const Milestone = ({milestone}) => {
                 {description && <p className={'!text-xl !font-light'}>{description}</p>}
 
                 {/*Show if "description is set" AND ("at least one of the links is set" OR "location is set")*/}
-                {description && ([event_link, presentation_link, video_link].some(Boolean) || location) &&
-                    <div className={'border-t mt-4 mb-3'}/>
-                }
+                {description && ([event_link, presentation_file, video_link].some(Boolean) || location) &&
+                    <div className={'border-t mt-4 mb-3'}/>}
 
                 {/*Show if at least one of the links is set*/}
-                {[event_link, presentation_link, video_link].some(Boolean) &&
+                {[event_link, presentation_file, video_link].some(Boolean) &&
                     <div className={'py-3 [&>*]:mb-2 [&>*]:btn [&>*]:btn-sm [&>*]:mr-2'}>
-                        {event_link &&
-                            <a role="button" target="_blank" rel="noreferrer"
-                               href={event_link}>Event-Website</a>
+                        {event_link && <a role="button" target="_blank" rel="noreferrer"
+                                          href={event_link}>Event-Website</a>
 
                         }
-                        {presentation_link &&
-                            <a role="button" target="_blank" rel="noreferrer"
-                               href={presentation_link}>Slides</a>
-                        }
-                        {video_link &&
-                            <a role="button" target="_blank" rel="noreferrer"
-                               href={video_link}>YouTube-Video</a>
-                        }
-                    </div>
-                }
+                        {presentation_file && <a role="button" target="_blank" rel="noreferrer"
+                                                 href={`/presentations/${presentation_file}`}>Slides</a>}
+                        {video_link && <a role="button" target="_blank" rel="noreferrer"
+                                          href={video_link}>YouTube-Video</a>}
+                    </div>}
                 {location && <span>📍 {location}</span>}
             </div>
-        </VerticalTimelineElement>
-    );
+        </VerticalTimelineElement>);
 }
 
 export default Milestone;
