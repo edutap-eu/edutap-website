@@ -17,12 +17,10 @@ query RoadmapQuery {
       status
       event_link
       video_link
+      presentation_file
     }
   }
 }`;
-
-// TODO: Add these fields to the query above once there is at least one milestone with these fields and actual values
-// presentation_link
 
 
 const RoadmapPage = () => {
@@ -33,7 +31,8 @@ const RoadmapPage = () => {
             <section className={'section space-y-4 md:space-y-8 md:text-lg md:mt-12'}>
                 <h1>Roadmap</h1>
                 <VerticalTimeline lineColor={"#24343D"}>
-                    {data.allRoadmapJson.nodes.map((milestone, index) => <Milestone milestone={milestone} key={index}/>)}
+                    {data.allRoadmapJson.nodes.map((milestone, index) => <Milestone milestone={milestone}
+                                                                                    key={index}/>)}
                 </VerticalTimeline>
             </section>
         </Layout>
