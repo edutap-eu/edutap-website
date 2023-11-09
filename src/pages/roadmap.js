@@ -1,6 +1,6 @@
 import * as React from "react";
 import {graphql, useStaticQuery} from "gatsby";
-import {VerticalTimeline, VerticalTimelineElement} from 'react-vertical-timeline-component';
+import {VerticalTimeline} from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import Layout from "../components/layout";
 import Milestone from "../components/milestone";
@@ -14,10 +14,15 @@ query RoadmapQuery {
       location
       title
       description
-      status 
+      status
+      event_link
     }
   }
 }`;
+
+// TODO: Add these fields to the query above once there is at least one milestone with these fields and actual values
+// presentation_link
+// video_link
 
 
 const RoadmapPage = () => {
