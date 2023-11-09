@@ -12,9 +12,9 @@
   },
   {
     "title": "Initial Idea eduTAP",
-    "location": null,
+    "location": "online",
     "milestone_type": null,
-    "description": "Campus Life Meeting Online",
+    "description": "EUGLOH Work Package - Campus Life - Meeting",
     "date": "2020-11-10",
     "status": "reached",
     "event_link": null,
@@ -34,7 +34,7 @@
   },
   {
     "title": "Kickoff Vision",
-    "location": "Paris",
+    "location": "University Paris-Saclay, France",
     "milestone_type": "Milestone 1",
     "description": "EUGHLOH Annual Summit",
     "date": "2022-06-10",
@@ -45,7 +45,7 @@
   },
   {
     "title": "EUGLOH - Presentation",
-    "location": null,
+    "location": "online",
     "milestone_type": "Presentation",
     "description": "Erasmus Without Paper 10-year Anniversary",
     "date": "2022-12-01",
@@ -56,7 +56,7 @@
   },
   {
     "title": "Presentation \"Digitized Card Pilot for European HEIs\"",
-    "location": "Palazzo Badoer, Venice Italy",
+    "location": "European Council of Student Affairs (ECStA) Palazzo Badoer, Venice Italy",
     "milestone_type": "Presentation",
     "description": "EDSSI Level 2 - Stakeholder Forum",
     "date": "2023-03-09",
@@ -67,7 +67,7 @@
   },
   {
     "title": "Presentation ECC Pilot",
-    "location": "Lund, Sweden",
+    "location": "Lunds University, Sweden",
     "milestone_type": "Milestone 2",
     "description": "EUGLOH Annual Summit, ",
     "date": "2023-06-29",
@@ -78,7 +78,7 @@
   },
   {
     "title": "Presentation",
-    "location": "Porto, Portugal",
+    "location": "University of Porto, Portugal",
     "milestone_type": "Presentation",
     "description": "ECCA/DC4EU Workshop",
     "date": "2023-09-21",
