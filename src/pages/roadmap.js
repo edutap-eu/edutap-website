@@ -16,13 +16,13 @@ query RoadmapQuery {
       description
       status
       event_link
+      video_link
     }
   }
 }`;
 
 // TODO: Add these fields to the query above once there is at least one milestone with these fields and actual values
 // presentation_link
-// video_link
 
 
 const RoadmapPage = () => {
