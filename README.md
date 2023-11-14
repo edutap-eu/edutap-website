@@ -23,7 +23,7 @@ You don't have to specify the path, but only the filename.
 ### Images
 
 This folder contains all images used in the website.
-You will mostlikely only need to add images in the `team` subfolder.
+You will most likely only need to add images in the `team` sub-folder.
 Here you can add/edit images for team members. They can be either `.png` or `.jpg`.
 In the `src/data/team.json` file you can link the images to the team members by specifying the relative path to the
 image.
@@ -34,15 +34,17 @@ image.
 The data folder contains the following files:
 
 - `nav.json`
+- `presentations.json`
 - `roadmap.json`
 - `team.json`
 
-You will mostlikely only need to edit the last two files. In the `roadmap.json` file you can add milestones to the
-roadmap.
-(s. Presentation section on how to add presentations to milestones). In the `team.json` file you can add team members.
+You will most likely only need to edit the last three files.
+In the `presentations.json` file you can add presentations to the presentations page.
+In the `roadmap.json` file you can add milestones to the roadmap.
+(s. Presentation section on how to add presentations to milestones). 
+In the `team.json` file you can add team members.
 (s. Image section on how to add images for team members).
 
-[//]: # (TODO: explain how to add presentations for roadmap milestones  )
 
 ## 🚀 Quick start
 
