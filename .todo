@@ -1,3 +1,8 @@
+- [ ] rework texts
 - [ ] change font
+- [ ] make font large on main page for no mobile users
+
+- [ ] prevent ugly loading of images
 - [ ] prevent layout from unmounting when switching between pages (https://www.gatsbyjs.com/docs/how-to/routing/layout-components/)
-- [ ] todo create data directory for all data lists (team, faq, links, roadmap)
+- [ ] faq with real data
+- [ ] format
