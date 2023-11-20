@@ -1,18 +1,22 @@
 [
   {
-    "to":"/",
-    "text":"Start"
+    "to": "/",
+    "text": "Start"
   },
   {
-    "to":"/roadmap",
-    "text":"Roadmap"
+    "to": "/roadmap",
+    "text": "Roadmap"
   },
   {
-    "to":"/showcases",
-    "text":"Showcases"
+    "to": "/showcases",
+    "text": "Showcases"
   },
   {
-    "to":"/about",
-    "text":"About"
+    "to": "/presentations",
+    "text": "Presentations"
+  },
+  {
+    "to": "/about",
+    "text": "About"
   }
 ]

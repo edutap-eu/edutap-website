@@ -1,6 +1,6 @@
 import * as React from "react";
 import {graphql, useStaticQuery} from "gatsby";
-import {VerticalTimeline, VerticalTimelineElement} from 'react-vertical-timeline-component';
+import {VerticalTimeline} from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import Layout from "../components/layout";
 import Milestone from "../components/milestone";
@@ -9,10 +9,16 @@ const roadmapQuery = graphql`
 query RoadmapQuery {
   allRoadmapJson {
     nodes {
+      milestone_type
       date
+      location
+      title
       description
       status
-      title
+      event_name
+      event_link
+      video_link
+      presentation_file
     }
   }
 }`;
@@ -26,7 +32,8 @@ const RoadmapPage = () => {
             <section className={'section space-y-4 md:space-y-8 md:text-lg md:mt-12'}>
                 <h1>Roadmap</h1>
                 <VerticalTimeline lineColor={"#24343D"}>
-                    {data.allRoadmapJson.nodes.map((milestone, index) => <Milestone milestone={milestone} key={index}/>)}
+                    {data.allRoadmapJson.nodes.map((milestone, index) => <Milestone milestone={milestone}
+                                                                                    key={index}/>)}
                 </VerticalTimeline>
             </section>
         </Layout>

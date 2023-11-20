@@ -1,6 +1,5 @@
 import * as React from "react";
 import Layout from "../../components/layout";
-import UnderConstruction from "../../components/under-construction";
 
 const PrivacyPolicyPage = () => (
     <Layout>
@@ -37,7 +36,6 @@ const PrivacyPolicyPage = () => (
                 meaning of Art. 6 (1) p. 1 lit. f DSGVO, not to have to maintain a server on our premises ourselves.
                 Server location is USA.
             </p>
-            {/*TODO: add link*/}
             <p>
                 You can find more information about objection and removal options vis-à-vis GitHub at:{' '}
                 <a className={'link'}
