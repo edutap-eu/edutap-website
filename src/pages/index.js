@@ -84,8 +84,11 @@ const IndexPage = () => {
                                          className={'w-[280px] h-[280px] md:hidden lg:block lg:w-[400px] lg:h-[511px] object-scale-down mb-10'}/>
                         </div>
                         <div className={'mx-auto'}>
-                            <h2 className={'text-center'}>Team</h2>
+                            <h2 className={'!text-center'}>Project Team</h2>
                             <Team/>
+                            <div className={''}>
+                                <p>Become a contributing member</p>
+                            </div>
                         </div>
                     </section>
                 </div>
