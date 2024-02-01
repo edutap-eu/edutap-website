@@ -1,7 +1,17 @@
 [
   {
     "title": "Lightning Talk: eduTAP",
-    "file":"Lightning_Talk_eduTAP.pdf",
+    "file": "Lightning_Talk_eduTAP.pdf",
     "description": "Short presentation on eduTAP"
+  },
+  {
+    "title": "eduTAP - Turning the European Student Card Vision into Reality",
+    "file": "eduTAP_-_Presentation_-_DC4EUECCA-Workshop_2023.pdf",
+    "description": "Presentation for ECCA/DC4EU Workshop at Universidade do Porto (UPorto), Portugal; 2023-09-21"
+  },
+  {
+    "title": "Digitized Card Pilot for European HEIs",
+    "file": "edssi2-digitized-card-pilot-for-eu-hei.pdf",
+    "description": "Presentation at EU Student eCard Stakeholders Forum; 2023-03-09"
   }
 ]
