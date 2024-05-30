@@ -34,8 +34,9 @@ image.
 The data folder contains the following files:
 
 - `nav.json`
-- `presentations.json`
+- `history.json`
 - `roadmap.json`
+- `presentations.json`
 - `team.json`
 
 You will most likely only need to edit the last three files.
