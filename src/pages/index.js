@@ -43,6 +43,7 @@ const IndexPage = () => {
                   <li>tap to lend a book,</li>
                   <li>tap to take a campus shuttle.</li>
                 </ul>
+                <p><center>no app, <strong>just tap</strong>!</center></p>
               </div>
             </div>
           </section>
@@ -58,14 +59,12 @@ const IndexPage = () => {
             </div>
             <div className={"md:max-w-[450px]"}>
               <h2 className={"text-center md:text-left"}>Features</h2>
-              <span className={"block mb-2 font-bold"}>For users</span>
+              <h3 className={"block mb-2 font-bold"}>For users</h3>
               <ul className="list-disc mt-2 ml-6">
                 <li>easily obtaining passes for specific services</li>
                 <li>ensure secure and respecting privacy</li>
               </ul>
-              <span className={"block mt-6 mb-2 font-bold"}>
-                For Service Providers
-              </span>
+              <h3 className={"block mt-6 mb-2 font-bold"}>For Service Providers</h3>
               <ul className="list-disc mt-2 ml-6">
                 <li>
                   a secure and trustworthy solution to validate student status
