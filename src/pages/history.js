@@ -5,9 +5,9 @@ import 'react-vertical-timeline-component/style.min.css';
 import Layout from "../components/layout";
 import Milestone from "../components/milestone";
 
-const roadmapQuery = graphql`
-query RoadmapQuery {
-  allRoadmapJson {
+const historyQuery = graphql`
+query HistoryQuery {
+  allHistoryJson {
     nodes {
       milestone_type
       date
@@ -15,20 +15,24 @@ query RoadmapQuery {
       title
       description
       status
+      event_name
+      event_link
+      video_link
+      presentation_file
     }
   }
 }`;
 
 
-const RoadmapPage = () => {
-    const data = useStaticQuery(roadmapQuery);
+const HistoryPage = () => {
+    const data = useStaticQuery(historyQuery);
 
     return (
         <Layout>
             <section className={'section space-y-4 md:space-y-8 md:text-lg md:mt-12'}>
-                <h1>Roadmap</h1>
+                <h1>History</h1>
                 <VerticalTimeline lineColor={"#24343D"}>
-                    {data.allRoadmapJson.nodes.map((milestone, index) => <Milestone milestone={milestone}
+                    {data.allHistoryJson.nodes.map((milestone, index) => <Milestone milestone={milestone}
                                                                                     key={index}/>)}
                 </VerticalTimeline>
             </section>
@@ -36,5 +40,5 @@ const RoadmapPage = () => {
     )
 }
 
-export default RoadmapPage;
+export default HistoryPage;
 export {default as Head} from '../components/head';

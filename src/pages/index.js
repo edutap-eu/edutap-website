@@ -50,6 +50,16 @@ const IndexPage = () => {
         </div>
         <div>
           <section className={sectionClass}>
+          <div className={"md:max-w-[450px]"}>
+            <h2>eduTAP the Concept</h2>
+          </div>
+          <div className={"md:max-w-[450px]"}>
+            <h2>eduTAP the Software</h2>
+          </div>
+          </section>
+        </div>
+        <div>
+          <section className={sectionClass}>
             <div>
               <StaticImage
                 src="../images/features.png"

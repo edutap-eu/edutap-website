@@ -1,7 +1,15 @@
 [
   {
+    "to": "/",
+    "text": "Overview"
+  },
+  {
     "to": "/roadmap",
     "text": "Roadmap"
+  },
+  {
+    "to": "/history",
+    "text": "History"
   },
   {
     "to": "/presentations",
