@@ -1,5 +1,9 @@
 [
   {
+    "to": "/",
+    "text": "Start"
+  },
+  {
     "to": "/roadmap",
     "text": "Roadmap"
   },
@@ -10,12 +14,11 @@
   {
     "to": "https://demo.edutap.eu/",
     "text": "Demos"
-  },
-
+  },/*
   {
-    "to": "https://docs.edutap.eu/",
-    "text": "Documentation"
-  },
+    "to": "/showcases",
+    "text": "Showcases"
+  },*/
   {
     "to": "/about",
     "text": "About"
