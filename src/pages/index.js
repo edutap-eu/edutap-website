@@ -137,16 +137,16 @@ const IndexPage = () => {
                 src={"../images/team.png"}
                 alt={""}
                 className={
-                  "w-[280px] h-[280px] md:hidden lg:block lg:w-[400px] lg:h-[511px] object-scale-down mb-10"
+                  "w-[280px] h-[280px] md:hidden lg:block lg:w-[600px] lg:h-[400px] object-scale-down mb-10 space-x-10 xl:space-x-10"
                 }
               />
             </div>
             <div className={"mx-auto"}>
               <h2 className={"!text-center"}>Project Team</h2>
               <Team />
-              <div className={""}>
-                <hr className={'my-2 xl:my-5'}/>
-                <p className={'text-center'}>Become a contributing member</p>
+              <hr style={{ "margin-top": "15px", "margin-bottom": "15px"}} />
+              <div className={"space-y-5 xl:space-y-10 text-center"}>
+                <p>Become a contributing member</p>
               </div>
             </div>
           </section>
