@@ -137,7 +137,7 @@ const IndexPage = () => {
                 src={"../images/team.png"}
                 alt={""}
                 className={
-                  "w-[280px] h-[280px] md:hidden lg:block lg:w-[600px] lg:h-[400px] object-scale-down mb-10 space-x-10 xl:space-x-10"
+                  "w-[280px] h-[280px] md:hidden lg:block lg:w-[450px] lg:h-[300px] object-cover mb-10 space-x-10 xl:space-x-10"
                 }
               />
             </div>
