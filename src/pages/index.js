@@ -43,18 +43,39 @@ const IndexPage = () => {
                   <li>tap to lend a book,</li>
                   <li>tap to take a campus shuttle.</li>
                 </ul>
-                <p><center>no app, <strong>just tap</strong>!</center></p>
+                <hr className={'my-2 xl:my-5'}/>
+                <p className={'text-center'}>no app, <strong>just tap</strong>!</p>
               </div>
             </div>
           </section>
         </div>
         <div>
-          <section className={sectionClass}>
+          <section className={'flex flex-col !px-8 items-start md:flex-row justify-between section'}>
           <div className={"md:max-w-[450px]"}>
             <h2>eduTAP the Concept</h2>
+            <ul className="list-disc mt-2 ml-6">
+              <li>leveraging the possibilities of digital wallets and smart devices</li>
+              <li>
+                use a devide-and-conquere priciple and split integrated campus cards into
+                <ul className="list-disc mt-2 ml-6">
+                  <li>a harmoized (standard) identity pass for Higher Education Institutions, based on Verifibale Credentials (<a className={'link'} href="https://www.iso.org/standard/69084.html">ISO/IEC 18013-5</a>)</li>
+                  <li>separate service passes for each individual on-site service</li>
+                  <li>make those service passes aquirable via eduGAIN-Login, and discoverable via a centralized service directory</li>
+                  <li>let service providers decide the base technology of the pass, based on their needs and security requirements</li>  
+                </ul>
+              </li>
+              <li>enable on-site service access to all members in the Higher Education Community (Students, Faculty, Staff, Employee and Affiliates)</li>
+            </ul>
           </div>
           <div className={"md:max-w-[450px]"}>
             <h2>eduTAP the Software</h2>
+            <p>The eduTAP software is software written by the eduTAP community to enable Higher Education Instituitions to</p>
+            <ul className="list-disc mt-2 ml-6">
+              <li>create, issue, and manage passes within digital wallets</li>
+              <li>interact with wallet passes to give access to services, identify, and verify the status of students and staff</li>
+            </ul>
+            <p>The eduTAP software is distributed as open source, where possible under the <a className={'link'} href="https://opensource.org/license/eupl-1-2/">European Union Public Licence v. 1.2</a> or above, or other open source Licences as Apache 2.0 or similar if the underlying Frameworks require that.</p>
+            <p>The full software can be found on the <a className={'link'} href="https://github.com/edutap-eu">Github eduTAP Organization</a>.</p>
           </div>
           </section>
         </div>
@@ -124,7 +145,8 @@ const IndexPage = () => {
               <h2 className={"!text-center"}>Project Team</h2>
               <Team />
               <div className={""}>
-                <p>Become a contributing member</p>
+                <hr className={'my-2 xl:my-5'}/>
+                <p className={'text-center'}>Become a contributing member</p>
               </div>
             </div>
           </section>
