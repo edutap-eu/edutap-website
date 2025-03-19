@@ -2,10 +2,11 @@ import * as React from "react";
 import {graphql, useStaticQuery} from "gatsby";
 import {VerticalTimeline} from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
-import Layout from "../components/layout";
-import Milestone from "../components/milestone";
+import {Layout} from "@/components/layout";
+import {Milestone, type MilestoneType} from "@/components/milestone";
+import {Container} from "@/components/container";
 
-const roadmapQuery = graphql`
+const ROADMAP_QUERY = graphql`
 query RoadmapQuery {
   allRoadmapJson {
     nodes {
@@ -21,20 +22,20 @@ query RoadmapQuery {
 
 
 const RoadmapPage = () => {
-    const data = useStaticQuery(roadmapQuery);
+    const data = useStaticQuery(ROADMAP_QUERY);
 
     return (
         <Layout>
-            <section className={'section space-y-4 md:space-y-8 md:text-lg md:mt-12'}>
-                <h1>Roadmap</h1>
+            <Container size="md" as="section" className='py-12 md:py-36'>
+                <h1 className="bg-white text-5xl font-bold tracking-tight mb-12">Roadmap</h1>
                 <VerticalTimeline lineColor={"#24343D"}>
-                    {data.allRoadmapJson.nodes.map((milestone, index) => <Milestone milestone={milestone}
+                    {data.allRoadmapJson.nodes.map((milestone: MilestoneType, index: number) => <Milestone milestone={milestone}
                                                                                     key={index}/>)}
                 </VerticalTimeline>
-            </section>
+            </Container>
         </Layout>
     )
 }
 
 export default RoadmapPage;
-export {default as Head} from '../components/head';
+export {default as Head} from '@/components/head';

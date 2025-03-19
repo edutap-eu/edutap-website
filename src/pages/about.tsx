@@ -1,20 +1,21 @@
 import * as React from "react";
 
-import Layout from "../components/layout";
+import {Layout} from "@/components/layout";
+import {Container} from "@/components/container";
 
 const AboutPage = () => {
     return (
         <Layout>
-            <section className={'section space-y-8 md:text-lg md:mt-12'}>
-                <h1>About</h1>
-                <div className={'space-y-4'}>
+            <Container size="md" as="section" className='prose py-12 md:py-36'>
+                <h1 className="bg-white text-5xl font-bold tracking-tight mb-12">About</h1>
+                <div>
                     <p>
                         Welcome to eduTAP, where "education meets the tap" – inspired by the convenience of modern
                         smartphone interactions like "tap to pay" and "tap to open." Just as you can effortlessly tap
                         your smartphone for various transactions, eduTAP enhances the (inter-)campus experience by
                         enabling university members to use their smartphones for a multitude of campus activities. With
                         specific passes securely stored in their digital wallets, individuals can seamlessly:
-                        <ul className={'mt-2 ml-10 list-disc'}>
+                        <ul>
                             <li>Verify their identity</li>
                             <li>Claim discounts</li>
                             <li>Make payments</li>
@@ -32,7 +33,7 @@ const AboutPage = () => {
                         European legal requirements. We're proud to align our efforts with Géant Trust and Identity
                         Services, joining the ranks of eduGAIN, eduroam, eduTEAMS, and InAcademia.
                         <br/>
-                        <div className={'mt-2'}>
+                        <div>
                             <strong>Disclaimer:</strong> eduTAP is currently a project under the
                             "European University Alliance" (EUGLOH) and is not an official Géant Service or Product.
                             We are in the conceptual and pilot phase, with multiple prototypes showcasing how an
@@ -41,11 +42,11 @@ const AboutPage = () => {
                     </p>
                 </div>
                 <hr/>
-                <div className={'space-y-8'}>
+                <div>
                     <p>
                         <strong>🎯 Our Goals:</strong> At eduTAP, we are dedicated to achieving the
                         following objectives.
-                        <ul className={'mt-2 pl-10 list-disc'}>
+                        <ul>
                             <li>
                                 Introduce the European digital campus card on smartphones for both Europe and the world.
                             </li>
@@ -61,7 +62,7 @@ const AboutPage = () => {
                     </p>
                     <p>
                         <strong>🚫 What We Don't Want:</strong>
-                        <ul className={'mt-2 pl-10 list-disc'}>
+                        <ul>
                             <li>We won't clutter your smartphones with additional apps; instead we use existing wallets
                                 like Apple Wallet and Google Wallet.
                             </li>
@@ -105,7 +106,7 @@ const AboutPage = () => {
                             <li>
                                 <strong>eduTAP Documentation:</strong> Find in-depth documentation about eduTAP, its
                                 components, and technologies at{' '}
-                                <a href='https://docs.edutap.eu/' className={'link'}>docs.edutap.eu</a>.
+                                <a href='https://docs.edutap.eu/'>docs.edutap.eu</a>.
                             </li>
                         </ul>
                     </p>
@@ -113,14 +114,10 @@ const AboutPage = () => {
                         Join us on this exciting journey as we tap into the future of education with eduTAP!
                     </p>
                 </div>
-            </section>
+            </Container>
         </Layout>
     )
 }
 
 export default AboutPage;
-export {
-    default
-        as
-            Head
-} from '../components/head';
+export {default as Head} from '@/components/head';

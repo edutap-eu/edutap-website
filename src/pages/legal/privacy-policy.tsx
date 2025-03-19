@@ -1,14 +1,15 @@
 import * as React from "react";
-import Layout from "../../components/layout";
+import {Layout} from "@/components/layout";
+import {Container} from "@/components/container";
 
 const PrivacyPolicyPage = () => (
   <Layout>
-    <section className="section space-y-4 md:text-lg md:mt-12">
-      <h1>Privacy Policy</h1>
+    <Container size="md" as="section" className='prose py-12 md:py-36'>
+      <h1 className="bg-white text-5xl font-bold tracking-tight mb-12">Privacy Policy</h1>
       <h2>Hosting</h2>
       <p>
         The Websites:
-        <ul class="list-disc mt-2 ml-6">
+        <ul>
           <li>
             <a href="https://eduTAP.eu/">eduTAP.eu</a>
           </li>
@@ -45,7 +46,7 @@ const PrivacyPolicyPage = () => (
         This is necessary to display our website and to ensure stability and
         security. This corresponds to our legitimate interest within the meaning
         of{" "}
-        <a className={"link"} href="https://">
+        <a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng">
           Art. 6 para. 1 p. 1 lit. f GDPR
         </a>
         .
@@ -60,7 +61,7 @@ const PrivacyPolicyPage = () => (
       <p>
         GitHub is the recipient of your personal data. This corresponds to our
         legitimate interest within the meaning of{" "}
-        <a className={"link"} href="">
+        <a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng">
           Art. 6 (1) p. 1 lit. f GDPR
         </a>
         , not to have to maintain a server on our premises ourselves. Server
@@ -70,7 +71,6 @@ const PrivacyPolicyPage = () => (
         You can find more information about objection and removal options
         vis-à-vis GitHub at:{" "}
         <a
-          className={"link"}
           href="https://docs.github.com/en/free-pro-team@latest/github/site-policy/github-privacy-statement#github-pages"
         >
           Github privacy statement
@@ -98,28 +98,28 @@ const PrivacyPolicyPage = () => (
         EU Standard Contractual Clauses (SCCs). For more information, please
         visit:{" "}
         <a
-          className={"link"}
           href="https://docs.github.com/en/free-pro-team@latest/github/site-policy/github-data-protection-addendum#attachment-1-the-standard-contractual-clauses-processors"
         >
           GitHub Data Protection Addendum
         </a>
         .
       </p>
-      <h2 className={"!mt-12"}>Linked Services</h2>
+      <h2>Linked Services</h2>
       <p>
         This website contains links to other services. If you follow these
         links, you should become aware of their terms of service. We link to:
       </p>
-      <ul className={"list-disc ml-4"}>
+      <ul>
         <li>
-          <a className={"link"} href="https://github.com">
+          <a href="https://github.com">
             GitHub
           </a>{" "}
           for documentation and source code repositories.
         </li>
       </ul>
-    </section>
+    </Container>
   </Layout>
 );
 
 export default PrivacyPolicyPage;
+export {default as Head} from '@/components/head';

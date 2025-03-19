@@ -4,6 +4,10 @@
     "text": "Overview"
   },
   {
+    "to": "/news",
+    "text": "News"
+  },
+  {
     "to": "/roadmap",
     "text": "Roadmap"
   },
@@ -14,15 +18,6 @@
   {
     "to": "/presentations",
     "text": "Presentations"
-  },
-  {
-    "to": "https://demo.edutap.eu/",
-    "text": "Demos"
-  },
-
-  {
-    "to": "https://docs.edutap.eu/",
-    "text": "Documentation"
   },
   {
     "to": "/about",

@@ -2,7 +2,20 @@ import * as React from "react";
 import {VerticalTimelineElement} from "react-vertical-timeline-component";
 import clsx from "clsx";
 
-const Milestone = ({milestone}) => {
+export type MilestoneType = {
+    milestone_type?: string;
+    date: string;
+    location?: string;
+    event_name?: string;
+    title: string;
+    description: string;
+    status: string;
+    event_link?: string;
+    presentation_file?: string;
+    video_link?: string;
+}
+
+export const Milestone = ({milestone}: {milestone: MilestoneType}) => {
     const {
         milestone_type = null,
         date,
@@ -44,15 +57,15 @@ const Milestone = ({milestone}) => {
     >
         <div>
             {milestone_type !== null && <span className={'text-base-content/70'}>{milestone_type}</span>}
-            <h2 className={'!mb-4 md:!text-3xl'}>{title}</h2>
-            {description && <p className={'!text-xl !font-light'}>{description}</p>}
+            <h2 className={'mb-4! md:text-3xl!'}>{title}</h2>
+            {description && <p className={'text-xl! font-light!'}>{description}</p>}
 
             {/*Show if "description is set" AND ("at least one of the links is set" OR "location is set")*/}
             {([event_link, presentation_file, video_link].some(Boolean) || location || event_name) &&
                 <div className={'border-t mt-4 mb-3'}/>}
             {/*Show if at least one of the links is set*/}
             {[event_link, presentation_file, video_link].some(Boolean) &&
-                <div className={'py-3 [&>*]:mb-2 [&>*]:btn [&>*]:btn-sm [&>*]:mr-2'}>
+                <div className={'py-3 *:mb-2 [&>*]:btn [&>*]:btn-sm *:mr-2'}>
                     {event_link && <a role="button" target="_blank" rel="noreferrer"
                                       href={event_link}>Event-Website</a>
 
@@ -76,4 +89,3 @@ const Milestone = ({milestone}) => {
     </VerticalTimelineElement>);
 }
 
-export default Milestone;

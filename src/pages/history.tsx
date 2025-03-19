@@ -2,10 +2,11 @@ import * as React from "react";
 import {graphql, useStaticQuery} from "gatsby";
 import {VerticalTimeline} from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
-import Layout from "../components/layout";
-import Milestone from "../components/milestone";
+import {Layout} from "@/components/layout";
+import {Milestone, type MilestoneType} from "@/components/milestone";
+import {Container} from "@/components/container";
 
-const historyQuery = graphql`
+const HISTORY_QUERY = graphql`
 query HistoryQuery {
   allHistoryJson {
     nodes {
@@ -25,20 +26,20 @@ query HistoryQuery {
 
 
 const HistoryPage = () => {
-    const data = useStaticQuery(historyQuery);
+    const data = useStaticQuery(HISTORY_QUERY);
 
     return (
         <Layout>
-            <section className={'section space-y-4 md:space-y-8 md:text-lg md:mt-12'}>
-                <h1>History</h1>
+            <Container size="md" as="section" className='py-12 md:py-36'>
+                <h1 className="bg-white text-5xl font-bold tracking-tight mb-12">History</h1>
                 <VerticalTimeline lineColor={"#24343D"}>
-                    {data.allHistoryJson.nodes.map((milestone, index) => <Milestone milestone={milestone}
+                    {data.allHistoryJson.nodes.map((milestone: MilestoneType, index: number) => <Milestone milestone={milestone}
                                                                                     key={index}/>)}
                 </VerticalTimeline>
-            </section>
+            </Container>
         </Layout>
     )
 }
 
 export default HistoryPage;
-export {default as Head} from '../components/head';
+export {default as Head} from '@/components/head';
