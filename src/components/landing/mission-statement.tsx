@@ -11,7 +11,7 @@ export const MissionStatement = () => (
             </h2>
 
             <p className="text-center text-xl text-gray-700 max-w-lg mb-12">
-                Our mission is to fulfill the interoperability vision of the European Student Card.
+                Our Mission is to provide an interoperable solution that works for everyone.
             </p>
 
             <div className="space-y-16 max-w-2xl">
@@ -60,6 +60,10 @@ export const MissionStatement = () => (
                     </div>
                 </div>
             </div>
+
+            <p className="text-center text-xl text-gray-700 max-w-lg mb-12 mt-10">
+                This fulfill the interoperability vision of <br/>the European Student Card.
+            </p>
 
             <h2 className="text-4xl font-bold tracking-tight pt-16 mb-4">
                 Project Goals
