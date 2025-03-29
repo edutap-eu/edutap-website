@@ -1,3 +1,5 @@
+import { resolve } from "path";
+
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
@@ -47,6 +49,9 @@ module.exports = {
         path: "./src/data/",
       },
       __key: "content",
+    },
+    {
+      resolve: "@sentry/gatsby",
     },
   ],
 };
