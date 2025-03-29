@@ -42,10 +42,9 @@ The data folder contains the following files:
 You will most likely only need to edit the last three files.
 In the `presentations.json` file you can add presentations to the presentations page.
 In the `roadmap.json` file you can add milestones to the roadmap.
-(s. Presentation section on how to add presentations to milestones). 
+(s. Presentation section on how to add presentations to milestones).
 In the `team.json` file you can add team members.
 (s. Image section on how to add images for team members).
-
 
 ## 🚀 Quick start
 

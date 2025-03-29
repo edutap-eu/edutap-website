@@ -1,11 +1,13 @@
 import * as React from "react";
-import {Layout} from "@/components/layout";
-import {Container} from "@/components/container";
+import { Layout } from "@/components/layout";
+import { Container } from "@/components/container";
 
 const PrivacyPolicyPage = () => (
   <Layout>
-    <Container size="md" as="section" className='prose py-12 md:py-36'>
-      <h1 className="bg-white text-5xl font-bold tracking-tight mb-12">Privacy Policy</h1>
+    <Container size="md" as="section" className="prose py-12 md:py-36">
+      <h1 className="bg-white text-5xl font-bold tracking-tight mb-12">
+        Privacy Policy
+      </h1>
       <h2>Hosting</h2>
       <p>
         The Websites:
@@ -70,9 +72,7 @@ const PrivacyPolicyPage = () => (
       <p>
         You can find more information about objection and removal options
         vis-à-vis GitHub at:{" "}
-        <a
-          href="https://docs.github.com/en/free-pro-team@latest/github/site-policy/github-privacy-statement#github-pages"
-        >
+        <a href="https://docs.github.com/en/free-pro-team@latest/github/site-policy/github-privacy-statement#github-pages">
           Github privacy statement
         </a>
         .
@@ -97,9 +97,7 @@ const PrivacyPolicyPage = () => (
         personal data of individuals in the EU. These measures are based on the
         EU Standard Contractual Clauses (SCCs). For more information, please
         visit:{" "}
-        <a
-          href="https://docs.github.com/en/free-pro-team@latest/github/site-policy/github-data-protection-addendum#attachment-1-the-standard-contractual-clauses-processors"
-        >
+        <a href="https://docs.github.com/en/free-pro-team@latest/github/site-policy/github-data-protection-addendum#attachment-1-the-standard-contractual-clauses-processors">
           GitHub Data Protection Addendum
         </a>
         .
@@ -111,10 +109,8 @@ const PrivacyPolicyPage = () => (
       </p>
       <ul>
         <li>
-          <a href="https://github.com">
-            GitHub
-          </a>{" "}
-          for documentation and source code repositories.
+          <a href="https://github.com">GitHub</a> for documentation and source
+          code repositories.
         </li>
       </ul>
     </Container>
@@ -122,4 +118,4 @@ const PrivacyPolicyPage = () => (
 );
 
 export default PrivacyPolicyPage;
-export {default as Head} from '@/components/head';
+export { default as Head } from "@/components/head";
