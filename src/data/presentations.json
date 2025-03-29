@@ -2,76 +2,91 @@
   {
     "title": "Lightning Talk: eduTAP",
     "file": "Lightning_Talk_eduTAP_v2.pdf",
-    "description": "Short presentation on eduTAP (Version 2)"
+    "description": "Short presentation on eduTAP (Version 2)",
+    "type": "lightning"
   },
   {
     "title": "Lightning Talk: eduTAP",
     "file": "Lightning_Talk_eduTAP_v1.pdf",
-    "description": "Short presentation on eduTAP (Version 1)"
+    "description": "Short presentation on eduTAP (Version 1)",
+    "type": "lightning"
   },
   {
     "title": "eduTAP - Bridging online identity to mobile credentials for reliable and trustworthy on-site service access (in the educational sector)",
     "file": "EUNIS2024.pdf",
-    "description": "Presentation at EUNIS 2024 Conference Athens, Greek; 2024-06-07"
+    "description": "Presentation at EUNIS 2024 Conference Athens, Greek; 2024-06-07",
+    "type": "conference"
   },
   {
     "title": "eduTAP - Bridging online identity to mobile credentials for reliable and trustworthy on-site service access (in the educational sector)",
     "file": "ECCA2024.pdf",
-    "description": "Slides during Panel-Discussion on Campus Card requirements and interoperable solutions for all HEIs; ECCA Conference 2024; Milan, Italy; 2024-05-16"
+    "description": "Slides during Panel-Discussion on Campus Card requirements and interoperable solutions for all HEIs; ECCA Conference 2024; Milan, Italy; 2024-05-16",
+    "type": "conference"
   },
   {
     "title": "The future of campus cards and student IDs are mobile credentials - eduTAP",
     "file": "Elatec-Webinar-eduTAP-why_digital_credentials_are_the_future_for_education.pdf",
-    "description": "Presentation at Elatec Webinar on Mobile Credentials, online; 2024-02-22"
+    "description": "Presentation at Elatec Webinar on Mobile Credentials, online; 2024-02-22",
+    "type": "conference"
   },
   {
     "title": "One Europe, one mobile solution: Turning the European Student Card vision into reality",
     "file": "EAIE-2023.pdf",
-    "description": "Presentation at EAIE 2023 Conference Rotterdam, The Netherlands; 2023-09-29"
+    "description": "Presentation at EAIE 2023 Conference Rotterdam, The Netherlands; 2023-09-29",
+    "type": "conference"
   },
   {
     "title": "eduTAP - Turning the European Student Card Vision into Reality",
     "file": "eduTAP_-_Presentation_-_DC4EUECCA-Workshop_2023.pdf",
-    "description": "Presentation for ECCA/DC4EU Workshop at Universidade do Porto (UPorto), Portugal; 2023-09-21"
+    "description": "Presentation for ECCA/DC4EU Workshop at Universidade do Porto (UPorto), Portugal; 2023-09-21",
+    "type": "conference"
   },
   {
     "title": "Digitized Card Pilot for European HEIs – A European Campus Card for Interoperable Services –",
     "file": "EUGLOH-ECCA-2023.pdf",
-    "description": "Presentation at European Campus Card Association Conference 2022 at University of Warsaw, Poland; 2023-05-10"
+    "description": "Presentation at European Campus Card Association Conference 2022 at University of Warsaw, Poland; 2023-05-10",
+    "type": "conference"
   },
   {
     "title": "Case study Ludwig-Maximilians-Universität München",
     "file": "LMU-ECCA-2023.pdf",
-    "description": "Presentation at European Campus Card Association Conference 2022 at University of Warsaw, Poland; 2023-05-11"
+    "description": "Presentation at European Campus Card Association Conference 2022 at University of Warsaw, Poland; 2023-05-11",
+    "type": "conference"
   },
   {
     "title": "Digitized Card Pilot for European HEIs",
     "file": "edssi2-digitized-card-pilot-for-eu-hei.pdf",
-    "description": "Presentation at EU Student eCard Stakeholders Forum; 2023-03-09"
+    "description": "Presentation at EU Student eCard Stakeholders Forum; 2023-03-09",
+    "type": "conference"
   },
   {
     "title": "One Europe, One Mobile Solution: Turning the European Student Card Vision into Reality",
     "file": "EUGLOH-Summit-2023.pdf",
-    "description": "Presentation at EUGLOH Annual Summit 2023 at Lund University, Sweden; 2023-06-14"
+    "description": "Presentation at EUGLOH Annual Summit 2023 at Lund University, Sweden; 2023-06-14",
+    "type": "conference"
   },
   {
     "title": "Digitized Card Pilot for European HEIs – A European Campus Card for interoperable Services – (EUGLOH Work Package 5 – Campus Life)",
     "file": "EUGLOH-Summit-2022.pdf",
-    "description": "Presentation at EUGLOH Annual Summit 2022 at Université Paris-Saclay, France; 2022-06-16"
+    "description": "Presentation at EUGLOH Annual Summit 2022 at Université Paris-Saclay, France; 2022-06-16",
+    "type": "conference"
   },
   {
     "title": "Digitized Card Pilot for European HEIs (EUGLOH Work Package 5 – Campus Life)",
     "file": "ECCA-2022.pdf",
-    "description": "Presentation at European Campus Card Association Conference 2022 at Universidade do Porto; Portugal; 2022-05-18"
+    "description": "Presentation at European Campus Card Association Conference 2022 at Universidade do Porto; Portugal; 2022-05-18",
+    "type": "conference"
   },
   {
     "title": "Feedback on European Student Card Project - Digitized Card Pilot for European HEIs – A European Campus Card for Interoperable Services – (EUGLOH Work Package – Campus Life)",
     "file": "ECC-EAC.B1-2022-10-26.pdf",
-    "description": "Presentation and Discussion with Directorate General For Education, Youth, Sport and Culture (EAC) EAC Unit B1 – Higher Education about the European Student Card; 2022-10-26"
+    "description": "Presentation and Discussion with Directorate General For Education, Youth, Sport and Culture (EAC) EAC Unit B1 – Higher Education about the European Student Card; 2022-10-26",
+    "type": "conference"
   }, 
   {
     "title": "European Student Card & eID legal and technical considerations",
     "file": "esc-legal+technical-points.pdf",
-    "description": "Presentation at European Student eID Framework Workshop / ECCA Meeting; 2020-11-03"
+    "description": "Presentation at European Student eID Framework Workshop / ECCA Meeting; 2020-11-03",
+    "type": "conference"
   }
 ]
