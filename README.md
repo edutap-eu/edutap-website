@@ -46,6 +46,38 @@ In the `roadmap.json` file you can add milestones to the roadmap.
 In the `team.json` file you can add team members.
 (s. Image section on how to add images for team members).
 
+#### News
+
+The website supports two types of news: micro news and news posts.
+Both news types will be displayed on the news index page.
+
+To add a micro news, add a new entry to the `micro-news.json` file in the `src/data` folder.
+The entry should have the following fields:
+
+```json
+{
+  "title": "Micro news",
+  "description": "This is a micro news post",
+  "date": "2022-11-24",
+  "url": "https://www.example.com"
+}
+```
+
+The `url` field is optional and can be used to link to an external page. 
+If you don't want to link to an external page, set the `url` field to `null`.
+The date must be in the format "YYYY-MM-DD".
+
+
+If you want to add a news post, add a new markdown file to the `src/data/news-posts` folder.
+Make sure to add a frontmatter to the markdown file with the following fields:
+
+```yaml
+slug: "/my-first-blog-post" # <-- must have a leading slash
+date: "2022-11-24" # <-- must be in the format "YYYY-MM-DD"
+title: "My first blog post" # <-- Will be displayed as the title of the post, so you don't have to repeat the title in the post content 
+short: "This is my first blog post" # <-- short description of the post that will be displayed on the news index page
+```
+
 ## 🚀 Quick start
 
 1. **Start developing.**
