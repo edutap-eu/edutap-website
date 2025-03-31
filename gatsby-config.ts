@@ -51,6 +51,15 @@ module.exports = {
       __key: "content",
     },
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `news-posts`,
+        path: `${__dirname}/src/data/news-posts`,
+      },
+      __key: "news-posts",
+    },
+    `gatsby-transformer-remark`,
+    {
       resolve: "@sentry/gatsby",
     },
   ],
