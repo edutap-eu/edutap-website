@@ -1,6 +1,12 @@
 [
   {
     "title": "Lightning Talk: eduTAP",
+    "file": "Lightning_Talk_eduTAP_v3.pdf",
+    "description": "Short presentation on eduTAP (Version 3)",
+    "type": "lightning"
+  },
+  {
+    "title": "Lightning Talk: eduTAP",
     "file": "Lightning_Talk_eduTAP_v2.pdf",
     "description": "Short presentation on eduTAP (Version 2)",
     "type": "lightning"
@@ -10,6 +16,18 @@
     "file": "Lightning_Talk_eduTAP_v1.pdf",
     "description": "Short presentation on eduTAP (Version 1)",
     "type": "lightning"
+  },
+  {
+    "title": "eduTAP - Bridging online identity to mobile credentials for reliable and trustworthy on-site service access (in the educational sector)",
+    "file": "eduTAP_-_EUF_2025-03-20.pdf",
+    "description": "Presentation at EUF European Universities Accelerator Meeting, online event; 2025-03-20",
+    "type": "Webinar"
+  },
+  {
+    "title": "Digital Campus Cards From Regulations and Contracts to an Interoperable Solution using existing Standards and Technologies",
+    "file": "ECCA-Webinar-2024-11-27.pdf",
+    "description": "Presentation at ECCA Webinar on Digital Campus Cards, online; 2024-11-27",
+    "type": "Webinar"
   },
   {
     "title": "eduTAP - Bridging online identity to mobile credentials for reliable and trustworthy on-site service access (in the educational sector)",
