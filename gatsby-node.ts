@@ -13,3 +13,31 @@ export const onCreateWebpackConfig: GatsbyNode["createPages"] = ({
     },
   });
 };
+
+/**
+ * Customize the GraphQL schema to ensure consistent return types
+ * even when data sources are empty
+ */
+export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] = ({ actions }) => {
+  const { createTypes } = actions;
+  
+  // Define the schema for our news items to ensure nodes is always an array
+  const typeDefs = `
+    type MicroNewsJson implements Node {
+      date: String!
+      title: String!
+      description: String!
+      url: String
+    }
+    
+    type AllMicroNewsJson {
+      nodes: [MicroNewsJson!]!
+    }
+    
+    type Query {
+      allMicroNewsJson: AllMicroNewsJson!
+    }
+  `;
+  
+  createTypes(typeDefs);
+};

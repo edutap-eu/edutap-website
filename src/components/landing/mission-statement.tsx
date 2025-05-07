@@ -81,8 +81,8 @@ export const MissionStatement = () => (
       </div>
 
       <p className="text-center text-xl text-gray-700 max-w-lg mb-12 mt-10">
-        This fulfill the interoperability vision of <br />
-        the European Student Card.
+        This fulfills the interoperability vision of <br />
+        the European Student Card initiative.
       </p>
 
       <h2 className="text-4xl font-bold tracking-tight pt-16 mb-4">
