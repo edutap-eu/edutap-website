@@ -8,7 +8,7 @@ export type PresentationType = {
   title: string;
   file: string;
   description?: string;
-  type: "lightning" | "conference";
+  type: "lightning" | "conference" | "webinar";
 };
 
 export const Presentation = ({
