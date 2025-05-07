@@ -45,13 +45,14 @@ const PresentationsPage = () => {
 
         <div className="mb-8">
           <h2 className="text-3xl font-semibold pb-3 mb-8 border-b-4 border-primary inline-block">
-            Conference Talks
+            Conference & Webinar Talks
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {data.allPresentationsJson.nodes
               .filter(
                 (presentation: PresentationType) =>
-                  presentation.type === "conference",
+                  presentation.type === "conference" ||
+                  presentation.type === "webinar",
               )
               .map((presentation: PresentationType, index: number) => (
                 <Presentation presentation={presentation} key={index} />
