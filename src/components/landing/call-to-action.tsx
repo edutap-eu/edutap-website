@@ -16,25 +16,29 @@ export const CallToAction = () => {
           digital identity.
         </p>
 
-        <a
-          href="https://github.com/edutap-eu"
-          className="inline-flex items-center px-8 py-4 rounded border-2 border-white hover:bg-white hover:text-black"
-          onMouseEnter={() => setIsHovering(false)}
-          onMouseLeave={() => setIsHovering(true)}
-        >
-          <GithubMark className="mr-3 h-5 w-5" inverted={isHovering} />
-          <span className="font-bold">Contribute on GitHub / eduTAP-eu</span>
-        </a>
+        <div className="flex flex-row sm:flex-row gap-4 text-center items-center justify-center">
+          <a
+            href="https://github.com/edutap-eu"
+            className="inline-flex items-center px-8 py-4 rounded border-2 border-white hover:bg-white hover:text-black"
+            onMouseEnter={() => setIsHovering(false)}
+            onMouseLeave={() => setIsHovering(true)}
+          >
+            <GithubMark className="mr-3 h-5 w-5" inverted={isHovering} />
+            <span className="font-bold">Contribute on GitHub / eduTAP-eu</span>
+          </a>
 
-        <a
-          href="https://github.com/edutap-collective"
-          className="inline-flex items-center px-8 py-4 rounded border-2 border-white hover:bg-white hover:text-black"
-          onMouseEnter={() => setIsHovering(false)}
-          onMouseLeave={() => setIsHovering(true)}
-        >
-          <GithubMark className="mr-3 h-5 w-5" inverted={isHovering} />
-          <span className="font-bold">Contribute on GitHub / eduTAP-collective</span>
-        </a>
+          <a
+            href="https://github.com/edutap-collective"
+            className="inline-flex items-center px-8 py-4 rounded border-2 border-white hover:bg-white hover:text-black"
+            onMouseEnter={() => setIsHovering(false)}
+            onMouseLeave={() => setIsHovering(true)}
+          >
+            <GithubMark className="mr-3 h-5 w-5" inverted={isHovering} />
+            <span className="font-bold">
+              Contribute on GitHub / eduTAP-collective
+            </span>
+          </a>
+        </div>
       </Container>
     </div>
   );
