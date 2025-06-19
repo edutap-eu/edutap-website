@@ -8,10 +8,6 @@
     "text": "News"
   },
   {
-    "to": "/roadmap",
-    "text": "Roadmap"
-  },
-  {
     "to": "/history",
     "text": "History"
   },
