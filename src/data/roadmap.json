@@ -1,34 +1,10 @@
 [
   {
-    "title": "Implementation Library ID",
-    "location": "LMU Munich, Germany",
-    "milestone_type": "Milestone",
-    "description": null,
-    "date": "End of 2023",
-    "status": "next"
-  },
-  {
-    "title": "Prototype Implementation Closed Loop Payment at Canteen",
-    "location": "LMU Munich, Germany",
-    "milestone_type": "Milestone",
-    "description": null,
-    "date": "Summer 2024",
-    "status": "next"
-  },
-  {
-    "title": "Prototype Implementation Common ID Pass",
-    "location": null,
-    "milestone_type": "Milestone",
-    "description": null,
-    "date": "Summer 2024",
-    "status": "next"
-  },
-  {
     "title": "Support further Implementations",
     "location": null,
     "milestone_type": null,
     "description": "at other Higher Education Institutions",
-    "date": "starting mid 2024",
+    "date": "starting mid 2025",
     "status": "future"
   }
 ]
