@@ -18,12 +18,9 @@ export const FeatureGrid = () => (
     </h2>
 
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-      <div className="rounded-lg shadow-md bg-gradient-to-br from-primary to-primary/80 p-8 text-white hover:shadow-lg transition-shadow">
-        <div className="mb-6">
-          <UserCircleIcon size={48} className="text-white" strokeWidth={2} />
-        </div>
-        <h3 className="text-xl font-bold mb-3">tap to identify</h3>
-        <p className="text-white opacity-90 font-medium">
+      <div className="rounded-lg shadow-md bg-gradient-to-br from-primary to-primary/80 p-8 hover:shadow-lg transition-shadow text-white opacity-90 font-medium">
+        <h3 className="text-xl font-bold mb-3"><UserCircleIcon size={48} className="inline-block mr-2" strokeWidth={2} />tap to identify</h3>
+        <p>
           Quickly verify your identity with a simple tap of your device. With
           Selective Disclosure Verifiable Credentials, you control what
           information to share.
@@ -31,12 +28,9 @@ export const FeatureGrid = () => (
         <p>On and off campus, to access a variety of services and locations.</p>
       </div>
 
-      <div className="rounded-lg shadow-md bg-gradient-to-br from-accent to-accent/80 p-8 text-white hover:shadow-lg transition-shadow">
-        <div className="mb-6">
-          <KeyIcon size={48} className="text-white" strokeWidth={2} />
-        </div>
-        <h3 className="text-xl font-bold mb-3">tap to open a door</h3>
-        <p className="text-white opacity-90 font-medium">
+      <div className="rounded-lg shadow-md bg-gradient-to-br from-accent to-accent/80 p-8 hover:shadow-lg transition-shadow text-white opacity-90 font-medium">
+        <h3 className="text-xl font-bold mb-3"><KeyIcon size={48} className="inline-block mr-2" strokeWidth={2} />tap to open a door</h3>
+        <p>
           with the tap of a device, unlock secure access to:
         </p>
         <ul className="list-disc list-inside mt-2">
@@ -52,12 +46,9 @@ export const FeatureGrid = () => (
         </ul>
       </div>
 
-      <div className="rounded-lg shadow-md bg-gradient-to-br from-primary to-primary/80 p-8 text-white hover:shadow-lg transition-shadow">
-        <div className="mb-6">
-          <CreditCardIcon size={48} className="text-white" strokeWidth={2} />
-        </div>
-        <h3 className="text-xl font-bold mb-3">tap to pay</h3>
-        <p className="text-white opacity-90 font-medium">
+      <div className="rounded-lg shadow-md bg-gradient-to-br from-primary to-primary/80 p-8 hover:shadow-lg transition-shadow text-white opacity-90 font-medium">
+        <h3 className="text-xl font-bold mb-3"><CreditCardIcon size={48} className="inline-block mr-2" strokeWidth={2} />tap to pay</h3>
+        <p>
           You can use your device to pay almost anywhere. At campus dining,
           vending machines, printers, bookstores, and more - on and off campus.
         </p>
@@ -65,7 +56,7 @@ export const FeatureGrid = () => (
           A single or a double tap - to prove your status and claim your
           discount - is all it takes.
         </p>
-        <p>All possible payment methods are supported.</p>
+        <p>All possible payment methods are supported:</p>
         <ul className="list-disc list-inside mt-2">
           <li>your regular credit or debit card (open-loop payment)</li>
           <li>your campus prepaid card (closed-loop payment)</li>
@@ -73,37 +64,27 @@ export const FeatureGrid = () => (
         </ul>
       </div>
 
-      <div className="rounded-lg shadow-md bg-gradient-to-br from-accent to-accent/80 p-8 text-white hover:shadow-lg transition-shadow">
-        <div className="mb-6">
-          <BookOpenIcon size={48} className="text-white" strokeWidth={2} />
-        </div>
-        <h3 className="text-xl font-bold mb-3">tap to lend a book</h3>
-        <p className="text-white opacity-90 font-medium">
+      <div className="rounded-lg shadow-md bg-gradient-to-br from-accent to-accent/80 p-8 hover:shadow-lg transition-shadow text-white opacity-90 font-medium">
+        <h3 className="text-xl font-bold mb-3"><BookOpenIcon size={48} className="inline-block mr-2" strokeWidth={2} />tap to lend a book</h3>
+        <p>
           Libraries with their books and media are the physical representation
           of knowledge and learning. With a simple tap, borrow books and other
           media.
         </p>
       </div>
 
-      <div className="rounded-lg shadow-md bg-gradient-to-br from-primary to-primary/80 p-8 text-white hover:shadow-lg transition-shadow">
-        <div className="mb-6">
-          <BusIcon size={48} className="text-white" strokeWidth={2} />
-        </div>
-        <h3 className="text-xl font-bold mb-3">tap to ride</h3>
-        <p className="text-white opacity-90 font-medium">
+      <div className="rounded-lg shadow-md bg-gradient-to-br from-primary to-primary/80 p-8 hover:shadow-lg transition-shadow text-white opacity-90 font-medium">
+        <h3 className="text-xl font-bold mb-3"><BusIcon size={48} className="inline-block mr-2" strokeWidth={2} />tap to ride</h3>
+        <p>
           Ride the campus shuttle or take the public transport.
           Also works for car, bike and scooter sharing.
         </p>
       </div>
 
-      <div className="rounded-lg shadow-md bg-gradient-to-br from-accent to-accent/80 p-8 text-white hover:shadow-lg transition-shadow">
-        <div className="mb-6">
-          <TicketPercentIcon size={48} className="text-white" strokeWidth={2} />
-        </div>
-        <h3 className="text-xl font-bold mb-3">tap to claim a discount</h3>
-        <p className="text-white opacity-90 font-medium">
-          Claim a discount on campus and beyond, by proving your student status
-          with a simple tap.
+      <div className="rounded-lg shadow-md bg-gradient-to-br from-accent to-accent/80 p-8 hover:shadow-lg transition-shadow text-white opacity-90 font-medium">
+        <h3 className="text-xl font-bold mb-3"><TicketPercentIcon size={48} className="inline-block mr-2" strokeWidth={2} />tap to claim a discount</h3>
+        <p>
+          Claim a discount on campus and beyond, by proving your student status with a simple tap.
         </p>
       </div>
     </div>
