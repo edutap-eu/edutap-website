@@ -1,35 +1,50 @@
 [
   {
     "name": "Alexander Loechel",
-    "org": "LMU Munich",
-    "role": "Project Lead",
+    "orgs": ["LMU Munich", "EUGLOH", "ECCA"],
+    "roles": ["Project Lead", "Developer"],
     "image": "../images/team/loechel.jpg"
   },
   {
     "name": "Jose Filipe Alves",
-    "org": "U.Porto",
-    "//role": "Subject Matter Expert",
+    "orgs": ["U.Porto", "EUGLOH", "ECCA"],
+    "roles": ["Subject Matter Expert"],
     "image": "../images/team/jfalves.png"
   },
   {
     "name": "Morgan Persson",
-    "org": "Lunds universitet",
-    "//role": "Subject Matter Expert",
+    "orgs": ["Lunds universitet", "EUGLOH", "ECCA"],
+    "roles": ["Subject Matter Expert on Card Reader and Credential Formats"],
     "image": "../images/team/morgan_persson.png"
   },
   {
+    "name": "Simon Lund",
+    "orgs": ["LMU Munich", "EUGLOH", "ECCA"],
+    "roles": ["Developer"],
+    "image": "../images/team/mock.png"
+  },
+  {
     "name": "Christine Baumgartner",
-    "role": "Project Management",
+    "orgs": ["HEIDI"],
+    "roles": ["Project Management HEIDI"],
     "image": "../images/team/christine-baumgartner.jpg"
   },
   {
     "name": "Jens Klein",
-    "role": "Developer",
+    "orgs": ["HEIDI"],
+    "roles": ["Developer"],
     "image": "../images/team/jens-klein.jpg"
   },
   {
     "name": "Philip Auersperg",
-    "role": "Developer",
+    "orgs": ["HEIDI"],
+    "roles": ["Developer"],
     "image": "../images/team/zworkb-krone.jpg"
+  },
+  {
+    "name": "Robert Niederreiter",
+    "orgs": ["HEIDI"],
+    "roles": ["Developer"],
+    "image": "../images/team/mock.png"
   }
 ]

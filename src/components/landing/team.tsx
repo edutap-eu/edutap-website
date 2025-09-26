@@ -12,8 +12,8 @@ const TEAM_QUERY = graphql`
     allTeamJson {
       nodes {
         name
-        org
-        role
+        orgs
+        roles
         image {
           childImageSharp {
             gatsbyImageData(
@@ -32,8 +32,8 @@ const TEAM_QUERY = graphql`
 
 type TeamMemberData = {
   name: string;
-  org?: string;
-  role?: string;
+  orgs?: string[];
+  roles?: string[];
   image: any; // gatsby-image source
 };
 
@@ -49,9 +49,12 @@ type TeamMemberCardProps = {
   imageData: IGatsbyImageData;
 };
 
-const TeamMember: React.FC<TeamMemberData> = ({ name, org, role, image }) => {
+const TeamMember: React.FC<TeamMemberData> = ({ name, orgs, roles, image }) => {
   const imageData = getImage(image);
-  const info = [org, role].filter(Boolean).join(" • ");
+
+  // Combine all info items
+  const orgsList = orgs ? orgs.join(" • ") : "";
+  const rolesList = roles ? roles.join(" • ") : "";
 
   if (!imageData) {
     return null; // Handle missing image gracefully
@@ -68,7 +71,8 @@ const TeamMember: React.FC<TeamMemberData> = ({ name, org, role, image }) => {
       </div>
       <div className="flex flex-col items-center text-center max-w-xs">
         <span className="font-bold text-base sm:text-lg mb-1">{name}</span>
-        <span className="text-gray-600 text-xs sm:text-sm">{info}</span>
+        <span className="text-gray-600 text-xs sm:text-sm">{orgsList}</span>
+        <span className="text-gray-600 text-xs sm:text-sm">{rolesList}</span>
       </div>
     </div>
   );
