@@ -7,7 +7,7 @@ export const MissionStatement = () => (
     <Container
       size="sm"
       as="section"
-      className=" bg-white flex flex-col items-center py-16 md:py-36 rounded-xl md:drop-shadow-xl px-8 md:px-4"
+      className="bg-white flex flex-col items-center py-16 md:py-36 rounded-xl md:drop-shadow-xl px-8 md:px-4"
     >
       <h2 className="scroll-m-20 text-4xl font-bold tracking-tight mb-4">
         Our Mission
@@ -53,15 +53,19 @@ export const MissionStatement = () => (
               For Everyone. Without Exception.
             </h3>
             <p className="text-gray-600 text-lg">
-              For every member of the higher education community, students,
-              faculty, staff and affiliates.
+              For every member of the higher education community:
+              <ul className="list-disc list-inside mt-2">
+                <li>Students</li>
+                <li>Faculty and Staff</li>
+                <li>Affiliates</li>
+              </ul>
             </p>
           </div>
         </div>
 
         <div className="flex flex-col md:flex-row md:items-center">
           <div className="flex-shrink-0 mb-6 md:mb-0 md:mr-10">
-            <div className="w-20 h-20 flex items-center justify-center bg-primary  rounded-md">
+            <div className="w-20 h-20 flex items-center justify-center bg-primary rounded-md">
               <ShieldIcon
                 className="w-10 h-10 text-primary-foreground"
                 strokeWidth={2}

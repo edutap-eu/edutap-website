@@ -7,8 +7,8 @@ export const Hero = () => (
   <div className="bg-gradient-to-b from bg-white to-secondary/50">
     <Container size="sm" as="section" className="pt-48 py-36">
       <div className="flex flex-col items-center text-center">
-        <Badge className="text-sm mb-6 px-8 py-2">
-          No app, just tap
+        <Badge className="text-lg mb-6 px-8 py-2">
+          no app, <strong>just tap!</strong>
         </Badge>
 
         <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight mb-8">

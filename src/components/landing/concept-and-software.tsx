@@ -27,9 +27,9 @@ export const ConceptAndSoftware = () => (
 
     <p className="text-center text-xl text-gray-700 max-w-lg mb-12 mx-auto">
       More than just a concept, eduTAP is a community-driven project that builds
-      on the vision to create a{" "}
+      on the vision to create <br /> a{" "}
       <a
-        href="https://education.ec.europa.eu/about-eea/the-eea-explainedEuropean Education Area."
+        href="https://education.ec.europa.eu/about-eea/the-eea-explained"
         className="text-accent hover:underline"
       >
         European Education Area
