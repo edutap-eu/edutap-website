@@ -87,7 +87,7 @@ export const Team: React.FC = () => {
         Meet the Team
       </h2>
 
-      <div className="grid gap-8 sm:gap-10 md:gap-12 px-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+      <div className="grid gap-8 sm:gap-10 md:gap-12 px-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {data.allTeamJson.nodes.map((member, index) => (
           <TeamMember key={`team-member-${member.name}-${index}`} {...member} />
         ))}

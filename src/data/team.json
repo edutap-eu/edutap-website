@@ -8,18 +8,18 @@
   {
     "name": "Jose Filipe Alves",
     "orgs": ["U.Porto", "EUGLOH", "ECCA"],
-    "roles": ["Subject Matter Expert"],
+    "roles": ["Expert on Credential Formats"],
     "image": "../images/team/jfalves.png"
   },
   {
     "name": "Morgan Persson",
     "orgs": ["Lunds universitet", "EUGLOH", "ECCA"],
-    "roles": ["Subject Matter Expert on Card Reader and Credential Formats"],
+    "roles": ["Expert on Card Reader and Credential Formats"],
     "image": "../images/team/morgan_persson.png"
   },
   {
     "name": "Simon Lund",
-    "orgs": ["LMU Munich", "EUGLOH", "ECCA"],
+    "orgs": ["LMU Munich", "EUGLOH"],
     "roles": ["Developer"],
     "image": "../images/team/mock.png"
   },
