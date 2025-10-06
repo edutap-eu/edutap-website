@@ -6,11 +6,10 @@ import { NavLinks } from "@/components/header/nav";
 import { Container } from "@/components/container";
 
 export const Header: React.FC = () => (
-  <>
-    <Container
-      as="header"
-      className="py-4 transition-all duration-300 backdrop-blur-md z-50 sticky top-0 bg-white/80 border-b border-gray-100"
-    >
+    <header className="backdrop-blur-md z-50 sticky top-0 bg-white/80 border-b border-gray-100">
+        <Container
+            className="py-4 transition-all duration-300"
+        >
       <div className="flex items-center justify-between">
         <Link
           to="/"
@@ -76,5 +75,5 @@ export const Header: React.FC = () => (
     <div className="flex md:hidden overflow-auto no-scrollbar py-4 px-4">
       <NavLinks />
     </div>
-  </>
+  </header>
 );
