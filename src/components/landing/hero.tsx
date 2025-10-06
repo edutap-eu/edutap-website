@@ -37,14 +37,14 @@ export const Hero = () => (
             href="https://github.com/edutap-eu"
             className="rounded px-8 py-4 bg-black font-medium text-white flex items-center justify-center transition-colors hover:bg-gray-100 hover:text-black"
           >
-            <GithubMark className="mr-2 h-5 w-5" inverted="true" />
+            <GithubMark className="mr-2 h-5 w-5" inverted />
             Github / eduTAP-eu
           </a>
           <a
             href="https://github.com/edutap-collective"
             className="rounded px-8 py-4 bg-black font-medium text-white flex items-center justify-center transition-colors hover:bg-gray-100 hover:text-black"
           >
-            <GithubMark className="mr-2 h-5 w-5" inverted="true" />
+            <GithubMark className="mr-2 h-5 w-5" inverted />
             Github / eduTAP-collective
           </a>
         </div>
