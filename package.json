@@ -24,8 +24,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "format": "prettier --write .",
-    "lint": "eslint .",
-    "deploy": "gatsby build --prefix-paths && gh-pages -d public -f"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@mdx-js/react": "^2.3.0",
