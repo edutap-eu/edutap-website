@@ -27,7 +27,7 @@ const PresentationsPage = () => {
           Presentations
         </h1>
 
-        <div className="mb-16">
+        <div className="mb-24">
           <h2 className="text-3xl font-semibold pb-3 mb-8 border-b-4 border-primary inline-block">
             Lightning Talks
           </h2>

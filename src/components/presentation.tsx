@@ -33,7 +33,8 @@ export const Presentation = ({
   }
 
   return (
-    <div className="flex flex-col h-full overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl hover:-translate-y-1 border border-gray-200">
+    <a href={pdfPath} target="_blank"
+       className="flex flex-col h-full overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl hover:-translate-y-1 border border-gray-200 cursor-pointer">
       {/* PDF Preview */}
       <div className="relative w-full h-48 bg-gray-100 overflow-hidden">
         {pageError ? (
@@ -80,22 +81,11 @@ export const Presentation = ({
       <div className="flex flex-col flex-grow p-4">
         <h3 className="text-xl font-semibold mb-2 line-clamp-2">{title}</h3>
         {description && (
-          <p className="text-gray-600 mb-4 flex-grow line-clamp-3">
+          <p className="text-gray-600 flex-grow line-clamp-3">
             {description}
           </p>
         )}
-        <div className="mt-auto pt-2">
-          <a
-            href={pdfPath}
-            className="inline-flex items-center px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors duration-300"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Eye className="h-4 w-4 mr-2" />
-            View Presentation
-          </a>
-        </div>
       </div>
-    </div>
+    </a>
   );
 };
