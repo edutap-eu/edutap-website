@@ -18,10 +18,22 @@
     "type": "lightning"
   },
   {
+    "title": "eduTAP - A Concept and System of Digital Identity Credentials for proximity on-site service access - Modern Campus ID (Student ID / Staff ID) for universities in Europe & the world",
+    "file": "eduTAP-PloneConf2025f.pdf",
+    "description": "Presentation at PloneConf 2025 at University of Jyväskylä, Finland; 2025-10-17",
+    "type": "conference"
+  },
+  {
     "title": "eduTAP - A Concept and System of Digital Identities for proximity on-site service access",
     "file": "eduTAP_Varna_2025.pdf",
     "description": "Presentation at IT ИНОВАЦИИ ВЪВ ВИСШЕТО ОБРАЗОВАНИЕ 2025 Conference Workshop at University of Economics – Varna, Bulgaria; 2025-10-03",
     "type": "conference"
+  },
+  {
+    "title": "HEIDI - Sichere digitale Identitäten für Hochschulen in der Handy-Wallet",
+    "file": "HEIDI-Plone-Tagung-2025.pdf",
+    "description": "Presentation at Plone Tagung 2025 at Universität Koblenz, Germany; 2025-06-10",
+    "type": "conference"  
   },
   {
     "title": "eduTAP - A Concept and System of Digital Identities for proximity on-site service access",
