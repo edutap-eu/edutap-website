@@ -164,9 +164,16 @@ export const ConceptAndSoftware = () => (
                     href="https://opensource.org/license/eupl-1-2/"
                     className="text-accent hover:underline"
                   >
-                    European Union Public Licence v. 1.2
-                  </a>{" "}
-                  (EUPL)
+                    European Union Public Licence v. 1.2 (EUPL)
+                  </a>, Documentation and Presentations are licensed under{" "}
+                  <a
+                    href="https://creativecommons.org/licenses/by-sa/4.0/legalcode"
+                    className="text-accent hover:underline"
+                  >
+                    Creative Commons Attribution-ShareAlike 4.0 International
+                    (CC BY-SA 4.0)
+                  </a>
+                  .
                 </p>
               ),
             },

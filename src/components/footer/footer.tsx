@@ -88,8 +88,12 @@ export const Footer = () => {
               { href: "/legal/imprint", label: "Imprint" },
               {
                 href: "https://opensource.org/license/eupl-1-2/",
-                label: "EUPL License",
+                label: "EUPL 1.2 License",
               },
+              {
+                href: "https://creativecommons.org/licenses/by-sa/4.0/legalcode",
+                label: "CC BY-SA 4.0 License",
+              }
             ]}
           />
         </div>
