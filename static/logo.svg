@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="500" viewBox="0 0 1600 500">
+  <defs>
+    <style>
+      /* @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap'); */
+      .device { fill:none; stroke:#b8bec6; stroke-width:8; }
+      .guide { stroke:#cfcfcf; stroke-width:2; stroke-dasharray:10 10; }
+    </style>
+  </defs>
+
+  <!-- Horizontal guide line -->
+  <line x1="0" y1="250" x2="1600" y2="250" class="guide"/>
+
+  <!-- Smartphone (Landscape) -->
+  <rect x="150" y="120" width="900" height="260" rx="50" class="device"/>
+  <line x1="210" y1="130" x2="210" y2="370" class="device"/>
+  <rect x="190" y="240" width="8" height="20" rx="4" fill="#b8bec6"/>
+
+  <!-- Wordmark -->
+  <text x1="210" y="245" font-family="Lato, sans-serif" font-size="120" font-weight="700">
+    <tspan fill="#115794">edu</tspan><tspan fill="#d76525">TAP</tspan>
+  </text>
+
+  <!-- Slogan -->
+  <text x="325" y="315" font-family="Lato, sans-serif" font-size="50" font-weight="700" fill="#4097be">
+    no app, just tap!
+  </text>
+
+  <!-- Reader -->
+  <rect x="1080" y="160" width="300" height="200" rx="35" class="device"/>
+
+  <!-- Filigree NFC contact waves -->
+  <g stroke="#b8bec6" stroke-width="4" fill="none" stroke-linecap="round">
+    <path d="M1040 230 Q1060 250 1040 270"/>
+    <path d="M1015 215 Q1055 250 1015 285"/>
+  </g>
+
+  <!-- Centered eduTAP icon inside reader (shifted slightly right) -->
+  <g transform="translate(1140,195) scale(0.85)">
+    <!-- colored waves -->
+    <path d="M30 90 Q50 110 30 130" stroke="#115794" stroke-width="18" fill="none" stroke-linecap="round"/>
+    <path d="M65 70 Q105 110 65 150" stroke="#4097be" stroke-width="18" fill="none" stroke-linecap="round"/>
+    <path d="M105 55 Q165 110 105 165" stroke="#f07129" stroke-width="18" fill="none" stroke-linecap="round"/>
+    <path d="M150 45 Q230 110 150 175" stroke="#d76525" stroke-width="18" fill="none" stroke-linecap="round"/>
+
+    <!-- Mortarboard (detailed, filled). Insert as a <g> and move via transform="translate(x,y) scale(s)" -->
+    <g id="edutap-mortarboard-filled" transform="translate(0,0)">
+        <!-- top board -->
+        <path d="M12 44 L142 8 L272 44 L142 80 Z"
+                fill="#d76525"/>
+        <!-- board rim (gives depth) -->
+        <path d="M12 44 L142 80 L272 44 L254 58 L142 92 L30 58 Z"
+                fill="#c85f22" opacity="0.95"/>
+
+        <!-- highlight lines on top -->
+        <path d="M58 44 L142 22 L226 44"
+                fill="none" stroke="#ffffff" stroke-width="10"
+                stroke-linecap="round" opacity="0.75"/>
+        <path d="M78 54 L142 36 L206 54"
+                fill="none" stroke="#ffffff" stroke-width="6"
+                stroke-linecap="round" opacity="0.55"/>
+
+        <!-- band (cap base) -->
+        <path d="M58 82 Q142 130 226 82"
+                fill="none" stroke="#d76525" stroke-width="18"
+                stroke-linecap="round" stroke-linejoin="round"/>
+
+        <!-- inner band shadow -->
+        <path d="M72 86 Q142 118 212 86"
+                fill="none" stroke="#b8541f" stroke-width="10"
+                stroke-linecap="round" opacity="0.55"/>
+
+        <!-- tassel cord -->
+        <path d="M266 46 C292 70 292 104 266 132"
+                fill="none" stroke="#d76525" stroke-width="12"
+                stroke-linecap="round"/>
+
+        <!-- tassel head -->
+        <circle cx="266" cy="144" r="12" fill="#d76525"/>
+
+        <!-- tassel body -->
+        <path d="M258 156
+                C250 170 250 186 258 200
+                C264 210 268 210 274 200
+                C282 186 282 170 274 156
+                Z"
+                fill="#d76525"/>
+
+        <!-- tassel strands -->
+        <path d="M256 198 L276 198" stroke="#ffffff" stroke-width="4" opacity="0.35" stroke-linecap="round"/>
+        <path d="M258 206 L274 206" stroke="#ffffff" stroke-width="4" opacity="0.25" stroke-linecap="round"/>
+    </g>
+  </g>
+
+</svg>
