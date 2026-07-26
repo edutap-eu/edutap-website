@@ -18,6 +18,12 @@
     "type": "lightning"
   },
   {
+    "title": "eduTAP - digitale Ausweise im Wallet",
+    "file": "eduTAP-BayAKIdM-2026-07-22.pdf",
+    "description": "Presentation at BayAK-IdM @ Hochschule Kempten; 2026-07-22",
+    "type:": "conference"
+  },
+  {
     "title": "From local services to shared services - an eduTAP showcase",
     "file": "eduTAP-EUGLOH-WP1-5-Lund-2026-04-21.pdf",
     "description": "Presentation at EUGLOH WP 1.5 Workshop 2026 at Lund University, Sweden; 2026-04-21",
