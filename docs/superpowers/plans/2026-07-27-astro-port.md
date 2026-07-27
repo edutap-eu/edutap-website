@@ -1722,7 +1722,7 @@ git commit -m "feat: replace react-pdf with pre-generated thumbnails"
 - Consumes: `news` and `microNews` collections from Task 2
 - Produces: routes `/news` and `/news/<slug>` matching the Gatsby URLs
 
-- [ ] **Step 1: Write the failing test**
+- [ ] **Step 1: Write the collection precondition tests**
 
 `tests/news.test.ts`:
 
@@ -1753,16 +1753,66 @@ describe("news", () => {
 });
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [ ] **Step 2: Run the collection tests — they should already pass**
 
 Run: `npm run test -- tests/news.test.ts`
-Expected: PASS for both — these assert collection behaviour from Task 2. If they fail, the frontmatter schema is wrong; fix that before continuing.
+Expected: PASS for both. They assert collection behaviour established in Task 2, so they are a precondition check rather than a red-phase test. If either fails, the `news` frontmatter schema is wrong — fix that before continuing.
 
-- [ ] **Step 3: Write `NewsItem.astro`**
+- [ ] **Step 3: Write the failing NewsItem test**
 
-Port `src/components/news-item.tsx` (42 lines). Props `{ date: Date; title: string; description: string; url?: string | null; isInternal?: boolean }`. External links get `target="_blank" rel="noreferrer"`, internal ones do not.
+Append to `tests/news.test.ts`:
 
-- [ ] **Step 4: Write `src/pages/news/index.astro`**
+```ts
+import { experimental_AstroContainer as AstroContainer } from "astro/container";
+import NewsItem from "../src/components/NewsItem.astro";
+
+describe("NewsItem", () => {
+  const item = {
+    date: new Date("2025-03-31"),
+    title: "First Post",
+    description: "We added a blog!",
+  };
+
+  it("opens external links in a new tab", async () => {
+    const container = await AstroContainer.create();
+    const html = await container.renderToString(NewsItem, {
+      props: { ...item, url: "https://example.org/news", isInternal: false },
+    });
+    expect(html).toContain('target="_blank"');
+    expect(html).toContain('rel="noreferrer"');
+  });
+
+  it("keeps internal links in the same tab", async () => {
+    const container = await AstroContainer.create();
+    const html = await container.renderToString(NewsItem, {
+      props: { ...item, url: "/news/first-post", isInternal: true },
+    });
+    expect(html).not.toContain('target="_blank"');
+  });
+
+  it("renders without a url", async () => {
+    const container = await AstroContainer.create();
+    const html = await container.renderToString(NewsItem, { props: item });
+    expect(html).toContain("First Post");
+  });
+});
+```
+
+- [ ] **Step 4: Run it to verify it fails**
+
+Run: `npm run test -- tests/news.test.ts`
+Expected: FAIL — `NewsItem.astro` does not exist yet.
+
+- [ ] **Step 5: Write `NewsItem.astro`**
+
+Port `src/components/news-item.tsx` (42 lines). Props `{ date: Date; title: string; description: string; url?: string | null; isInternal?: boolean }`. External links get `target="_blank" rel="noreferrer"`, internal ones do not. Copy the class strings from the source verbatim.
+
+- [ ] **Step 6: Run the tests to verify they pass**
+
+Run: `npm run test -- tests/news.test.ts`
+Expected: PASS (5 tests).
+
+- [ ] **Step 7: Write `src/pages/news/index.astro`**
 
 Ports `src/pages/news/index.tsx`, including the `NoNewsPlaceholder` branch at lines 39–44 — `micro-news.json` is currently empty, but the single Markdown post keeps the list non-empty.
 
@@ -1805,7 +1855,7 @@ const items = [
 </BaseLayout>
 ```
 
-- [ ] **Step 5: Write `src/pages/news/[...slug].astro`**
+- [ ] **Step 8: Write `src/pages/news/[...slug].astro`**
 
 Gatsby's `{markdownRemark.frontmatter__slug}.tsx` built `/news/first-post` from the frontmatter `slug: "/first-post"`. Reproduce exactly — strip the leading slash for the route parameter.
 
@@ -1853,12 +1903,12 @@ const formattedDate = post.data.date.toLocaleDateString("en-GB", {
 
 Check the original file for the exact heading classes and button copy before finalising.
 
-- [ ] **Step 6: Verify the route renders**
+- [ ] **Step 9: Verify the route renders**
 
 Run: `npm run build && ls dist/news/first-post/index.html`
 Expected: the file exists. Open it and confirm the Markdown body rendered, including the `## Types of Posts` heading.
 
-- [ ] **Step 7: Commit**
+- [ ] **Step 10: Commit**
 
 ```bash
 git add src/components/NewsItem.astro src/pages/news tests/news.test.ts
@@ -1872,7 +1922,7 @@ git commit -m "feat: port news index and post pages to Astro"
 **Files:**
 
 - Create: `src/pages/about.astro`, `src/pages/404.astro`, `src/pages/legal/imprint.astro`, `src/pages/legal/privacy-policy.astro`, `src/components/UnderConstruction.astro`
-- Test: covered by Task 12's route test
+- Test: covered by Task 11's route test
 
 **Interfaces:**
 
