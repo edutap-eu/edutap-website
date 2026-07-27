@@ -62,6 +62,12 @@ These are fixed as part of the port because the affected code is being rewritten
 | Unescaped `&` in a commented-out `@import` makes the file invalid XML; strict SVG renderers fail to parse it | `static/logo.svg:6` | Escaped |
 | Dead files: empty `colors.css`, `favicon-square2.png.png` (doubled extension), `test.svg` | `static/` | Not carried over |
 | `Tabs` component is never imported anywhere | `src/components/ui/tabs.tsx` | Not carried over |
+| The newest entry has a typo in its key — `"type:"` instead of `"type"` — so it matches neither group filter and is invisible on the live presentations page | `src/data/presentations.json:24` | Key corrected; the new schema makes this class of error a build failure |
+
+Two further observations, left untouched because they are editorial rather than technical:
+`eduTAP-PloneConf2025.pdf` and `eduTAP-Poster-Charm-EU.pdf` sit in `static/presentations/`
+without being referenced from `presentations.json`, and three team portraits
+(`lmu-campus.jpg`, `lmu-campus-org.jpg`, `jfalves-org.png`) are unused.
 
 ## 4. Stack
 
@@ -79,7 +85,7 @@ React, `react-pdf`, `react-vertical-timeline-component`, `lucide-react`, `daisyu
 
 ## 5. Project structure
 
-```
+```text
 src/
   content.config.ts        collections and Zod schemas
   data/                    unchanged: *.json and news-posts/*.md
@@ -212,8 +218,8 @@ runs on Vitest with Astro's Container API, so no browser is required.
 
 - **Routes** — all nine URLs from the Gatsby build exist in the Astro build, including the
   news detail route
-- **Content integrity** — 35 presentations, 12 team images, all milestones rendered; every
-  file referenced from JSON exists on disk
+- **Content integrity** — 33 presentation entries, 8 team members, 12 history milestones and
+  4 roadmap milestones rendered; every file referenced from JSON exists on disk
 - **Thumbnail coverage** — every PDF in `public/presentations/` has a matching WebP in
   `thumbs/`, so a forgotten `npm run thumbnails` fails CI instead of shipping a blank card
 - **Metadata** — `<title>`, description, canonical URL, sitemap entries
