@@ -2148,28 +2148,29 @@ Expected: all tests pass. Then walk all nine routes in `npm run preview` beside 
 - [ ] **Step 2: Delete the Gatsby tree**
 
 ```bash
-git rm -r --cached public
 git rm gatsby-config.ts gatsby-node.ts gatsby-browser.ts sentry.config.ts components.json
 git rm -r src/pages/*.tsx "src/pages/news/{markdownRemark.frontmatter__slug}.tsx" \
   src/pages/news/index.tsx src/pages/legal/*.tsx
 git rm -r src/components/*.tsx src/components/ui/*.tsx src/components/header \
   src/components/footer src/components/landing/*.tsx src/lib/utils.ts
 git rm -r src/images
-rm -rf public/page-data public/static .cache
 ```
 
-Careful: `public/` now holds the *committed* static assets (favicon, logos, PDFs, thumbnails), not Gatsby output. Only remove the Gatsby-generated subdirectories. Verify with `git status` before committing.
+The Gatsby build output that used to live in `public/` was already deleted before Task 1, so `public/` now contains only the committed site assets (favicon, logos, PDFs, thumbnails). Do not touch it here. Verify with `git status` before committing.
 
-- [ ] **Step 3: Update `.gitignore`**
+- [ ] **Step 3: Confirm `.gitignore` is correct**
 
-Replace Gatsby entries with:
+It was already rewritten during Task 1 (the `public` entry had to go before any asset could be committed). Verify it reads:
 
 ```gitignore
 node_modules/
 dist/
 .astro/
 .DS_Store
+.idea
 ```
+
+If `public` still appears anywhere in the file, remove it — `public/` holds committed site assets now, not build output.
 
 - [ ] **Step 4: Prune remaining dependencies**
 
