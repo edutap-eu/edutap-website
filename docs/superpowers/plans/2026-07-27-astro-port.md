@@ -638,8 +638,23 @@ git commit -m "feat: give roadmap entries ISO dates with display labels"
 
 Five markup-only components. `Tabs` is deliberately not ported — it is imported nowhere.
 
+**Restore the design tokens first.** The shadcn components reference a full token
+vocabulary — `bg-card`, `text-card-foreground`, `text-primary-foreground`,
+`text-muted-foreground`, `border-ring`, `bg-background`, `bg-destructive` — that Task 1's
+`global.css` rewrite dropped in favour of nine brand tokens. Porting the class strings
+without those tokens is not a simplification but a silent failure: Tailwind emits no rule
+for an unknown utility, so the components would render unstyled with nothing reported.
+Restore the full set, taking the values from the pre-port `global.css`
+(`git show c6611e2:src/styles/global.css`) with one deliberate change: `primary`,
+`secondary` and `accent` take the exact brand hex values rather than the imprecise oklch
+approximations they held before.
+
+Once the tokens exist, port each component's class strings **verbatim** from its `.tsx`
+source. Do not retype them from the descriptions below — read the files.
+
 **Files:**
 
+- Modify: `src/styles/global.css` (restore the token set)
 - Create: `src/components/Container.astro`, `src/components/ui/Button.astro`, `src/components/ui/Card.astro`, `src/components/ui/Badge.astro`, `src/components/ui/Separator.astro`
 - Test: `tests/components.test.ts`
 
@@ -703,161 +718,68 @@ describe("Button", () => {
 Run: `npm run test -- tests/components.test.ts`
 Expected: FAIL — the component modules cannot be resolved.
 
-- [ ] **Step 3: Write `Container.astro`**
+- [ ] **Step 3: Restore the design tokens in `src/styles/global.css`**
 
-The `cva` variants from `src/components/container.tsx:6-18` become a plain lookup. Class strings are copied verbatim.
-
-```astro
----
-interface Props {
-  size?: "sm" | "md" | "lg";
-  as?: string;
-  class?: string;
-}
-
-const { size = "lg", as: Tag = "div", class: className = "" } = Astro.props;
-
-const widths = {
-  sm: "max-w-screen-lg",
-  md: "max-w-screen-xl",
-  lg: "max-w-screen-2xl",
-} as const;
----
-
-<Tag class={`container mx-auto px-4 sm:px-6 lg:px-8 ${widths[size]} ${className}`}>
-  <slot />
-</Tag>
-```
-
-Note: `max-w-screen-*` was removed in Tailwind 4. Add the three values to the `@theme` block in `src/styles/global.css` so the utilities still resolve:
+Add the shadcn token set to the existing `@theme` block, alongside the brand and status
+tokens already there. Take every value from `git show c6611e2:src/styles/global.css`,
+except `primary`, `secondary` and `accent`, which take the exact brand hex:
 
 ```css
---container-screen-lg: 1024px;
---container-screen-xl: 1280px;
---container-screen-2xl: 1400px;
+  --color-background: oklch(1 0 0);
+  --color-foreground: oklch(0.145 0 0);
+  --color-card: oklch(1 0 0);
+  --color-card-foreground: oklch(0.145 0 0);
+  --color-popover: oklch(1 0 0);
+  --color-popover-foreground: oklch(0.145 0 0);
+  --color-primary-foreground: oklch(0.985 0 0);
+  --color-secondary-foreground: oklch(0.205 0 0);
+  --color-muted: oklch(0.97 0 0);
+  --color-muted-foreground: oklch(0.556 0 0);
+  --color-accent-foreground: oklch(0.985 0 0);
+  --color-destructive: oklch(62.19% 0.2046 30.28);
+  --color-border: oklch(0.922 0 0);
+  --color-input: oklch(0.922 0 0);
+  --color-ring: oklch(0.708 0 0);
+  --radius: 0.625rem;
 ```
 
-The 1400px value for `2xl` matches the `TODO` comment in the old `global.css`.
+`--color-primary`, `--color-secondary` and `--color-accent` already hold the exact hex
+values and must not be touched. The `chart-*` and `sidebar-*` tokens are not restored —
+grep confirms no component references them.
 
-- [ ] **Step 4: Write `Button.astro`**
+Tailwind 4 also removed the `max-w-screen-*` utilities the original Container relies on, so
+add:
 
-Variants taken from `src/components/ui/button.tsx`. `asChild` disappears — the component now renders the anchor directly, which is what every call site did with it.
-
-```astro
----
-interface Props {
-  variant?: "default" | "outline";
-  size?: "sm" | "default";
-  href?: string;
-  target?: string;
-  rel?: string;
-  class?: string;
-}
-
-const {
-  variant = "default",
-  size = "default",
-  href,
-  target,
-  rel,
-  class: className = "",
-} = Astro.props;
-
-const base =
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50";
-
-const variants = {
-  default: "bg-primary text-white shadow hover:bg-primary/90",
-  outline: "border border-border-subtle bg-white shadow-sm hover:bg-surface",
-} as const;
-
-const sizes = {
-  default: "h-9 px-4 py-2",
-  sm: "h-8 rounded-md px-3 text-xs",
-} as const;
-
-const classes = `${base} ${variants[variant]} ${sizes[size]} ${className}`;
----
-
-{
-  href ? (
-    <a href={href} target={target} rel={rel} class={classes}>
-      <slot />
-    </a>
-  ) : (
-    <button class={classes}>
-      <slot />
-    </button>
-  )
-}
+```css
+  --container-screen-lg: 1024px;
+  --container-screen-xl: 1280px;
+  --container-screen-2xl: 1400px;
 ```
 
-- [ ] **Step 5: Write `Card.astro`, `Badge.astro`, `Separator.astro`**
+The 1400px value for `2xl` matches the `TODO` comment in the pre-port `global.css`.
 
-`Card.astro` — the old file exported `Card`, `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`. Astro has no multi-export components, so a single component with named slots covers all call sites in `concept-and-software.tsx`:
+- [ ] **Step 4: Verify the utilities actually resolve**
 
-```astro
----
-interface Props {
-  class?: string;
-}
-const { class: className = "" } = Astro.props;
----
+An unrecognised Tailwind class produces no CSS rule and no error. After a build, confirm
+the generated stylesheet contains rules for `max-w-screen-2xl`, `bg-card`,
+`text-muted-foreground` and `text-primary-foreground`. If any is absent, the token name is
+wrong — fix it before writing components against it.
 
-<div class={`rounded-xl border border-border-subtle bg-white text-slate-950 shadow ${className}`}>
-  {
-    (Astro.slots.has("title") || Astro.slots.has("description")) && (
-      <div class="flex flex-col space-y-1.5 p-6">
-        {Astro.slots.has("title") && (
-          <h3 class="font-semibold leading-none tracking-tight">
-            <slot name="title" />
-          </h3>
-        )}
-        {Astro.slots.has("description") && (
-          <p class="text-sm text-slate-500">
-            <slot name="description" />
-          </p>
-        )}
-      </div>
-    )
-  }
-  <div class="p-6 pt-0">
-    <slot />
-  </div>
-</div>
-```
+- [ ] **Step 5: Port the five components, copying class strings verbatim**
 
-`Badge.astro`:
+Read each source file and reproduce its class strings character-for-character. Only the
+component mechanics change, never the classes.
 
-```astro
----
-interface Props {
-  class?: string;
-}
-const { class: className = "" } = Astro.props;
----
+| Source | Target | Mechanical changes |
+| --- | --- | --- |
+| `src/components/container.tsx` | `Container.astro` | `cva` variants become a lookup object; `as` prop stays |
+| `src/components/ui/button.tsx` | `Button.astro` | `asChild` disappears — renders `<a>` when `href` is passed, else `<button>`. Keep all six variants and five sizes. |
+| `src/components/ui/card.tsx` | `Card.astro` | The seven exported sub-components become named slots (`title`, `description`, `action`, `footer`) plus the default slot |
+| `src/components/ui/badge.tsx` | `Badge.astro` | Variants preserved |
+| `src/components/ui/separator.tsx` | `Separator.astro` | Radix primitive becomes a plain `div` with `role="separator"` |
 
-<div
-  class={`inline-flex items-center rounded-md border border-transparent bg-primary px-2.5 py-0.5 text-xs font-semibold text-white transition-colors ${className}`}
->
-  <slot />
-</div>
-```
-
-`Separator.astro`:
-
-```astro
----
-interface Props {
-  orientation?: "horizontal" | "vertical";
-  class?: string;
-}
-const { orientation = "horizontal", class: className = "" } = Astro.props;
-const size = orientation === "horizontal" ? "h-px w-full" : "h-full w-px";
----
-
-<div role="separator" aria-orientation={orientation} class={`shrink-0 bg-border-subtle ${size} ${className}`}></div>
-```
+Preserve the `data-slot` attributes — they are referenced by sibling selectors such as
+`has-[data-slot=card-action]`.
 
 - [ ] **Step 6: Run the test to verify it passes**
 
