@@ -12,10 +12,10 @@ const widths = {
   md: "max-w-screen-xl",
   lg: "max-w-screen-2xl",
 } as const;
+
+const width = widths[size as "sm" | "md" | "lg"];
 ---
 
-<Tag
-  class={`container mx-auto px-4 sm:px-6 lg:px-8 ${widths[size]} ${className}`}
->
+<Tag class={`container mx-auto px-4 sm:px-6 lg:px-8 ${width} ${className}`}>
   <slot />
 </Tag>

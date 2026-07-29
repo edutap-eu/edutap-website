@@ -4,12 +4,13 @@ interface Props {
   class?: string;
 }
 const { orientation = "horizontal", class: className = "" } = Astro.props;
-const size = orientation === "horizontal" ? "h-px w-full" : "h-full w-px";
 ---
 
 <div
+  data-slot="separator-root"
+  data-orientation={orientation}
   role="separator"
   aria-orientation={orientation}
-  class={`shrink-0 bg-border-subtle ${size} ${className}`}
+  class={`bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px ${className}`}
 >
 </div>
