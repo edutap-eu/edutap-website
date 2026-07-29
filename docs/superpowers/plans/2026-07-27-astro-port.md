@@ -337,7 +337,7 @@ describe("content collections", () => {
     }
   });
 
-  it("parses every milestone date into a real Date", async () => {
+  it("parses milestone dates into the exact expected values", async () => {
     for (const name of ["history", "roadmap"] as const) {
       const entries = await getCollection(name);
       expect(entries.length).toBeGreaterThan(0);
@@ -346,6 +346,12 @@ describe("content collections", () => {
         expect(Number.isNaN(entry.data.date.getTime())).toBe(false);
       }
     }
+
+    // Assert a known value, not just "is a Date" — a schema that silently
+    // coerces prose would pass the type check while inventing the value.
+    const history = await getCollection("history");
+    const first = history.find((entry) => entry.data.title === "First Involvement");
+    expect(first?.data.date.toISOString().slice(0, 10)).toBe("2020-07-01");
   });
 
   it("restricts milestone status to the three known values", async () => {
@@ -389,9 +395,23 @@ function indexed(prefix: string) {
     }));
 }
 
+/**
+ * An ISO date, either YYYY-MM-DD or YYYY-MM.
+ *
+ * Deliberately NOT z.coerce.date(): V8 extracts a trailing year from free
+ * text, so `new Date("Summer 2024")` yields 1 January 2024 rather than an
+ * Invalid Date. Coercion would therefore accept the roadmap's prose dates
+ * and silently invent values that are up to six months wrong. The regex
+ * rejects them instead, which is the whole point of validating this field.
+ */
+const isoDate = z
+  .string()
+  .regex(/^\d{4}-\d{2}(-\d{2})?$/, "must be an ISO date: YYYY-MM-DD or YYYY-MM")
+  .transform((value) => new Date(value));
+
 const milestoneSchema = z.object({
   title: z.string(),
-  date: z.coerce.date(),
+  date: isoDate,
   /** Original wording, shown instead of the parsed date when present. */
   dateLabel: z.string().optional(),
   milestone_type: z.string().nullable().default(null),
@@ -439,7 +459,7 @@ const microNews = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    date: z.coerce.date(),
+    date: isoDate,
     url: z.string().url().nullable().default(null),
   }),
 });
@@ -448,7 +468,7 @@ const news = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/data/news-posts" }),
   schema: z.object({
     slug: z.string().startsWith("/"),
-    date: z.coerce.date(),
+    date: isoDate,
     title: z.string(),
     short: z.string(),
   }),
@@ -459,9 +479,8 @@ export const collections = { history, roadmap, team, presentations, microNews, n
 
 Two notes on the data this schema meets:
 
-- One `history.json` entry has the date `"2024-06"` rather than a full ISO date. JavaScript
-  parses this as 1 June 2024, so `z.coerce.date()` accepts it. Leave it — it is valid, and
-  tightening the schema to require `YYYY-MM-DD` would reject real data for no benefit.
+- One `history.json` entry has the date `"2024-06"` rather than a full ISO date. That is why
+  `isoDate` accepts a `YYYY-MM` form alongside `YYYY-MM-DD`. Leave the data as it is.
 - `history.json` uses only the statuses `reached` and `future`; `roadmap.json` uses `next`
   and `future`. The shared enum covers all three.
 
@@ -471,7 +490,7 @@ Run: `npm run test -- tests/content.test.ts`
 
 Two failures are expected, and both are genuine defects in the editorial data that the schema is designed to catch:
 
-1. **Milestone dates** — `roadmap.json` contains free text like `"End of 2023"`, which `z.coerce.date()` turns into an Invalid Date. Fixed in Task 3.
+1. **Milestone dates** — `roadmap.json` contains free text like `"End of 2023"`, which `isoDate` rejects outright. Astro reports the schema violation and the collection fails to load, so the milestone tests error. Fixed in Task 3.
 2. **A malformed presentation entry** — the newest entry in `presentations.json` has a typo in its key: `"type:"` instead of `"type"`. Fix it in the next step.
 
 - [ ] **Step 5: Fix the malformed presentation key**
@@ -552,7 +571,7 @@ describe("roadmap date migration", () => {
 - [ ] **Step 2: Run the test to verify it fails**
 
 Run: `npm run test -- tests/content.test.ts`
-Expected: FAIL — `dateLabel` is `undefined` for all four entries.
+Expected: FAIL. Note the failure mode: because `isoDate` rejects the prose dates outright, the whole `roadmap` collection fails to load, so these tests error rather than simply reporting an undefined `dateLabel`. Astro names the offending entries and the expected format in its error output.
 
 - [ ] **Step 3: Rewrite `src/data/roadmap.json`**
 
