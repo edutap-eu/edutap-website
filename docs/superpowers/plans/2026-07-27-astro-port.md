@@ -662,8 +662,9 @@ source. Do not retype them from the descriptions below — read the files.
 
 - Produces:
   - `Container` — props `{ size?: "sm" | "md" | "lg"; as?: string; class?: string }`, default `size="lg"`, default `as="div"`
-  - `Button` — props `{ variant?: "default" | "outline"; size?: "sm" | "default"; href?: string; class?: string }`; renders `<a>` when `href` is given, otherwise `<button>`
-  - `Card`, `Badge`, `Separator` — props `{ class?: string }`
+  - `Button` — renders `<a>` when `href` is given, otherwise `<button>`. Keeps every variant and size the shadcn source defines: variants `default | destructive | outline | secondary | ghost | link`, sizes `default | sm | lg | xl | icon`.
+  - `Card` — default slot for content plus named slots `title`, `description`, `action`, `footer`, mirroring the seven React sub-components
+  - `Badge`, `Separator` — props `{ class?: string }`, variants as defined in their sources
 
 - [ ] **Step 1: Write the failing test**
 
