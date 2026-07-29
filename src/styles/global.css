@@ -11,6 +11,10 @@
   --color-status-reached: #12684a;
   --color-status-next: #3e99c0;
   --color-status-future: #24343d;
+
+  --container-screen-lg: 1024px;
+  --container-screen-xl: 1280px;
+  --container-screen-2xl: 1400px;
 }
 
 @layer utilities {
