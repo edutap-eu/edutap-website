@@ -69,7 +69,13 @@ They are replaced by `astro-icon` with `@iconify-json/lucide`, which inlines the
 | `tests/*.test.ts` | Route, content, metadata, link and thumbnail tests |
 | `Makefile` | `lint`, `reformat`, `test-local` |
 
-**Deleted at the end (Task 13):** everything Gatsby — `gatsby-*.ts`, all `.tsx` files, `src/images/`, `static/`, `public/` build output, `sentry.config.ts`, and the Gatsby dependencies.
+**Deleted at the end (Task 13):** everything Gatsby — `gatsby-*.ts`, all `.tsx` files, `src/images/`, `static/`, `sentry.config.ts`, and the Gatsby dependencies.
+
+**Explicitly surviving Task 13:** `src/lib/utils.ts` with its `cn()` helper, plus `clsx` and
+`tailwind-merge`. The Astro components merge caller-supplied classes through `cn()`, because
+plain concatenation leaves conflicting utilities (`bg-primary` from a variant against a
+caller's `bg-black`) to be resolved by stylesheet order rather than by intent — the header's
+GitHub button depends on the override winning.
 
 ---
 
@@ -2094,7 +2100,7 @@ git rm gatsby-config.ts gatsby-node.ts gatsby-browser.ts sentry.config.ts compon
 git rm -r src/pages/*.tsx "src/pages/news/{markdownRemark.frontmatter__slug}.tsx" \
   src/pages/news/index.tsx src/pages/legal/*.tsx
 git rm -r src/components/*.tsx src/components/ui/*.tsx src/components/header \
-  src/components/footer src/components/landing/*.tsx src/lib/utils.ts
+  src/components/footer src/components/landing/*.tsx
 git rm -r src/images
 ```
 
@@ -2119,7 +2125,7 @@ If `public` still appears anywhere in the file, remove it — `public/` holds co
 ```bash
 npm pkg delete dependencies.react dependencies.react-dom dependencies.react-pdf \
   dependencies.react-vertical-timeline-component dependencies.lucide-react \
-  dependencies.class-variance-authority dependencies.clsx dependencies.tailwind-merge \
+  dependencies.class-variance-authority \
   dependencies.tw-animate-css dependencies.npm dependencies.postcss \
   dependencies.sharp dependencies.@mdx-js/react dependencies.@sentry/gatsby \
   dependencies.@radix-ui/react-separator dependencies.@radix-ui/react-slot \
