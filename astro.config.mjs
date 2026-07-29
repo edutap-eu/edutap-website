@@ -6,6 +6,12 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   site: "https://edutap.eu",
+  // Vitest (via `getViteConfig`) always resolves the content layer's cache in "dev" mode,
+  // reading the data store from `.astro/` rather than the default `node_modules/.astro/`.
+  // Pointing `cacheDir` at the same `.astro/` directory means `astro build`/`astro sync`
+  // (which run in "build" mode) populate the exact file vitest expects, so `npm run test`
+  // works right after `npm run build` on a fresh checkout without ever needing `astro dev`.
+  cacheDir: "./.astro/",
   integrations: [
     sitemap(),
     icon({ include: { lucide: ["*"] } }),
