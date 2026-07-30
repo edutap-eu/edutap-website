@@ -55,9 +55,11 @@ Add the PDF to `public/presentations/`, then add an entry to `src/data/presentat
 filename only (no path). Presentations can also be linked from a roadmap milestone via the `presentation_file`
 field in `src/data/roadmap.json`.
 
-**After adding or replacing a presentation PDF, you must run `npm run thumbnails` and commit the generated WebP
-thumbnail** — the presentations page displays a thumbnail of the first page next to each PDF, and thumbnails are
-generated ahead of time rather than at request time (this is a static site).
+**After adding a presentation PDF, you must run `npm run thumbnails` and commit the generated WebP thumbnail** —
+the presentations page displays a thumbnail of the first page next to each PDF, and thumbnails are generated ahead
+of time rather than at request time (this is a static site). The script skips a PDF that already has a thumbnail,
+so if you **replace** a PDF under the same filename, pass `--force` to regenerate it:
+`npm run thumbnails -- --force`.
 
 `npm run thumbnails` requires [poppler](https://poppler.freedesktop.org/) (for `pdftoppm`) and
 [webp](https://developers.google.com/speed/webp) (for `cwebp`) to be installed locally:
