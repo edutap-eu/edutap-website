@@ -24,7 +24,7 @@ const isoDate = z
   .regex(/^\d{4}-\d{2}(-\d{2})?$/, "must be an ISO date: YYYY-MM-DD or YYYY-MM")
   .transform((value) => new Date(value));
 
-const milestoneSchema = z.object({
+export const milestoneSchema = z.object({
   title: z.string(),
   date: isoDate,
   /** Original wording, shown instead of the parsed date when present. */
@@ -59,14 +59,30 @@ const team = defineCollection({
   }),
 });
 
+// Previously a plain `import navItems from "../data/nav.json"` in NavLinks.astro
+// and Footer.astro, with no schema even though the README claimed all
+// hand-maintained JSON was validated. Renaming a field (e.g. `to` -> `href`)
+// would have shipped `href="undefined"` links on every page's header and
+// footer with a green build. Now a content collection like every other
+// editorial JSON file, so the same build-time validation applies.
+const nav = defineCollection({
+  loader: file("src/data/nav.json", { parser: indexed("nav") }),
+  schema: z.object({
+    to: z.string(),
+    text: z.string(),
+  }),
+});
+
+export const presentationSchema = z.object({
+  title: z.string(),
+  file: z.string().endsWith(".pdf"),
+  description: z.string().optional(),
+  type: z.enum(["lightning", "conference", "webinar"]),
+});
+
 const presentations = defineCollection({
   loader: file("src/data/presentations.json", { parser: indexed("presentation") }),
-  schema: z.object({
-    title: z.string(),
-    file: z.string().endsWith(".pdf"),
-    description: z.string().optional(),
-    type: z.enum(["lightning", "conference", "webinar"]),
-  }),
+  schema: presentationSchema,
 });
 
 const microNews = defineCollection({
@@ -89,4 +105,4 @@ const news = defineCollection({
   }),
 });
 
-export const collections = { history, roadmap, team, presentations, microNews, news };
+export const collections = { history, roadmap, team, presentations, microNews, news, nav };
