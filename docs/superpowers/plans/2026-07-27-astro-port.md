@@ -1169,7 +1169,17 @@ Convert each file under `src/components/landing/` using the rules table above. S
 - `feature-grid.tsx` (103 lines) — icons `BookOpenIcon`, `BusIcon`, `CreditCardIcon`, `KeyIcon`, `TicketPercentIcon`, `UserCircleIcon`; uses `Badge`
 - `concept-and-software.tsx` (207 lines) — icons `BuildingIcon`, `FingerprintIcon`, `KeyRoundIcon`, `LayersIcon`, `LockOpenIcon`, `PackageOpenIcon`, `UsersIcon`, `WalletIcon`; uses the `Card` slot form
 - `team.tsx` (97 lines) — `await getCollection("team")` in the frontmatter, `resolveTeamImage()` plus `<Image>` from `astro:assets` for portraits
-- `call-to-action.tsx` (45 lines) — the `isHovering` state at line 7 is **dropped**; replace whatever it toggled with the equivalent Tailwind `hover:` utility
+- `call-to-action.tsx` (45 lines) — the `isHovering` state at line 7 is **dropped**. It swapped the GitHub mark between its white and dark variant so the logo stayed legible when `hover:bg-white` inverted the button. Reproduce that in CSS by rendering both marks and toggling them with a `group` hover:
+
+  ```astro
+  <a href="https://github.com/edutap-eu" class="group inline-flex items-center px-8 py-4 rounded border-2 border-white hover:bg-white hover:text-black">
+    <GithubMark class="mr-3 h-5 w-5 group-hover:hidden" inverted />
+    <GithubMark class="mr-3 h-5 w-5 hidden group-hover:inline-block" />
+    <span class="font-bold">Contribute on GitHub / eduTAP-eu</span>
+  </a>
+  ```
+
+  This also fixes a bug in the original: both links shared one state, so hovering either one turned *both* marks dark — leaving the un-hovered button's logo black on black, effectively invisible. Scoping the hover to each link with `group` makes them independent. Note the fix in the commit message.
 
 - [ ] **Step 5: Write `src/pages/index.astro`**
 
