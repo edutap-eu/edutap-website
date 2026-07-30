@@ -1,11 +1,13 @@
 ---
-import navItems from "../data/nav.json";
+import { getCollection } from "astro:content";
+import { byFileOrder } from "../lib/ordering";
 
 interface Props {
   pathname: string;
 }
 
 const { pathname } = Astro.props;
+const navItems = (await getCollection("nav")).sort(byFileOrder).map((entry) => entry.data);
 const normalise = (path: string) => (path !== "/" ? path.replace(/\/$/, "") : path);
 const current = normalise(pathname);
 

@@ -81,6 +81,9 @@ Micro news are short items shown on the news index page without a dedicated page
    `public/presentations/thumbs/`. **Commit the generated `.webp` file together with the PDF** — thumbnails are
    generated ahead of time, not on the fly, since this is a static site.
 
+   The script skips PDFs that already have a thumbnail, so if you are **replacing** an existing PDF under the same
+   filename, pass `--force` to regenerate its thumbnail: `npm run thumbnails -- --force`.
+
 3. Add an entry to `src/data/presentations.json` (schema: the `presentations` collection in
    `src/content.config.ts`):
 
@@ -166,3 +169,23 @@ milestones to `src/data/history.json`.
 
 Verify: run `npm run dev` and check <http://localhost:4321/roadmap> (for `roadmap.json`) or
 <http://localhost:4321/history> (for `history.json`).
+
+## Add or edit a navigation link
+
+The header and footer navigation are both generated from `src/data/nav.json` (schema: the `nav` collection in
+`src/content.config.ts`).
+
+| Field  | Type     | Notes                                        |
+| ------ | -------- | --------------------------------------------- |
+| `to`   | `string` | The link target, e.g. `/history`.              |
+| `text` | `string` | The link label shown to visitors.              |
+
+```json
+{
+  "to": "/history",
+  "text": "History"
+}
+```
+
+Order matters: entries render in file order, top to bottom in the header and footer. Verify: run `npm run dev` and
+check the header on any page.

@@ -1,9 +1,11 @@
 ---
+import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 import Container from "./Container.astro";
 import FooterNavColumn from "./FooterNavColumn.astro";
-import navItems from "../data/nav.json";
+import { byFileOrder } from "../lib/ordering";
 
+const navItems = (await getCollection("nav")).sort(byFileOrder).map((entry) => entry.data);
 const navLinks = navItems.map((item) => ({ href: item.to, label: item.text }));
 const year = new Date().getFullYear();
 ---
