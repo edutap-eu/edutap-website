@@ -29,9 +29,16 @@
   --color-ring: oklch(0.708 0 0);
   --radius: 0.625rem;
 
-  --container-screen-lg: 1024px;
-  --container-screen-xl: 1280px;
-  --container-screen-2xl: 1400px;
+  /*
+   * No --container-screen-* overrides here on purpose. Tailwind 4's built-in
+   * max-w-screen-{lg,xl,2xl} utilities already fall back to --breakpoint-*
+   * (64rem / 80rem / 96rem), which is what the live site ships. The pre-port
+   * stylesheet carried a TODO to redefine these as 1024px / 1280px / 1400px;
+   * implementing that TODO here narrowed every max-w-screen-2xl container
+   * (Header, Footer, FeatureGrid, ConceptAndSoftware) by up to 136px at wide
+   * viewports. That redesign decision belongs to a future redesign project,
+   * not this appearance-preserving port - see final-review.md I2.
+   */
 }
 
 @layer utilities {

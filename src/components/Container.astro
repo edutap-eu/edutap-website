@@ -1,6 +1,4 @@
 ---
-import { cn } from "../lib/utils";
-
 interface Props {
   size?: "sm" | "md" | "lg";
   as?: string;
@@ -16,8 +14,16 @@ const widths = {
 } as const;
 
 const width = widths[size as "sm" | "md" | "lg"];
+
+// The original container.tsx composed classes with cva, which concatenates
+// rather than resolving conflicts. Container has no variants of its own to
+// let a caller override, so it must concatenate too: using cn() (twMerge)
+// here treats e.g. Hero's "pt-48 py-36" as conflicting with nothing of its
+// own, but ALSO resolves "pt-48" vs "py-36" against each other as if they
+// were the same utility group, silently dropping pt-48. Plain concatenation
+// matches the original, non-merging behaviour.
 ---
 
-<Tag class={cn("container mx-auto px-4 sm:px-6 lg:px-8", width, className)}>
+<Tag class={`container mx-auto px-4 sm:px-6 lg:px-8 ${width} ${className}`}>
   <slot />
 </Tag>
