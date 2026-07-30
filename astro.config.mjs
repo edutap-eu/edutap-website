@@ -16,8 +16,11 @@ export default defineConfig({
     sitemap(),
     icon({ include: { lucide: ["*"] } }),
     sentry({
-      dsn: "https://591c58f7710af7e185aa4eb01bda6fd5@sentry.dev-tools.verwaltung.uni-muenchen.de/5",
-      tracesSampleRate: 1.0,
+      // Static site, no adapter/SSR: the server SDK has nothing to instrument
+      // at runtime, so it is disabled here. Client-side `dsn`/`tracesSampleRate`
+      // are configured in `sentry.client.config.ts` (passing them here directly
+      // is deprecated since @sentry/astro 10 and prints a build warning).
+      enabled: { server: false },
       sourceMapsUploadOptions: { enabled: false },
     }),
   ],
