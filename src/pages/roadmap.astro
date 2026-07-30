@@ -5,8 +5,12 @@ import Timeline from "../components/Timeline.astro";
 import Milestone from "../components/Milestone.astro";
 import { getCollection } from "astro:content";
 
+// Recovers JSON file order from the loader's `${prefix}-${index}` id, matching
+// history.astro and the original roadmap.tsx (see history.astro for why
+// getCollection()'s default id-string order and a parsed-date sort are both
+// wrong here).
 const milestones = (await getCollection("roadmap")).sort(
-  (a, b) => a.data.date.getTime() - b.data.date.getTime(),
+  (a, b) => Number(a.id.split("-")[1]) - Number(b.id.split("-")[1]),
 );
 ---
 

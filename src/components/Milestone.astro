@@ -17,8 +17,16 @@
  * Sizes, offsets and colours below (40px/60px disc, 18px/50% line, 60px
  * content margin, 7px arrow, box-shadows) are copied from
  * react-vertical-timeline-component/style.min.css, confirmed against the
- * live site's computed styles at 390px and 1440px. The 1170px breakpoint is
- * the library's own two-column switch, not one of Tailwind's defaults.
+ * live site's computed styles at 390px, ~1000px and 1440px. The 1170px
+ * breakpoint is the library's own two-column switch, not one of Tailwind's
+ * defaults; the date label additionally steps through a 768px type
+ * breakpoint the layout switch doesn't share (13px / 14px / 16px).
+ *
+ * Dates are deliberately NOT reformatted: this is a strict 1:1 port, and the
+ * live site shows the raw ISO string from the source JSON. Do not reintroduce
+ * `Date.prototype.toLocaleDateString` here - that was tried, reviewed, and
+ * reverted by the project owner; readable dates belong to the redesign phase
+ * that follows this port, not to this task.
  */
 import type { CollectionEntry } from "astro:content";
 import Button from "./ui/Button.astro";
@@ -49,9 +57,13 @@ const statusColour = {
   future: "var(--color-status-future)",
 }[status];
 
-const displayDate =
-  dateLabel ??
-  date.toLocaleDateString("en-GB", { year: "numeric", month: "long", day: "numeric" });
+// Strict 1:1 port: the live site shows the raw ISO string from the source
+// JSON (e.g. "2020-07-01"), not a human-readable format - that belongs to a
+// later redesign phase. `date` is a parsed Date now, so `dateLabel` (the
+// original wording, verbatim) is what covers the one entry that can't
+// round-trip through a Date: history.json's "2024-06" has no day component,
+// and reformatting via the Date object would invent one ("2024-06-01").
+const displayDate = dateLabel ?? date.toISOString().slice(0, 10);
 
 const hasLinks = Boolean(event_link || presentation_file || video_link);
 const hasMeta = Boolean(event_name || location);
@@ -138,7 +150,13 @@ const hasMeta = Boolean(event_name || location);
 
     <span
       class:list={[
-        "mt-2 block text-[13px] opacity-70 md:text-base",
+        // 13px base, 14px at the library's own 768px type breakpoint, 16px
+        // at the 1170px layout switch - three steps, not two. Confirmed
+        // against react-vertical-timeline-component/style.min.css: the date
+        // rule sits in the same 768px block as the h2/p type bump (14px
+        // there) and gets a further, separate 16px override only inside the
+        // 1170px two-column block.
+        "mt-2 block text-[13px] opacity-70 md:text-[14px] min-[1170px]:text-base",
         "min-[1170px]:absolute min-[1170px]:top-1.5 min-[1170px]:mt-0 min-[1170px]:w-full",
         side === "left"
           ? "min-[1170px]:left-[124%]"
