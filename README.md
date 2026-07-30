@@ -1,58 +1,81 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
+# eduTAP Website
 
-# eduTAP Website based on Gatby
+The eduTAP project website, built with [Astro](https://astro.build).
 
-## Updating Data
+## Quick start
 
-You can update data in three different locations in the repository:
+Make sure you have [nvm](https://github.com/nvm-sh/nvm) installed, then, in the repository's root directory:
 
-- `/static/presentations`
-- `/src/images`
-- `/src/data`
+```bash
+nvm use
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Your site is now running at <http://localhost:4321>. Edit and save a file in `src/pages/` or `src/components/` to
+see your site update in real-time.
+
+## Make targets
+
+The repository exposes its common workflows through a `Makefile`:
+
+- `make lint` — runs `astro check` (type-checks `.astro` files and content schemas).
+- `make reformat` — runs `prettier --write .`.
+- `make test-local` — runs the test suite (`npm run test`).
+- `make build` — builds the production site into `dist/`.
+
+You can also call the underlying npm scripts directly (`npm run dev`, `npm run check`, `npm run format`,
+`npm run test`, `npm run build`, `npm run preview`). `npm run test` builds the site first (via its `pretest`
+script), so it is self-sufficient on a fresh checkout.
+
+## Updating content
+
+Content lives in three places:
+
+- `src/data/*.json` — structured data: navigation, team, roadmap, history, presentations, micro news.
+- `src/data/news-posts/*.md` — long-form news posts.
+- `src/assets/team/` — team member portraits.
+- `public/presentations/` — presentation PDFs (served as static files).
+
+Every JSON file and every news post is validated against a schema (see `src/content.config.ts`) when the site
+builds. If a required field is missing or has the wrong type, `npm run build` (and therefore `npm run test`) fails
+with a named error pointing at the offending file — malformed content can't silently break the live site.
+
+For the exact required fields of each content type and how to verify your change locally, see
+[`docs/how-to/add-content.md`](docs/how-to/add-content.md). The short version:
 
 ### Presentations
 
-Here you can add presentations (.pdf).
-These can be linked in the roadmap.json file in `src/data/roadmap.json`.
-You don't have to specify the path, but only the filename.
+Add the PDF to `public/presentations/`, then add an entry to `src/data/presentations.json` referencing it by
+filename only (no path). Presentations can also be linked from a roadmap milestone via the `presentation_file`
+field in `src/data/roadmap.json`.
 
-### Images
+**After adding or replacing a presentation PDF, you must run `npm run thumbnails` and commit the generated WebP
+thumbnail** — the presentations page displays a thumbnail of the first page next to each PDF, and thumbnails are
+generated ahead of time rather than at request time (this is a static site).
 
-This folder contains all images used in the website.
-You will most likely only need to add images in the `team` sub-folder.
-Here you can add/edit images for team members. They can be either `.png` or `.jpg`.
-In the `src/data/team.json` file you can link the images to the team members by specifying the relative path to the
-image.
-(e.g. `../images/team/your-image.png`)
+`npm run thumbnails` requires [poppler](https://poppler.freedesktop.org/) (for `pdftoppm`) and
+[webp](https://developers.google.com/speed/webp) (for `cwebp`) to be installed locally:
 
-### Data
+```bash
+brew install poppler webp
+```
 
-The data folder contains the following files:
+### Team members
 
-- `nav.json`
-- `history.json`
-- `roadmap.json`
-- `presentations.json`
-- `team.json`
+Add the portrait (`.jpg` or `.png`) to `src/assets/team/`, then add an entry to `src/data/team.json` referencing it
+by its path relative to `src/`, e.g. `../assets/team/your-image.png`.
 
-You will most likely only need to edit the last three files.
-In the `presentations.json` file you can add presentations to the presentations page.
-In the `roadmap.json` file you can add milestones to the roadmap.
-(s. Presentation section on how to add presentations to milestones).
-In the `team.json` file you can add team members.
-(s. Image section on how to add images for team members).
+### News
 
-#### News
+The website supports two types of news: micro news and news posts. Both are shown on the news index page.
 
-The website supports two types of news: micro news and news posts.
-Both news types will be displayed on the news index page.
-
-To add a micro news, add a new entry to the `micro-news.json` file in the `src/data` folder.
-The entry should have the following fields:
+To add a **micro news** entry, add an entry to `src/data/micro-news.json`:
 
 ```json
 {
@@ -63,50 +86,22 @@ The entry should have the following fields:
 }
 ```
 
-The `url` field is optional and can be used to link to an external page. 
-If you don't want to link to an external page, set the `url` field to `null`.
-The date must be in the format "YYYY-MM-DD".
+The `url` field is optional and links to an external page; set it to `null` if there is none. The date must be in
+the format `YYYY-MM-DD`.
 
-
-If you want to add a news post, add a new markdown file to the `src/data/news-posts` folder.
-Make sure to add a frontmatter to the markdown file with the following fields:
+To add a **news post**, add a new Markdown file to `src/data/news-posts/`, with frontmatter:
 
 ```yaml
-slug: "/my-first-blog-post" # <-- must have a leading slash
-date: "2022-11-24" # <-- must be in the format "YYYY-MM-DD"
-title: "My first blog post" # <-- Will be displayed as the title of the post, so you don't have to repeat the title in the post content 
-short: "This is my first blog post" # <-- short description of the post that will be displayed on the news index page
+---
+slug: "/my-first-blog-post" # must have a leading slash
+date: "2022-11-24" # must be in the format "YYYY-MM-DD"
+title: "My first blog post" # displayed as the title of the post, don't repeat it in the body
+short: "This is my first blog post" # short description shown on the news index page
+---
 ```
 
-## 🚀 Quick start
+## Deployment
 
-1. **Start developing.**
-
-Make sure to have npm installed.
-If in doubt use nvm and install the stable version.
-
-In the repositories root directory:
-
-First run `npm install` one time.
-
-Then start the development server `npm run develop`.
-
-Your site is now running at http://localhost:8000!
-
-Edit and save a file in `src/pages/` to see your site update in real-time!
-
-User `npm run clean` to delete the cache and public folder. This is useful if you have problems with the development
-server.
-
-3. **Deployment to GH Pages**
-
-Push to the master branch and the site will be deployed automatically.
-
-4. **Learn more**
-
-- [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-- [Tutorials](https://www.gatsbyjs.com/docs/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-- [Guides](https://www.gatsbyjs.com/docs/how-to/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-- [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-- [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-- [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+Pushing to `main` triggers the "Deploy static content to Pages" GitHub Actions workflow
+(`.github/workflows/pages.yaml`), which installs dependencies, runs the test suite (which builds the site as part
+of its `pretest` step), and publishes `dist/` to GitHub Pages.
