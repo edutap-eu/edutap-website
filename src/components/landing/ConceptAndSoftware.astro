@@ -1,0 +1,182 @@
+---
+import Container from "../Container.astro";
+import Card from "../ui/Card.astro";
+import { Icon } from "astro-icon/components";
+---
+
+<Container class="py-16 md:py-36">
+  <h2 class="text-4xl font-bold tracking-tight text-center mb-4">
+    <span class="text-primary">One Coin</span>,{" "}
+    <span class="text-accent">Two Sides</span>
+  </h2>
+
+  <p class="text-center text-xl text-gray-700 max-w-lg mb-12 mx-auto">
+    More than just a concept, eduTAP is a community-driven project that builds
+    on the vision to create <br /> a{" "}
+    <a
+      href="https://education.ec.europa.eu/about-eea/the-eea-explained"
+      class="text-accent hover:underline"
+    >
+      European Education Area
+    </a>
+    .
+  </p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    {/* eduTAP the Concept Card */}
+    <Card>
+      <span slot="title" class="text-3xl text-primary">
+        eduTAP the Concept
+      </span>
+      <span slot="description" class="text-lg pt-2">
+        Reimagining campus identity for the digital age
+      </span>
+
+      <div class="space-y-4">
+        <div class="flex items-start gap-3">
+          <div class="mt-1 bg-gray-400 rounded-full p-1 shrink-0">
+            <Icon name="lucide:wallet" class="h-5 w-5 text-white" />
+          </div>
+          <div>
+            <p class="text-gray-700">
+              Leveraging the full potential of digital wallets and smart
+              devices to create a seamless campus experience without
+              physical cards.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <div class="mt-1 bg-gray-400 rounded-full p-1 shrink-0">
+            <Icon name="lucide:layers" class="h-5 w-5 text-white" />
+          </div>
+          <div>
+            <p class="text-gray-700">
+              Using a divide-and-conquer principle to transform
+              traditional campus cards into:
+            </p>
+            <ul class="list-disc ml-8">
+              <li class="text-gray-600 text-sm">
+                A harmonized identity pass using Verifiable Credentials (
+                <a
+                  href="https://www.iso.org/standard/69084.html"
+                  class="text-accent hover:underline"
+                >
+                  ISO/IEC 18013-5
+                </a>
+                )
+              </li>
+              <li class="text-gray-600 text-sm">
+                Separate service passes for individual on-site services
+              </li>
+              <li class="text-gray-600 text-sm">
+                Service passes accessible via eduGAIN-Login with
+                centralized discovery
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <div class="mt-1 bg-gray-400 rounded-full p-1 shrink-0">
+            <Icon name="lucide:lock-open" class="h-5 w-5 text-white" />
+          </div>
+          <div>
+            <p class="text-gray-700">
+              Let service providers decide the base technology of the pass,
+              based on their needs and security requirements
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <div class="mt-1 bg-gray-400 rounded-full p-1 shrink-0">
+            <Icon name="lucide:building" class="h-5 w-5 text-white" />
+          </div>
+          <div>
+            <p class="text-gray-700">
+              Enabling on-site service access to all members in the Higher
+              Education Community without exception.
+            </p>
+          </div>
+        </div>
+      </div>
+    </Card>
+
+    {/* eduTAP the Software Card */}
+    <Card>
+      <span slot="title" class="text-3xl text-accent">
+        eduTAP the Software
+      </span>
+      <span slot="description" class="text-lg pt-2">
+        Open-source solutions for modern campus needs
+      </span>
+
+      <div class="space-y-4">
+        <p class="text-gray-700">
+          The eduTAP software is built by the community to enable Higher
+          Education Institutions to:
+        </p>
+
+        <div class="flex items-center gap-3">
+          <div class="bg-gray-400 rounded-full p-1 shrink-0">
+            <Icon name="lucide:fingerprint" class="h-5 w-5 text-white" />
+          </div>
+          <p class="text-gray-700">
+            Create, issue and manage digital identity passes for students,
+            staff, and guests
+          </p>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="bg-gray-400 rounded-full p-1 shrink-0">
+            <Icon name="lucide:key-round" class="h-5 w-5 text-white" />
+          </div>
+          <p class="text-gray-700">
+            Enable access control to services, facilities, and resources
+            with wallet passes
+          </p>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="bg-gray-400 rounded-full p-1 shrink-0">
+            <Icon name="lucide:package-open" class="h-5 w-5 text-white" />
+          </div>
+          <p class="text-gray-700">
+            Software is distributed as open source, primarily under the{" "}
+            <a
+              href="https://opensource.org/license/eupl-1-2/"
+              class="text-accent hover:underline"
+            >
+              European Union Public Licence v. 1.2 (EUPL)
+            </a>, Documentation and Presentations are licensed under{" "}
+            <a
+              href="https://creativecommons.org/licenses/by-sa/4.0/legalcode"
+              class="text-accent hover:underline"
+            >
+              Creative Commons Attribution-ShareAlike 4.0 International
+              (CC BY-SA 4.0)
+            </a>
+            .
+          </p>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="bg-gray-400 rounded-full p-1 shrink-0">
+            <Icon name="lucide:users" class="h-5 w-5 text-white" />
+          </div>
+          <p class="text-gray-700">
+            Community-driven development. Join us on{" "}
+            <a
+              href="https://github.com/edutap-eu"
+              class="text-accent hover:underline"
+            >
+              GitHub
+            </a>{" "}
+            to contribute.
+          </p>
+        </div>
+      </div>
+    </Card>
+  </div>
+</Container>
