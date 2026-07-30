@@ -1365,9 +1365,11 @@ const statusColour = {
   future: "var(--color-status-future)",
 }[status];
 
-const displayDate =
-  dateLabel ??
-  date.toLocaleDateString("en-GB", { year: "numeric", month: "long", day: "numeric" });
+// The live site renders the raw ISO string, and this is a 1:1 port, so no
+// locale formatting. dateLabel covers both the roadmap's prose dates and the
+// one history entry written as "2024-06" — rendering that through a Date
+// would invent a day the site has never shown.
+const displayDate = dateLabel ?? date.toISOString().slice(0, 10);
 
 const hasLinks = Boolean(event_link || presentation_file || video_link);
 const hasMeta = Boolean(event_name || location);
