@@ -1,13 +1,5 @@
 {
   "extends": "astro/tsconfigs/strict",
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": [
-    "dist",
-    "node_modules",
-    ".cache",
-    "public",
-    "src/**/*.tsx",
-    "gatsby-*.ts",
-    "sentry.config.ts"
-  ]
+  "exclude": ["dist"]
 }

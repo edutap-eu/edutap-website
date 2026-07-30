@@ -15,14 +15,10 @@
     }
   ],
   "keywords": [
-    "gatsby"
+    "astro"
   ],
   "scripts": {
-    "develop": "gatsby develop",
-    "start": "gatsby develop",
     "build": "astro build",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean",
     "format": "prettier --write .",
     "dev": "astro dev",
     "preview": "astro preview",
@@ -33,40 +29,19 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
-    "@mdx-js/react": "^2.3.0",
-    "@radix-ui/react-separator": "^1.1.2",
-    "@radix-ui/react-slot": "^1.1.2",
-    "@radix-ui/react-tabs": "^1.1.3",
     "@sentry/astro": "^10.68.0",
-    "@sentry/gatsby": "^9.10.1",
-    "@tailwindcss/postcss": "^4.0.14",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.1.3",
     "astro-icon": "^1.1.5",
-    "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "lucide-react": "^0.483.0",
-    "npm": "^10.8.1",
-    "postcss": "^8.4.31",
-    "react": "^18.3.1",
-    "react-dom": "^18.2.0",
-    "react-pdf": "^9.2.1",
-    "react-vertical-timeline-component": "^3.6.0",
-    "sharp": "^0.33.5",
     "tailwind-merge": "^3.0.2",
-    "tailwindcss": "^4.3.3",
-    "tw-animate-css": "^1.2.4"
+    "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "@iconify-json/lucide": "^1.2.120",
     "@tailwindcss/typography": "^0.5.16",
     "@types/node": "^22.13.10",
-    "@types/react": "^19.0.11",
-    "@types/react-dom": "^19.0.4",
-    "@types/react-vertical-timeline-component": "^3.3.6",
-    "daisyui": "^5.0.6",
-    "gh-pages": "^6.0.0",
     "prettier": "^3.5.3",
     "prettier-plugin-astro": "^0.14.1",
     "typescript": "^5.8.2",
