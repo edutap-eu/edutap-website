@@ -4,20 +4,17 @@ import Container from "../components/Container.astro";
 import Timeline from "../components/Timeline.astro";
 import Milestone from "../components/Milestone.astro";
 import { getCollection } from "astro:content";
+import { byFileOrder } from "../lib/ordering";
 
 // The original history.tsx iterates allHistoryJson.nodes in JSON file order
-// and never sorts. getCollection() does NOT preserve that order on its own -
-// it comes back sorted by `id` as a string ("history-0", "history-1",
-// "history-10", "history-11", "history-2", ...), which is not numeric order.
-// Sorting by parsed date instead is tempting but also wrong: history.json has
-// one entry dated "2024-06" (day unknown, parsed as the 1st) immediately
+// and never sorts. getCollection() does NOT preserve that order on its own,
+// and sorting by parsed date instead is tempting but also wrong: history.json
+// has one entry dated "2024-06" (day unknown, parsed as the 1st) immediately
 // followed by one dated "2024-06-07", and Date.getTime() would swap them
-// relative to the file's (and the live site's) order. Recovering the
-// original file order from the loader's own `${prefix}-${index}` id is the
-// one sort that matches the live site byte-for-byte.
-const milestones = (await getCollection("history")).sort(
-  (a, b) => Number(a.id.split("-")[1]) - Number(b.id.split("-")[1]),
-);
+// relative to the file's (and the live site's) order. byFileOrder recovers
+// the original file order from the loader's own id, the one sort that
+// matches the live site byte-for-byte. See src/lib/ordering.ts.
+const milestones = (await getCollection("history")).sort(byFileOrder);
 ---
 
 <BaseLayout title="History | eduTAP">

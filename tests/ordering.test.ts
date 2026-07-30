@@ -49,7 +49,7 @@ function renderedPresentationFiles(distPath: string): string[] {
 }
 
 describe("collection ordering", () => {
-  it.each(["history", "roadmap", "presentations"] as const)(
+  it.each(["history", "roadmap", "presentations", "team"] as const)(
     "%s ids follow the indexed() prefix-index contract",
     async (name) => {
       const entries = await getCollection(name);
@@ -136,5 +136,23 @@ describe("collection ordering", () => {
       Number(a.id.split("-").pop()) - Number(b.id.split("-").pop());
     const sorted = (await getCollection("history")).sort(byFileOrder);
     expect(sorted[0].data.title).toBe("First Involvement");
+  });
+
+  // Team.astro renders in team.json file order today only because all 8 ids
+  // are single-digit, so string order and numeric order coincide by
+  // accident. This pins the actual file order via team.json as ground
+  // truth, the same way the history/roadmap/presentations tests above do,
+  // so a 9th/10th member (double-digit id) can't silently scramble the
+  // homepage team section.
+  it("team renders in JSON file order, not id-string order", async () => {
+    const source: { name: string }[] = JSON.parse(
+      readFileSync("src/data/team.json", "utf8"),
+    );
+    const expected = source.map((m) => m.name);
+
+    const byFileOrder = (a: { id: string }, b: { id: string }) =>
+      Number(a.id.split("-").pop()) - Number(b.id.split("-").pop());
+    const sorted = (await getCollection("team")).sort(byFileOrder);
+    expect(sorted.map((entry) => entry.data.name)).toEqual(expected);
   });
 });

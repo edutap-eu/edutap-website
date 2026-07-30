@@ -3,19 +3,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/Container.astro";
 import Presentation from "../components/Presentation.astro";
 import { getCollection } from "astro:content";
+import { byFileOrder } from "../lib/ordering";
 
 // The original presentations.tsx iterates allPresentationsJson.nodes in JSON
 // file order and never sorts. getCollection() does NOT preserve that order on
 // its own - it comes back sorted by `id` as a string ("presentation-0",
 // "presentation-1", "presentation-10", ..., "presentation-2", ...), which
-// scrambles all 33 cards. Sorting by the numeric suffix of the loader's own
-// `${prefix}-${index}` id restores the file order the editors maintain and
-// matches the live site.
-const byFileOrder = (
-  a: { id: string },
-  b: { id: string },
-) => Number(a.id.split("-").pop()) - Number(b.id.split("-").pop());
-
+// scrambles all 33 cards. byFileOrder restores the file order the editors
+// maintain and matches the live site. See src/lib/ordering.ts.
 const presentations = (await getCollection("presentations")).sort(byFileOrder);
 
 const lightningTalks = presentations.filter((entry) => entry.data.type === "lightning");

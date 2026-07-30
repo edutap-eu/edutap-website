@@ -4,14 +4,12 @@ import Container from "../components/Container.astro";
 import Timeline from "../components/Timeline.astro";
 import Milestone from "../components/Milestone.astro";
 import { getCollection } from "astro:content";
+import { byFileOrder } from "../lib/ordering";
 
-// Recovers JSON file order from the loader's `${prefix}-${index}` id, matching
-// history.astro and the original roadmap.tsx (see history.astro for why
-// getCollection()'s default id-string order and a parsed-date sort are both
-// wrong here).
-const milestones = (await getCollection("roadmap")).sort(
-  (a, b) => Number(a.id.split("-")[1]) - Number(b.id.split("-")[1]),
-);
+// Recovers JSON file order from the loader's id, matching history.astro and
+// the original roadmap.tsx (see history.astro for why getCollection()'s
+// default id-string order and a parsed-date sort are both wrong here).
+const milestones = (await getCollection("roadmap")).sort(byFileOrder);
 ---
 
 <BaseLayout title="Roadmap | eduTAP">
