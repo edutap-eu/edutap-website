@@ -1777,7 +1777,7 @@ Expected: FAIL — `NewsItem.astro` does not exist yet.
 
 - [ ] **Step 5: Write `NewsItem.astro`**
 
-Port `src/components/news-item.tsx` (42 lines). Props `{ date: Date; title: string; description: string; url?: string | null; isInternal?: boolean }`. External links get `target="_blank" rel="noreferrer"`, internal ones do not. Copy the class strings from the source verbatim.
+Port `src/components/news-item.tsx` (42 lines). Props `{ date: Date; title: string; description: string; url?: string | null; isInternal?: boolean }`. External links get `target="_blank" rel="noopener noreferrer"` — copy the `rel` value from the source, which is the only one of the site's eight external links carrying `noopener`. Do not harmonise the other seven; reproducing the inconsistency is what verbatim means here. Copy the class strings from the source verbatim.
 
 - [ ] **Step 6: Run the tests to verify they pass**
 
