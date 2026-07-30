@@ -2183,6 +2183,16 @@ git rm -r src/images
 
 The Gatsby build output that used to live in `public/` was already deleted before Task 1, so `public/` now contains only the committed site assets (favicon, logos, PDFs, thumbnails). Do not touch it here. Verify with `git status` before committing.
 
+- [ ] **Step 2b: Correct the image paths in `team.json`**
+
+The eight entries still read `"../images/team/<file>"`, pointing at the directory this task
+deletes. It works only because `resolveTeamImage` matches on basename alone. Once
+`src/images/` is gone the path is actively misleading, and the new how-to teaches the correct
+form. Rewrite each to `"../assets/team/<file>"`.
+
+This is editorial data, so change nothing but the directory segment — names, orgs and roles
+stay exactly as they are. Confirm the build still resolves all eight portraits afterwards.
+
 - [ ] **Step 3: Confirm `.gitignore` is correct**
 
 It was already rewritten during Task 1 (the `public` entry had to go before any asset could be committed). Verify it reads:
