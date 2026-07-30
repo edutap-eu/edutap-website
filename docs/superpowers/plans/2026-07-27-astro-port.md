@@ -1983,7 +1983,54 @@ describe("routes", () => {
 });
 ```
 
-- [ ] **Step 2: Write the internal link test**
+- [ ] **Step 2: Write the collection ordering test**
+
+`getCollection` sorts by `id` as a *string*, not in JSON file order. This bit the history
+timeline in Task 7, and with 33 presentations a string sort yields `-0, -1, -10, -11, …, -2`.
+Both pages now sort by the numeric id suffix; this test stops that regressing, and pins the
+id format the sort depends on.
+
+`tests/ordering.test.ts`:
+
+```ts
+import { describe, expect, it } from "vitest";
+import { getCollection } from "astro:content";
+
+/** The order the editors maintain in the JSON files. */
+const byFileOrder = (a: { id: string }, b: { id: string }) =>
+  Number(a.id.split("-").pop()) - Number(b.id.split("-").pop());
+
+describe("collection ordering", () => {
+  it.each(["history", "roadmap", "presentations"] as const)(
+    "%s ids follow the indexed() prefix-index contract",
+    async (name) => {
+      const entries = await getCollection(name);
+      for (const entry of entries) {
+        expect(entry.id).toMatch(/^[a-z-]+-\d+$/);
+      }
+      const suffixes = entries.map((e) => Number(e.id.split("-").pop()));
+      expect([...suffixes].sort((a, b) => a - b)).toEqual([...new Set(suffixes)].sort((a, b) => a - b));
+    },
+  );
+
+  it("presentations sorted by file order start and end with the expected talks", async () => {
+    const sorted = (await getCollection("presentations")).sort(byFileOrder);
+    expect(sorted[0].data.title).toBe("Lightning Talk: eduTAP");
+    expect(sorted[0].data.file).toBe("Lightning_Talk_eduTAP_v3.pdf");
+    expect(sorted).toHaveLength(33);
+  });
+
+  it("history sorted by file order begins with the first involvement", async () => {
+    const sorted = (await getCollection("history")).sort(byFileOrder);
+    expect(sorted[0].data.title).toBe("First Involvement");
+  });
+});
+```
+
+Verify the expected titles against the JSON files before trusting them — if a title has
+changed since this plan was written, fix the test to match the data, not the other way round.
+
+- [ ] **Step 3: Write the internal link test**
 
 `tests/links.test.ts`:
 
@@ -2028,12 +2075,12 @@ describe("internal links", () => {
 });
 ```
 
-- [ ] **Step 3: Run the tests**
+- [ ] **Step 4: Run the tests**
 
 Run: `npm run build && npm run test`
 Expected: PASS. If the link test flags `/presentations/<file>.pdf`, confirm the PDF really is in `public/presentations/` — that is a genuine content error worth fixing, not a test bug.
 
-- [ ] **Step 4: Commit**
+- [ ] **Step 5: Commit**
 
 ```bash
 git add tests/routes.test.ts tests/links.test.ts
