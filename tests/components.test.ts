@@ -62,12 +62,91 @@ describe("Button", () => {
     );
   });
 
+  it("applies the destructive variant classes", async () => {
+    const container = await AstroContainer.create();
+    const html = await container.renderToString(Button, {
+      props: { variant: "destructive" },
+    });
+    expect(html).toContain(
+      "bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+    );
+  });
+
+  it("applies the secondary variant classes", async () => {
+    const container = await AstroContainer.create();
+    const html = await container.renderToString(Button, {
+      props: { variant: "secondary" },
+    });
+    expect(html).toContain(
+      "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
+    );
+  });
+
+  it("applies the ghost variant classes", async () => {
+    const container = await AstroContainer.create();
+    const html = await container.renderToString(Button, {
+      props: { variant: "ghost" },
+    });
+    expect(html).toContain(
+      "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
+    );
+  });
+
+  it("applies the link variant classes", async () => {
+    const container = await AstroContainer.create();
+    const html = await container.renderToString(Button, {
+      props: { variant: "link" },
+    });
+    expect(html).toContain("text-primary underline-offset-4 hover:underline");
+  });
+
   it("applies the sm size classes", async () => {
     const container = await AstroContainer.create();
     const html = await container.renderToString(Button, {
       props: { size: "sm" },
     });
     expect(html).toContain("h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5");
+  });
+
+  it("applies the lg size classes", async () => {
+    const container = await AstroContainer.create();
+    const html = await container.renderToString(Button, {
+      props: { size: "lg" },
+    });
+    expect(html).toContain("h-10 rounded-md px-6 has-[>svg]:px-4");
+  });
+
+  it("applies the xl size classes, letting tailwind-merge resolve the rounded-md/rounded-lg conflict with the base classes", async () => {
+    const container = await AstroContainer.create();
+    const html = await container.renderToString(Button, {
+      props: { size: "xl" },
+    });
+    expect(html).toContain("h-12 rounded-lg px-8 has-[>svg]:px-4 text-lg");
+    expect(html).not.toContain("rounded-md");
+  });
+
+  it("applies the icon size classes", async () => {
+    const container = await AstroContainer.create();
+    const html = await container.renderToString(Button, {
+      props: { size: "icon" },
+    });
+    expect(html).toContain("size-9");
+  });
+
+  it("lets a caller-supplied class win over the variant's own background utility via tailwind-merge", async () => {
+    // Mirrors the header's GitHub button call site (src/components/header/header.tsx):
+    // variant="default" contributes bg-primary/hover:bg-primary; the override must win
+    // outright, not merely coexist in the class attribute waiting on stylesheet order.
+    const container = await AstroContainer.create();
+    const html = await container.renderToString(Button, {
+      props: {
+        variant: "default",
+        class: "bg-black text-white hover:bg-black/90 hidden md:flex",
+      },
+    });
+    expect(html).toContain("bg-black");
+    expect(html).toContain("hover:bg-black/90");
+    expect(html).not.toContain("bg-primary");
   });
 });
 
@@ -119,6 +198,29 @@ describe("Card", () => {
     expect(html).toContain('data-slot="card-footer"');
     expect(html).toContain("flex items-center px-6 [.border-t]:pt-6");
     expect(html).toContain("Card footer");
+  });
+
+  it("renders a header with the action slot, driving the has-[data-slot=card-action] layout", async () => {
+    const container = await AstroContainer.create();
+    const html = await container.renderToString(Card, {
+      slots: { title: "Card title", action: "Card action", default: "Body" },
+    });
+    expect(html).toContain('data-slot="card-header"');
+    expect(html).toContain('data-slot="card-action"');
+    expect(html).toContain(
+      "col-start-2 row-span-2 row-start-1 self-start justify-self-end",
+    );
+    expect(html).toContain("Card action");
+  });
+
+  it("merges a caller-supplied class onto the card wrapper via tailwind-merge", async () => {
+    const container = await AstroContainer.create();
+    const html = await container.renderToString(Card, {
+      props: { class: "rounded-none" },
+      slots: { default: "Body" },
+    });
+    expect(html).toContain("rounded-none");
+    expect(html).not.toContain("rounded-xl");
   });
 });
 
