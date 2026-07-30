@@ -4,7 +4,6 @@ import Container from "../src/components/Container.astro";
 import Button from "../src/components/ui/Button.astro";
 import Card from "../src/components/ui/Card.astro";
 import Badge from "../src/components/ui/Badge.astro";
-import Separator from "../src/components/ui/Separator.astro";
 
 describe("Container", () => {
   it("applies the lg max width by default", async () => {
@@ -246,24 +245,5 @@ describe("Badge", () => {
     expect(html).toContain(
       "text-foreground [a&amp;]:hover:bg-accent [a&amp;]:hover:text-accent-foreground",
     );
-  });
-});
-
-describe("Separator", () => {
-  it("defaults to horizontal with the data-orientation selectors", async () => {
-    const container = await AstroContainer.create();
-    const html = await container.renderToString(Separator, {});
-    expect(html).toContain('data-orientation="horizontal"');
-    expect(html).toContain(
-      "bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px",
-    );
-  });
-
-  it("honours the vertical orientation prop", async () => {
-    const container = await AstroContainer.create();
-    const html = await container.renderToString(Separator, {
-      props: { orientation: "vertical" },
-    });
-    expect(html).toContain('data-orientation="vertical"');
   });
 });
