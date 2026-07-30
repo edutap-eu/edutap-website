@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/"
+    style="fill-rule:evenodd;clip-rule:evenodd;">
+    <path
+        d="M992,252L992,772C992,893.421 893.421,992 772,992L252,992C130.579,992 32,893.421 32,772L32,252C32,130.579 130.579,32 252,32L772,32C893.421,32 992,130.579 992,252Z"
+        style="fill:rgb(247,247,251);stroke:rgb(227,227,239);stroke-width:16px;" />
+    <g transform="matrix(-1.42245,-0.138897,0.151669,-1.55325,941.985,408.445)">
+        <path d="M106,112C106,136 234,136 234,112L234,160C234,184 106,184 106,160L106,112Z"
+            style="fill:rgb(64,151,190);fill-rule:nonzero;" />
+    </g>
+    <g transform="matrix(1.53703,0,0,1.53703,-327.781,-287.256)">
+        <path d="M365.99,463.69C384.682,498.866 384.682,541.134 365.99,576.31"
+            style="fill:rgb(247,247,251);fill-rule:nonzero;stroke:rgb(17,87,148);stroke-width:78px;stroke-linecap:round;" />
+        <path d="M465.3,409.12C501.467,478.548 501.467,561.452 465.3,630.88"
+            style="fill:rgb(247,247,251);fill-rule:nonzero;stroke:rgb(64,151,190);stroke-width:78px;stroke-linecap:round;" />
+        <path d="M566.37,353.28C620.898,457.635 620.898,582.365 566.37,686.72"
+            style="fill:rgb(247,247,251);fill-rule:nonzero;stroke:rgb(240,113,41);stroke-width:92px;stroke-linecap:round;" />
+        <path d="M672.05,294.95C744.973,435.988 744.973,604.012 672.05,745.05"
+            style="fill:rgb(247,247,251);fill-rule:nonzero;stroke:rgb(215,101,37);stroke-width:92px;stroke-linecap:round;" />
+    </g>
+    <g id="edutap-mortarboard-cylinder-underview" transform="matrix(1,0,0,1,-9.97531,-16.5969)">
+        <g transform="matrix(1.42477,0.11263,-0.11263,1.42477,503.464,10.3887)">
+            <path d="M40,70L170,28L300,70L170,112L40,70Z" style="fill:rgb(17,87,148);fill-rule:nonzero;" />
+            <path d="M68,78L170,46L272,78L170,110L68,78Z" style="fill:rgb(64,151,190);fill-rule:nonzero;" />
+            <g transform="matrix(-0.99983,-0.0184488,0.025774,-1.39682,334.969,296.648)">
+                <path d="M106,112C106,136 234,136 234,112L234,160C234,184 106,184 106,160L106,112Z"
+                    style="fill:rgb(17,87,148);fill-rule:nonzero;" />
+            </g>
+        </g>
+        <g transform="matrix(0.501017,0,0,0.501017,736.185,113.574)">
+            <path d="M292,70L292,156"
+                style="fill:none;fill-rule:nonzero;stroke:rgb(17,87,148);stroke-width:14px;stroke-linecap:round;stroke-linejoin:round;" />
+            <circle cx="292" cy="170" r="14" style="fill:rgb(17,87,148);" />
+            <path d="M279,188C270,208 270,240 279,260C288,274 296,274 305,260C314,240 314,208 305,188L279,188Z"
+                style="fill:rgb(17,87,148);fill-rule:nonzero;" />
+        </g>
+    </g>
+</svg>

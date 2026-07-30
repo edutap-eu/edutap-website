@@ -1,0 +1,27 @@
+---
+import navItems from "../data/nav.json";
+
+interface Props {
+  pathname: string;
+}
+
+const { pathname } = Astro.props;
+const normalise = (path: string) => (path !== "/" ? path.replace(/\/$/, "") : path);
+const current = normalise(pathname);
+
+const base = "font-medium hover:text-primary transition-colors text-black/70";
+const active = "text-primary font-bold underline decoration-2 underline-offset-6";
+---
+
+<nav class="items-center space-x-6">
+  {
+    navItems.map((item) => (
+      <a
+        href={item.to}
+        class={`${base} ${normalise(item.to) === current ? active : ""}`}
+      >
+        {item.text}
+      </a>
+    ))
+  }
+</nav>
