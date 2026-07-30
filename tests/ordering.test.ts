@@ -87,6 +87,12 @@ describe("collection ordering", () => {
     );
     const expected = source.map((m) => m.title);
 
+    // Same guard as the history test above: currently moot (all 4 roadmap
+    // titles are unique), but titles are free-text editorial content, and a
+    // duplicate slipping in later would silently weaken a "contains every
+    // title" style check the same way it already does for history.
+    expect(new Set(expected).size).toBe(expected.length);
+
     expect(renderedMilestoneTitles("dist/roadmap/index.html")).toEqual(
       expected,
     );

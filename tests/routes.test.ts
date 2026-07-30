@@ -1,5 +1,24 @@
 import { describe, expect, it } from "vitest";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
+import { join } from "node:path";
+
+/** All built HTML files, recursively. */
+function htmlFiles(dir: string): string[] {
+  return readdirSync(dir).flatMap((entry) => {
+    const path = join(dir, entry);
+    if (statSync(path).isDirectory()) return htmlFiles(path);
+    return path.endsWith(".html") ? [path] : [];
+  });
+}
+
+/** All `.astro` source files, recursively. */
+function astroFiles(dir: string): string[] {
+  return readdirSync(dir).flatMap((entry) => {
+    const path = join(dir, entry);
+    if (statSync(path).isDirectory()) return astroFiles(path);
+    return path.endsWith(".astro") ? [path] : [];
+  });
+}
 
 const ROUTES = [
   "index.html",
@@ -43,8 +62,33 @@ describe("routes", () => {
     expect(existsSync("dist/sitemap-index.xml")).toBe(true);
   });
 
+  // A regex over dist/index.html's own markup for the word "react" cannot
+  // prove there is no React runtime: the Sentry SDK bundle already ships the
+  // literal string "React" inside a content-hashed dist/_astro/*.js file,
+  // invisible to a check that only reads the HTML, and a genuinely hydrated
+  // component referenced through a <script src="..."> would evade it just
+  // as easily. Astro's own hydration marker is the reliable signal instead -
+  // any hydrated island renders an <astro-island> custom element into the
+  // HTML regardless of which framework or bundle produced it, so the first
+  // assertion below is the one that actually detects hydration. The other
+  // two rule out the ways an island could exist without yet being rendered
+  // (a component imported but not used anywhere, or the integration wired
+  // up but not invoked).
   it("ships no React runtime", () => {
-    const html = readFileSync("dist/index.html", "utf8");
-    expect(html).not.toMatch(/react/i);
+    for (const file of htmlFiles("dist")) {
+      expect(readFileSync(file, "utf8")).not.toMatch(/<astro-island\b/);
+    }
+
+    for (const file of astroFiles("src")) {
+      expect(readFileSync(file, "utf8")).not.toMatch(
+        /client:(load|idle|visible|media|only)\b/,
+      );
+    }
+
+    expect(readFileSync("astro.config.mjs", "utf8")).not.toMatch(
+      /@astrojs\/react/,
+    );
+    const pkg = JSON.parse(readFileSync("package.json", "utf8"));
+    expect(Object.keys(pkg.dependencies ?? {})).not.toContain("@astrojs/react");
   });
 });
