@@ -39,7 +39,13 @@ const formattedDate = date.toLocaleDateString("en-US", {
       </Button>
     ) : (
       url && (
-        <Button variant="link" class="p-0" href={url} target="_blank" rel="noreferrer">
+        <Button
+          variant="link"
+          class="p-0"
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Read more
         </Button>
       )

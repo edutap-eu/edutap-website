@@ -38,7 +38,7 @@ describe("NewsItem", () => {
       props: { ...item, url: "https://example.org/news", isInternal: false },
     });
     expect(html).toContain('target="_blank"');
-    expect(html).toContain('rel="noreferrer"');
+    expect(html).toContain('rel="noopener noreferrer"');
   });
 
   it("keeps internal links in the same tab", async () => {
