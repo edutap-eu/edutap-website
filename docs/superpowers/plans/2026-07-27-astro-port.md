@@ -1976,9 +1976,15 @@ describe("routes", () => {
     expect(existsSync("dist/sitemap-index.xml")).toBe(true);
   });
 
-  it("ships no React runtime", () => {
-    const html = readFileSync("dist/index.html", "utf8");
-    expect(html).not.toMatch(/react/i);
+  // Detects hydration by Astro's own signal rather than by grepping for the
+  // word "react": any hydrated island renders an <astro-island> element,
+  // whatever framework or bundle name is behind it. Grepping dist/index.html
+  // for /react/i proves nothing — the Sentry bundle already contains the
+  // string, and a hashed <script src> would hide a real island entirely.
+  it("hydrates no islands", () => {
+    for (const file of htmlFiles("dist")) {
+      expect(readFileSync(file, "utf8")).not.toContain("<astro-island");
+    }
   });
 });
 ```
