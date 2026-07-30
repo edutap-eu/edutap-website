@@ -2250,9 +2250,15 @@ Expected: no output.
 - [ ] **Step 7: Commit**
 
 ```bash
-git add -A
+git add -u                    # stage deletions and modifications only
+git add package.json tsconfig.json .gitignore src/data/team.json
+git status                    # confirm nothing unexpected is staged
 git commit -m "chore: remove Gatsby and all React dependencies"
 ```
+
+Do **not** use `git add -A` here. The working tree carries untracked files belonging to the
+project owner (`HANDOFF.md`, `edutap-redesign_1.html`, `inspect-brand_1.mjs`), and `-A`
+would sweep them into this commit.
 
 - [ ] **Step 8: Report to the project owner**
 
