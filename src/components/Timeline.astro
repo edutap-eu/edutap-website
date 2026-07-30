@@ -1,0 +1,23 @@
+---
+/**
+ * Vertical timeline shell: a centre line behind alternating Milestone cards.
+ *
+ * Every pixel value here is copied from react-vertical-timeline-component's
+ * own stylesheet (node_modules/react-vertical-timeline-component/style.min.css),
+ * not guessed and not taken from Tailwind's default breakpoints. In
+ * particular the library switches from one column to two at 1170px — a
+ * breakpoint Tailwind has no built-in name for, hence the `min-[1170px]:`
+ * arbitrary variants throughout this component and Milestone.astro.
+ */
+---
+
+<div class="relative mx-auto w-[95%] max-w-[1170px] py-8 min-[1170px]:w-[90%]">
+  <div
+    class="pointer-events-none absolute top-0 bottom-0 left-[18px] w-1 bg-status-future min-[1170px]:left-1/2 min-[1170px]:-ml-0.5"
+    aria-hidden="true"
+  >
+  </div>
+  <ol class="relative m-0 list-none p-0">
+    <slot />
+  </ol>
+</div>

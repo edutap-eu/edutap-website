@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/Container.astro";
+import Timeline from "../components/Timeline.astro";
+import Milestone from "../components/Milestone.astro";
+import { getCollection } from "astro:content";
+
+const milestones = (await getCollection("roadmap")).sort(
+  (a, b) => a.data.date.getTime() - b.data.date.getTime(),
+);
+---
+
+<BaseLayout title="Roadmap | eduTAP">
+  <Container size="md" as="section" class="py-12 md:py-36">
+    <h1 class="mb-12 bg-white text-5xl font-bold tracking-tight">Roadmap</h1>
+    <Timeline>
+      {
+        milestones.map((entry, index) => (
+          <Milestone milestone={entry.data} side={index % 2 === 0 ? "left" : "right"} />
+        ))
+      }
+    </Timeline>
+  </Container>
+</BaseLayout>
