@@ -1,0 +1,71 @@
+---
+import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
+import Container from "./Container.astro";
+import FooterNavColumn from "./FooterNavColumn.astro";
+import { byFileOrder } from "../lib/ordering";
+
+const navItems = (await getCollection("nav")).sort(byFileOrder).map((entry) => entry.data);
+const navLinks = navItems.map((item) => ({ href: item.to, label: item.text }));
+const year = new Date().getFullYear();
+---
+
+<div class="bg-primary text-white">
+  <Container as="footer" class="py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="space-y-4">
+        <a href="/" class="inline-block">
+          <h3 class="font-bold text-2xl">
+            <span class="px-2 mr-1 rounded-sm bg-white text-primary">edu</span>
+            <span class="text-accent">TAP</span>
+          </h3>
+        </a>
+        <p class="text-sm">
+          Transforming campus experiences for the digital campus card of the future.
+        </p>
+        <p class="font-bold">A project initiated by EUGLOH and co-funded by LMU.</p>
+        <div class="flex flex-row gap-4">
+          <img src="/eugloh-white.webp" alt="EUGLOH" class="w-24 flex-1 object-contain" />
+          <img src="/lmu-logo.png" alt="LMU" class="w-56 -m-2 flex-1 object-contain" />
+        </div>
+        <div class="flex items-center gap-1 mt-8 text-sm  text-gray-100">
+          <Icon name="lucide:copyright" class="inline-block size-4" />
+          <span>{year} eduTAP. All rights reserved.</span>
+        </div>
+      </div>
+
+      <FooterNavColumn title="Navigation" links={navLinks} />
+
+      <FooterNavColumn
+        title="Resources"
+        links={[
+          { href: "https://docs.edutap.eu/", label: "Documentation" },
+          {
+            href: "https://github.com/edutap-eu",
+            label: "GitHub Repository / eduTAP-eu",
+          },
+          {
+            href: "https://github.com/edutap-collective",
+            label: "GitHub Repository / eduTAP-collective",
+          },
+        ]}
+      />
+
+      <FooterNavColumn
+        title="Legal"
+        links={[
+          { href: "/legal/privacy-policy", label: "Privacy Policy" },
+          { href: "/legal/imprint", label: "Imprint" },
+          {
+            href: "https://opensource.org/license/eupl-1-2/",
+            label: "EUPL 1.2 License",
+          },
+          {
+            href: "https://creativecommons.org/licenses/by-sa/4.0/legalcode",
+            label: "CC BY-SA 4.0 License",
+          },
+        ]}
+      />
+    </div>
+  </Container>
+</div>

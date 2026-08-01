@@ -1,0 +1,169 @@
+---
+/**
+ * One timeline entry: a status disc on the centre line, a card pointing at
+ * it with a small triangular arrow, and a date on the opposite side.
+ *
+ * Replaces src/components/milestone.tsx built on
+ * react-vertical-timeline-component. The useState/useEffect "colour dance"
+ * in that file (lines 32-49) mirrored a value that never changes after
+ * mount, so it becomes a static lookup here. The console.log(milestone) at
+ * line 31 is dropped. The daisyUI `btn` classes on the link row rendered
+ * unstyled on the live site (daisyUI was never registered as a Tailwind
+ * plugin) and are replaced with the real Button component - a deliberate
+ * appearance improvement, not a regression. `text-base-content/70` on the
+ * milestone_type span is the same kind of dead daisyUI class and becomes
+ * `text-black/70`.
+ *
+ * Sizes, offsets and colours below (40px/60px disc, 18px/50% line, 60px
+ * content margin, 7px arrow, box-shadows) are copied from
+ * react-vertical-timeline-component/style.min.css, confirmed against the
+ * live site's computed styles at 390px, ~1000px and 1440px. The 1170px
+ * breakpoint is the library's own two-column switch, not one of Tailwind's
+ * defaults; the date label additionally steps through a 768px type
+ * breakpoint the layout switch doesn't share (13px / 14px / 16px).
+ *
+ * Dates are deliberately NOT reformatted: this is a strict 1:1 port, and the
+ * live site shows the raw ISO string from the source JSON. Do not reintroduce
+ * `Date.prototype.toLocaleDateString` here - that was tried, reviewed, and
+ * reverted by the project owner; readable dates belong to the redesign phase
+ * that follows this port, not to this task.
+ */
+import type { CollectionEntry } from "astro:content";
+import Button from "./ui/Button.astro";
+
+interface Props {
+  milestone: CollectionEntry<"history">["data"];
+  side: "left" | "right";
+}
+
+const { milestone, side } = Astro.props;
+const {
+  milestone_type,
+  date,
+  dateLabel,
+  location,
+  event_name,
+  title,
+  description,
+  status,
+  event_link,
+  presentation_file,
+  video_link,
+} = milestone;
+
+const statusColour = {
+  reached: "var(--color-status-reached)",
+  next: "var(--color-status-next)",
+  future: "var(--color-status-future)",
+}[status];
+
+// Strict 1:1 port: the live site shows the raw ISO string from the source
+// JSON (e.g. "2020-07-01"), not a human-readable format - that belongs to a
+// later redesign phase. `date` is a parsed Date now, so `dateLabel` (the
+// original wording, verbatim) is what covers the one entry that can't
+// round-trip through a Date: history.json's "2024-06" has no day component,
+// and reformatting via the Date object would invent one ("2024-06-01").
+const displayDate = dateLabel ?? date.toISOString().slice(0, 10);
+
+const hasLinks = Boolean(event_link || presentation_file || video_link);
+const hasMeta = Boolean(event_name || location);
+---
+
+<li
+  class="relative mt-8 first:mt-0 min-[1170px]:mt-16 min-[1170px]:after:table min-[1170px]:after:clear-both min-[1170px]:after:content-['']"
+  style={`--tl-color:${statusColour}`}
+>
+  <!-- status disc, centred on the line -->
+  <div
+    class="absolute top-0 left-0 flex h-10 w-10 items-center justify-center rounded-full text-white min-[1170px]:left-1/2 min-[1170px]:-ml-[30px] min-[1170px]:h-[60px] min-[1170px]:w-[60px]"
+    style="background:var(--tl-color);box-shadow:0 0 0 4px #fff,inset 0 2px 0 rgba(0,0,0,.08),0 3px 0 4px rgba(0,0,0,.05)"
+  >
+    {status === "reached" && <span class="text-4xl leading-none">✓</span>}
+  </div>
+
+  <div
+    class:list={[
+      "relative ml-[60px] rounded bg-white p-4 shadow-[0_3px_0_#ddd] min-[1170px]:ml-0 min-[1170px]:w-[44%] min-[1170px]:p-6",
+      side === "right" && "min-[1170px]:float-right",
+    ]}
+    style="border:2px solid var(--tl-color)"
+  >
+    <!-- content arrow, pointing at the centre line -->
+    <div
+      class:list={[
+        "absolute top-4 h-0 w-0 border-[7px] border-transparent min-[1170px]:top-6",
+        side === "left"
+          ? "-left-[14px] border-r-[var(--tl-color)] min-[1170px]:left-auto min-[1170px]:-right-[14px] min-[1170px]:border-r-transparent min-[1170px]:border-l-[var(--tl-color)]"
+          : "-left-[14px] border-r-[var(--tl-color)]",
+      ]}
+      aria-hidden="true"
+    >
+    </div>
+
+    {milestone_type && <span class="text-black/70">{milestone_type}</span>}
+    <h2 class="mt-0 mb-4 text-base font-normal md:text-3xl" style="color:#303e49">
+      {title}
+    </h2>
+    {description && <p class="mt-5 text-xl font-light">{description}</p>}
+
+    {(hasLinks || hasMeta) && <div class="mt-4 mb-3 border-t border-border-subtle" />}
+
+    {
+      hasLinks && (
+        <div class="flex flex-wrap gap-2 py-3">
+          {event_link && (
+            <Button variant="outline" size="sm" href={event_link} target="_blank" rel="noreferrer">
+              Event-Website
+            </Button>
+          )}
+          {presentation_file && (
+            <Button
+              variant="outline"
+              size="sm"
+              href={`/presentations/${presentation_file}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Slides
+            </Button>
+          )}
+          {video_link && (
+            <Button variant="outline" size="sm" href={video_link} target="_blank" rel="noreferrer">
+              YouTube-Video
+            </Button>
+          )}
+        </div>
+      )
+    }
+
+    {
+      hasMeta && (
+        <div class="flex">
+          <div class="mr-2">📍</div>
+          <div>
+            {event_name && <span class="block">{event_name}</span>}
+            {location && <span class="block">{location}</span>}
+          </div>
+        </div>
+      )
+    }
+
+    <span
+      class:list={[
+        // 13px base, 14px at the library's own 768px type breakpoint, 16px
+        // at the 1170px layout switch - three steps, not two. Confirmed
+        // against react-vertical-timeline-component/style.min.css: the date
+        // rule sits in the same 768px block as the h2/p type bump (14px
+        // there) and gets a further, separate 16px override only inside the
+        // 1170px two-column block.
+        "mt-2 block text-[13px] opacity-70 md:text-[14px] min-[1170px]:text-base",
+        "min-[1170px]:absolute min-[1170px]:top-1.5 min-[1170px]:mt-0 min-[1170px]:w-full",
+        side === "left"
+          ? "min-[1170px]:left-[124%]"
+          : "min-[1170px]:right-[124%] min-[1170px]:left-auto min-[1170px]:text-right",
+      ]}
+    >
+      {displayDate}
+    </span>
+  </div>
+</li>

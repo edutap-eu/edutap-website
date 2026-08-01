@@ -4,7 +4,8 @@
     "location": "LMU Munich, Germany",
     "milestone_type": "Milestone",
     "description": null,
-    "date": "End of 2023",
+    "date": "2023-12-31",
+    "dateLabel": "End of 2023",
     "status": "next"
   },
   {
@@ -12,7 +13,8 @@
     "location": "LMU Munich, Germany",
     "milestone_type": "Milestone",
     "description": null,
-    "date": "Summer 2024",
+    "date": "2024-07-01",
+    "dateLabel": "Summer 2024",
     "status": "next"
   },
   {
@@ -20,7 +22,8 @@
     "location": null,
     "milestone_type": "Milestone",
     "description": null,
-    "date": "Summer 2024",
+    "date": "2024-07-01",
+    "dateLabel": "Summer 2024",
     "status": "next"
   },
   {
@@ -28,7 +31,8 @@
     "location": null,
     "milestone_type": null,
     "description": "at other Higher Education Institutions",
-    "date": "starting mid 2025",
+    "date": "2025-07-01",
+    "dateLabel": "starting mid 2025",
     "status": "future"
   }
 ]

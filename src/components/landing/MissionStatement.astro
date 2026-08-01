@@ -1,0 +1,115 @@
+---
+import Container from "../Container.astro";
+import { Icon } from "astro-icon/components";
+
+const goals = [
+  "For Europe and the world",
+  "Decentralized, secure and <abbr title='state of the art'>SOTA</abbr>",
+  "Compliant (e.g. GDPR, vendor-neutral)",
+  "Easy updates and maintenance",
+  "Accessible to all users",
+  "Follows European jurisdiction requirements",
+  "Community-governed, free and open-source software",
+  "Favorable adaptation possible",
+];
+---
+
+<div class="bg-gradient-to-b from-secondary/50 py-16 md:py-36">
+  <Container
+    size="sm"
+    as="section"
+    class="bg-white flex flex-col items-center py-16 md:py-36 rounded-xl md:drop-shadow-xl px-8 md:px-4"
+  >
+    <h2 class="scroll-m-20 text-4xl font-bold tracking-tight mb-4">
+      Our Mission
+    </h2>
+
+    <p class="text-center text-xl text-gray-700 max-w-lg mb-12">
+      Our Mission is to provide an interoperable solution that works for
+      everyone.
+    </p>
+
+    <div class="space-y-16 max-w-2xl">
+      <div class="flex flex-col md:flex-row md:items-center">
+        <div class="flex-shrink-0 mb-6 md:mb-0 md:mr-10">
+          <div class="w-20 h-20 flex items-center justify-center bg-primary rounded-md">
+            <Icon name="lucide:smartphone" class="w-10 h-10 text-primary-foreground" />
+          </div>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold tracking-tight mb-2">
+            Digital First. Campus Ready.
+          </h3>
+          <p class="text-gray-600 text-lg">
+            We are developing the digital campus card of the future for the
+            smartphone.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row md:items-center">
+        <div class="flex-shrink-0 mb-6 md:mb-0 md:mr-10">
+          <div class="w-20 h-20 flex items-center justify-center bg-primary rounded-md">
+            <Icon name="lucide:users" class="w-10 h-10 text-primary-foreground" />
+          </div>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold tracking-tight mb-2">
+            For Everyone. Without Exception.
+          </h3>
+          <p class="text-gray-600 text-lg">
+            For every member of the higher education community:
+            <ul class="list-disc list-inside mt-2">
+              <li>Students</li>
+              <li>Faculty and Staff</li>
+              <li>Affiliates</li>
+            </ul>
+          </p>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row md:items-center">
+        <div class="flex-shrink-0 mb-6 md:mb-0 md:mr-10">
+          <div class="w-20 h-20 flex items-center justify-center bg-primary rounded-md">
+            <Icon name="lucide:shield" class="w-10 h-10 text-primary-foreground" />
+          </div>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold tracking-tight mb-2">
+            Smart. Seamless. Secure.
+          </h3>
+          <p class="text-gray-600 text-lg">
+            eduTAP is your educational ID and a collection of service passes
+            in the digital wallet.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <p class="text-center text-xl text-gray-700 max-w-lg mb-12 mt-10">
+      This fulfills the interoperability vision of <br />
+      the European Student Card initiative.
+    </p>
+
+    <h2 class="text-4xl font-bold tracking-tight pt-16 mb-4">
+      Project Goals
+    </h2>
+
+    <p class="text-center text-xl text-gray-700 max-w-lg mb-12">
+      The following goals guide the development of eduTAP.
+    </p>
+
+    <ul class="max-w-2xl grid grid-cols-1 md:grid-cols-[auto_1fr] gap-4">
+      {
+        goals.map((goal) => (
+          <li class="flex items-center max-w-sm">
+            <div class="w-8 h-8 flex-shrink-0 rounded-full bg-primary flex items-center justify-center mr-3 mt-0.5">
+              <Icon name="lucide:check" class="size-4 text-white" />
+            </div>
+            <p class="text-gray-700" set:html={goal} />
+          </li>
+        ))
+      }
+    </ul>
+  </Container>
+</div>

@@ -1,0 +1,31 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/Container.astro";
+import Timeline from "../components/Timeline.astro";
+import Milestone from "../components/Milestone.astro";
+import { getCollection } from "astro:content";
+import { byFileOrder } from "../lib/ordering";
+
+// The original history.tsx iterates allHistoryJson.nodes in JSON file order
+// and never sorts. getCollection() does NOT preserve that order on its own,
+// and sorting by parsed date instead is tempting but also wrong: history.json
+// has one entry dated "2024-06" (day unknown, parsed as the 1st) immediately
+// followed by one dated "2024-06-07", and Date.getTime() would swap them
+// relative to the file's (and the live site's) order. byFileOrder recovers
+// the original file order from the loader's own id, the one sort that
+// matches the live site byte-for-byte. See src/lib/ordering.ts.
+const milestones = (await getCollection("history")).sort(byFileOrder);
+---
+
+<BaseLayout title="History | eduTAP">
+  <Container size="md" as="section" class="py-12 md:py-36">
+    <h1 class="mb-12 bg-white text-5xl font-bold tracking-tight">History</h1>
+    <Timeline>
+      {
+        milestones.map((entry, index) => (
+          <Milestone milestone={entry.data} side={index % 2 === 0 ? "left" : "right"} />
+        ))
+      }
+    </Timeline>
+  </Container>
+</BaseLayout>
