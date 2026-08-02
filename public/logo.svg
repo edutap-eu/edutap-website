@@ -18,7 +18,7 @@
   <rect x="190" y="240" width="8" height="20" rx="4" fill="#b8bec6"/>
 
   <!-- Wordmark -->
-  <text x1="210" y="245" font-family="Lato, sans-serif" font-size="120" font-weight="700">
+  <text x="210" y="245" font-family="Lato, sans-serif" font-size="120" font-weight="700">
     <tspan fill="#115794">edu</tspan><tspan fill="#d76525">TAP</tspan>
   </text>
 
