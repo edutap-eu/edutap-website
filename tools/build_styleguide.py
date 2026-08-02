@@ -35,6 +35,7 @@ REPO = pathlib.Path(__file__).resolve().parent.parent  # edutap-website
 WORKSPACES = REPO.parent  # the directory holding the eduTAP checkouts
 
 WEBSITE_PUBLIC = REPO / "public"  # Astro's static directory, formerly Gatsby's static/
+BRAND = REPO / "brand"  # partner logo masters, deliberately outside public/
 ECC_STATIC = WORKSPACES / "ecc-documentation" / "source" / "_static"
 
 CACHE = pathlib.Path(tempfile.gettempdir()) / "edutap-styleguide-assets"
@@ -175,6 +176,23 @@ def european_emblem(blue: str, yellow: str) -> str:
     )
 
 
+def brand_assets() -> dict[str, dict]:
+    """Load every logo variant under brand/, keyed as "<folder>/<name>".
+
+    The fills are read back out of each file rather than written down here, so the
+    swatches under a variant can never drift from what the file actually paints.
+    """
+    library = {}
+    for path in sorted(BRAND.rglob("*.svg")):
+        markup = path.read_text()
+        library[f"{path.parent.name}/{path.stem}"] = {
+            "uri": data_uri(path),
+            "colours": sorted(set(re.findall(r'fill="(#[0-9a-fA-F]{6})"', markup))),
+            "file": f"brand/{path.parent.name}/{path.name}",
+        }
+    return library
+
+
 def collect_assets() -> dict[str, str]:
     fonts = {
         name: data_uri(cached_download(url, f"{name}.woff2"))
@@ -240,6 +258,8 @@ class System:
     kicker: str
     lede: str
     marks: list[dict] = field(default_factory=list)
+    logo_variants: list[dict] = field(default_factory=list)
+    logo_source: str = ""
     palettes: list[Palette] = field(default_factory=list)
     typography: list[dict] = field(default_factory=list)
     rules: list[str] = field(default_factory=list)
@@ -391,6 +411,15 @@ def build_systems() -> list[System]:
                 "background": "blue",
             },
         ],
+        logo_source="EUGLOH_logo.ai, official master · converted from Illustrator",
+        logo_variants=[
+            {
+                "key": "eugloh/eugloh-colour",
+                "label": "Colour",
+                "use": "The three-colour mark, for light grounds. A vector reversed version "
+                       "does not exist in the material we hold — only the WebP above.",
+            },
+        ],
         palettes=[
             Palette(
                 title="Logo colours",
@@ -478,6 +507,29 @@ def build_systems() -> list[System]:
                 "note": "The current mark in LMU-Grün, taken from lmu.de. Vector, so it stays sharp at any size.",
                 "background": "light",
             }
+        ],
+        logo_source="LMU logo pack, RGB masters · converted from EPS",
+        logo_variants=[
+            {
+                "key": "lmu/lmu-flaechig-gruen",
+                "label": "Flächig grün",
+                "use": "The default. Solid green blocks with the letters knocked out in white.",
+            },
+            {
+                "key": "lmu/lmu-invertiert-gruen",
+                "label": "Invertiert grün",
+                "use": "Keyline boxes, open interior. Lighter on the page than the solid version.",
+            },
+            {
+                "key": "lmu/lmu-invertiert-schwarz",
+                "label": "Invertiert schwarz",
+                "use": "One colour, for anything printed without colour. Note it is #232323, not pure black.",
+            },
+            {
+                "key": "lmu/lmu-invertiert-weiss",
+                "label": "Invertiert weiß",
+                "use": "For dark grounds and photography. The eduTAP footer uses this one.",
+            },
         ],
         palettes=[
             Palette(
@@ -572,6 +624,45 @@ def build_systems() -> list[System]:
                 "file": "co-funded_EN/horizontal/RGB/PNG/…_NEG.png",
                 "note": "For dark grounds. A monochrome and a black version ship alongside.",
                 "background": "dark",
+            },
+        ],
+        logo_source="Commission logo pack, horizontal RGB masters · converted from EPS",
+        logo_variants=[
+            {
+                "key": "eu/co-funded-pos",
+                "label": "Positive",
+                "use": "The default: emblem in colour, wording in EU blue. Light grounds.",
+            },
+            {
+                "key": "eu/co-funded-neg",
+                "label": "Negative",
+                "use": "Emblem in colour, wording in white. For dark grounds — it disappears on white, "
+                       "which is why both grounds are shown here.",
+            },
+            {
+                "key": "eu/co-funded-monochrome",
+                "label": "Monochrome",
+                "use": "Everything in EU blue, including the stars. When two inks are not available.",
+            },
+            {
+                "key": "eu/co-funded-black",
+                "label": "Black",
+                "use": "Solid black, one colour.",
+            },
+            {
+                "key": "eu/co-funded-black-outline",
+                "label": "Black outline",
+                "use": "Black with the emblem field left open, so it works on a light patterned ground.",
+            },
+            {
+                "key": "eu/co-funded-white",
+                "label": "White",
+                "use": "Solid white, one colour, for dark grounds.",
+            },
+            {
+                "key": "eu/co-funded-white-outline",
+                "label": "White outline",
+                "use": "White with the emblem field left open, for dark photography.",
             },
         ],
         palettes=[
@@ -984,6 +1075,30 @@ h3.block .provenance {
 .mark-meta strong { font-size: 0.9rem; display: block; }
 .mark-meta span { display: block; font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem; }
 .mark-meta code { display: block; font-size: 0.72rem; color: var(--text-muted); margin-top: 0.45rem; word-break: break-all; }
+/* ---------- logo library ---------- */
+
+.variants { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr)); }
+.variant { border: 1px solid var(--rule); border-radius: 3px; background: var(--card); overflow: hidden; }
+.variant-stages { display: flex; }
+.variant-stages > div { flex: 1; display: grid; place-items: center; padding: 1.1rem 0.9rem; min-height: 6rem; }
+.variant-stages .on-light { background: #ffffff; }
+.variant-stages .on-dark { background: var(--dark); }
+.variant-stages img { max-width: 100%; max-height: 3.6rem; height: auto; }
+.variant-meta { padding: 0.75rem 0.9rem 0.9rem; border-top: 1px solid var(--rule); }
+.variant-meta strong { display: block; font-family: "Lato", Arial, sans-serif; font-size: 0.92rem; color: var(--ink); }
+.variant-meta .use { display: block; font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem; }
+.variant-meta code { display: block; font-size: 0.7rem; color: var(--text-muted); margin-top: 0.4rem; word-break: break-all; }
+.variant-inks { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.55rem; }
+.variant-inks span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+.variant-inks i { width: 0.75rem; height: 0.75rem; border-radius: 2px; border: 1px solid var(--rule); }
+
 .mark-meta .flag {
   display: block;
   margin-top: 0.6rem;
@@ -1285,6 +1400,48 @@ def render_marks(marks: list[dict], assets: dict[str, str]) -> str:
 </div>"""
 
 
+def render_logo_library(system: System, brand: dict[str, dict]) -> str:
+    """Show every official variant on both a light and a dark ground.
+
+    A variant only proves itself against the background it was drawn for: the
+    reversed files vanish on white, which is the point and is worth seeing.
+    """
+    if not system.logo_variants:
+        return ""
+
+    cards = []
+    for variant in system.logo_variants:
+        entry = brand.get(variant["key"])
+        if entry is None:
+            continue
+        inks = "".join(
+            f'<span><i style="background:{colour}"></i>{colour.upper()}</span>'
+            for colour in entry["colours"]
+        )
+        label = html.escape(variant["label"])
+        cards.append(
+            f"""<figure class="variant">
+  <div class="variant-stages">
+    <div class="on-light"><img src="{entry['uri']}" alt="{label} on a light ground"></div>
+    <div class="on-dark"><img src="{entry['uri']}" alt="{label} on a dark ground"></div>
+  </div>
+  <figcaption class="variant-meta">
+    <strong>{label}</strong>
+    <span class="use">{variant['use']}</span>
+    <div class="variant-inks">{inks}</div>
+    <code>{html.escape(entry['file'])}</code>
+  </figcaption>
+</figure>"""
+        )
+
+    return f"""<h3 class="block">Logo library
+  <span class="provenance">{system.logo_source}</span>
+</h3>
+<div class="variants">
+{chr(10).join(cards)}
+</div>"""
+
+
 def render_typography(specimens: list[dict]) -> str:
     if not specimens:
         return ""
@@ -1304,7 +1461,7 @@ def render_typography(specimens: list[dict]) -> str:
 </div>"""
 
 
-def render_system(system: System, assets: dict[str, str]) -> str:
+def render_system(system: System, assets: dict[str, str], brand: dict[str, dict]) -> str:
     rules = ""
     if system.rules:
         items = "\n".join(f"<li>{rule}</li>" for rule in system.rules)
@@ -1330,6 +1487,7 @@ def render_system(system: System, assets: dict[str, str]) -> str:
       <p>{system.lede}</p>
     </div>
     {render_marks(system.marks, assets)}
+    {render_logo_library(system, brand)}
     {palettes}
     {render_typography(system.typography)}
     {rules}
@@ -1375,14 +1533,14 @@ def render_conflicts() -> str:
 </section>"""
 
 
-def render_page(systems: list[System], assets: dict[str, str]) -> str:
+def render_page(systems: list[System], assets: dict[str, str], brand: dict[str, dict]) -> str:
     swatch_count = sum(len(palette.swatches) for system in systems for palette in system.palettes)
     mark_count = sum(len(system.marks) for system in systems)
 
     nav = "\n".join(
         f'<a href="#{system.slug}">{html.escape(system.name)}</a>' for system in systems
     )
-    sections = "\n".join(render_system(system, assets) for system in systems)
+    sections = "\n".join(render_system(system, assets, brand) for system in systems)
 
     font_faces = f"""
 @font-face {{ font-family: "Lato"; font-style: normal; font-weight: 400;
@@ -1471,12 +1629,14 @@ def render_page(systems: list[System], assets: dict[str, str]) -> str:
 def main() -> None:
     output = pathlib.Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_OUTPUT
     assets = collect_assets()
+    brand = brand_assets()
     systems = build_systems()
-    output.write_text(render_page(systems, assets), encoding="utf-8")
+    output.write_text(render_page(systems, assets, brand), encoding="utf-8")
 
     swatches = sum(len(palette.swatches) for system in systems for palette in system.palettes)
+    variants = sum(len(system.logo_variants) for system in systems)
     size_kb = output.stat().st_size / 1024
-    print(f"wrote {output} — {swatches} swatches, {size_kb:,.0f} KB")
+    print(f"wrote {output} — {swatches} swatches, {variants} logo variants, {size_kb:,.0f} KB")
 
 
 if __name__ == "__main__":
