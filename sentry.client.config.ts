@@ -8,6 +8,6 @@ import * as Sentry from "@sentry/astro";
 // to instrument — only the client SDK is enabled (see `enabled: { server: false }`
 // in `astro.config.mjs`), and no `sentry.server.config.ts` is needed.
 Sentry.init({
-  dsn: "https://591c58f7710af7e185aa4eb01bda6fd5@sentry.dev-tools.verwaltung.uni-muenchen.de/5",
+  dsn: "https://b8c11a165aeb4d17ae7b781fe9d3db24@portal-mgmt.verwaltung.uni-muenchen.de/portale/bugsink/1",
   tracesSampleRate: 1.0,
 });
