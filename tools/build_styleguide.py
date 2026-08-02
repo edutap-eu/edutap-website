@@ -9,9 +9,13 @@ Expected location: edutap-website/tools/build_styleguide.py
 
 Run:  uv run python tools/build_styleguide.py [output.html]
 
-Logo files are read from this repository and from the ecc-documentation checkout next
-to it. Fonts and the EU funding-statement pack are downloaded once and cached in the
-system temp directory, so nothing lands in the repository that does not belong there.
+The page is an internal reference: it is written to the repository root, not to
+public/, so the Astro build never picks it up and it stays off edutap.eu.
+
+Logo files are read from public/ in this repository and from the ecc-documentation
+checkout next to it. Fonts and the EU funding-statement pack are downloaded once and
+cached in the system temp directory, so nothing lands in the repository that does not
+belong there.
 """
 
 from __future__ import annotations
@@ -30,11 +34,11 @@ from dataclasses import dataclass, field
 REPO = pathlib.Path(__file__).resolve().parent.parent  # edutap-website
 WORKSPACES = REPO.parent  # the directory holding the eduTAP checkouts
 
-WEBSITE_STATIC = REPO / "static"
+WEBSITE_PUBLIC = REPO / "public"  # Astro's static directory, formerly Gatsby's static/
 ECC_STATIC = WORKSPACES / "ecc-documentation" / "source" / "_static"
 
 CACHE = pathlib.Path(tempfile.gettempdir()) / "edutap-styleguide-assets"
-DEFAULT_OUTPUT = WEBSITE_STATIC / "edutap-styleguide.html"
+DEFAULT_OUTPUT = REPO / "edutap-styleguide.html"
 
 CO_FUNDED_ZIP_URL = (
     "https://ec.europa.eu/regional_policy/sources/information-sources/"
@@ -92,10 +96,11 @@ def sanitise_svg(markup: str) -> str:
     in this project's assets:
 
     * a DOCTYPE pointing at the SVG 1.1 DTD, which the image sandbox cannot fetch;
-    * a bare ampersand — edutap-website/static/logo.svg carries one inside a
-      commented-out @import, and it is enough to fail the whole file.
+    * a bare ampersand, which public/logo.svg carried inside a commented-out @import
+      until it was escaped during the Astro port.
 
-    Both are repaired for the copy embedded here. The source files still need fixing.
+    Both repairs stay in place as a guard: the next hand-edited SVG will hit the same
+    two traps, and a logo that silently fails to render is expensive to notice.
     """
     markup = re.sub(r"<\?xml[^>]*\?>", "", markup)
     markup = re.sub(r"<!DOCTYPE[^>]*>", "", markup, flags=re.IGNORECASE)
@@ -178,11 +183,11 @@ def collect_assets() -> dict[str, str]:
     funding = {token: data_uri(path) for token, path in co_funded_logos().items()}
     return {
         **funding,
-        "edutap_logo": data_uri(WEBSITE_STATIC / "logo.svg"),
-        "edutap_logo_portrait": data_uri(WEBSITE_STATIC / "logo-portarit.svg"),
+        "edutap_logo": data_uri(WEBSITE_PUBLIC / "logo.svg"),
+        "edutap_logo_portrait": data_uri(WEBSITE_PUBLIC / "logo-portarit.svg"),
         "eugloh_logo": data_uri(ECC_STATIC / "eugloh-logo.svg"),
-        "eugloh_logo_white": data_uri(WEBSITE_STATIC / "eugloh-white.webp"),
-        "lmu_logo": data_uri(WEBSITE_STATIC / "lmu-logo.png"),
+        "eugloh_logo_white": data_uri(WEBSITE_PUBLIC / "eugloh-white.webp"),
+        "lmu_logo": data_uri(WEBSITE_PUBLIC / "lmu-logo.svg"),
         "eu_emblem_web": svg_data_uri(european_emblem("#003399", "#FFCC00")),
         "eu_emblem_print": svg_data_uri(european_emblem("#004494", "#FFED00")),
         **fonts,
@@ -306,22 +311,15 @@ def build_systems() -> list[System]:
             {
                 "asset": "edutap_logo",
                 "label": "Horizontal logo",
-                "file": "edutap-website/static/logo.svg",
-                "note": "Wordmark, slogan, reader and card in one lockup — shown exactly as the file draws it.",
+                "file": "edutap-website/public/logo.svg",
+                "note": "Wordmark, slogan, reader and card in one lockup. Used in this page's header.",
                 "background": "light",
-                "flag": (
-                    "Two defects in the source file. The wordmark carries "
-                    "<code>x1=\"210\"</code> where it needs <code>x=\"210\"</code>, so it lands at "
-                    "x=0 and escapes the phone frame. And a bare <code>&amp;</code> in a "
-                    "commented-out @import makes the file invalid XML, so it fails to load as an "
-                    "&lt;img&gt; at all — the copy on this page is repaired for display."
-                ),
             },
             {
                 "asset": "edutap_logo_portrait",
                 "label": "Portrait logo",
-                "file": "edutap-website/static/logo-portarit.svg",
-                "note": "For narrow placements. Renders correctly; used in this page's header.",
+                "file": "edutap-website/public/logo-portarit.svg",
+                "note": "For narrow placements.",
                 "background": "light",
                 "flag": "Filename carries a typo: <em>portarit</em>.",
             },
@@ -388,7 +386,7 @@ def build_systems() -> list[System]:
             {
                 "asset": "eugloh_logo_white",
                 "label": "Reversed logo",
-                "file": "edutap-website/static/eugloh-white.webp",
+                "file": "edutap-website/public/eugloh-white.webp",
                 "note": "White version. Use on the alliance blue or on photography.",
                 "background": "blue",
             },
@@ -476,8 +474,8 @@ def build_systems() -> list[System]:
             {
                 "asset": "lmu_logo",
                 "label": "LMU logo",
-                "file": "edutap-website/static/lmu-logo.png",
-                "note": "The file currently used on the eduTAP website. See the conflicts section.",
+                "file": "edutap-website/public/lmu-logo.svg",
+                "note": "The current mark in LMU-Grün, taken from lmu.de. Vector, so it stays sharp at any size.",
                 "background": "light",
             }
         ],
@@ -752,19 +750,25 @@ def build_systems() -> list[System]:
 
 CONFLICTS = [
     {
-        "title": "The LMU logo file is not in LMU green",
-        "left": ("#00883A", "LMU-Grün, brand guide"),
-        "right": ("#2f854c", "dominant pixel colour of lmu-logo.png"),
+        "title": "LMU has three greens in circulation",
+        "colours": [
+            ("#00883A", "LMU-Grün, current brand guide"),
+            ("#009f56", "eduTAP Wallet pass assets"),
+            ("#2f854c", "the PNG this site used until August 2026"),
+        ],
         "body": (
-            "The PNG the eduTAP website serves is painted in an older green. Anything placed "
-            "next to it in the current LMU-Grün will visibly disagree. Replace the file with a "
-            "current asset from the LMU brand portal rather than recolouring this one."
+            "Only the first is current — it is what the brand guide specifies and what lmu.de "
+            "ships. The website now uses it. The Wallet pass artwork in the shared image folder "
+            "is still cut in the older #009f56 and wants re-exporting; #2f854c came from a "
+            "retired PNG and should not reappear anywhere."
         ),
     },
     {
         "title": "Two European blues, both correct",
-        "left": ("#003399", "emblem, web palette"),
-        "right": ("#004494", "emblem, Erasmus+ print values"),
+        "colours": [
+            ("#003399", "emblem, web palette"),
+            ("#004494", "emblem, Erasmus+ print values"),
+        ],
         "body": (
             "The graphics guide maps Reflex Blue to #003399 for screen; the Erasmus+ guidelines "
             "print #004494 for CMYK work. Choose one per medium and stay in it — an emblem in "
@@ -773,8 +777,10 @@ CONFLICTS = [
     },
     {
         "title": "EUGLOH's logo blue is not EUGLOH's web blue",
-        "left": ("#2b5a9d", "logo file"),
-        "right": ("#115794", "--secondColorDark"),
+        "colours": [
+            ("#2b5a9d", "logo file"),
+            ("#115794", "--secondColorDark"),
+        ],
         "body": (
             "The mark and the website were coloured independently. Keep the logo on its own "
             "value and let the surrounding interface use the web palette."
@@ -782,8 +788,10 @@ CONFLICTS = [
     },
     {
         "title": "The EU's interface blue is not the emblem's blue",
-        "left": ("#003399", "emblem, binding"),
-        "right": ("#0E47CB", "EU Blue 100, Europa Component Library"),
+        "colours": [
+            ("#003399", "emblem, binding"),
+            ("#0E47CB", "EU Blue 100, Europa Component Library"),
+        ],
         "body": (
             "Searching for \"the official EU blue\" turns up both. The Component Library value is "
             "a UI colour for EU digital products; the emblem's is fixed by specification. Never "
@@ -872,7 +880,7 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fo
 /* ---------- hero ---------- */
 
 .hero { padding: clamp(3rem, 9vw, 6rem) 0 clamp(2rem, 5vw, 3.5rem); }
-.hero-logo { width: 168px; height: auto; display: block; margin-bottom: 2.2rem; }
+.hero-logo { width: min(100%, 520px); height: auto; display: block; margin-bottom: 1.5rem; }
 .hero h1 { font-size: clamp(2.4rem, 6vw, 4.1rem); max-width: 22ch; }
 .hero p {
   max-width: 58ch;
@@ -1333,19 +1341,19 @@ def render_system(system: System, assets: dict[str, str]) -> str:
 def render_conflicts() -> str:
     cards = []
     for conflict in CONFLICTS:
-        (left_hex, left_label), (right_hex, right_label) = conflict["left"], conflict["right"]
-        left_text = "#fff" if contrast_ratio(left_hex, "#ffffff") >= contrast_ratio(left_hex, "#000000") else "#000"
-        right_text = "#fff" if contrast_ratio(right_hex, "#ffffff") >= contrast_ratio(right_hex, "#000000") else "#000"
+        panels = []
+        for hex_value, label in conflict["colours"]:
+            on_white = contrast_ratio(hex_value, "#ffffff")
+            text = "#fff" if on_white >= contrast_ratio(hex_value, "#000000") else "#000"
+            panels.append(
+                f'<div style="background:{hex_value};color:{text}">'
+                f"<code>{hex_value.upper()}</code><small>{html.escape(label)}</small></div>"
+            )
         cards.append(
             f"""<article class="conflict">
   <h3>{html.escape(conflict['title'])}</h3>
   <div class="versus">
-    <div style="background:{left_hex};color:{left_text}">
-      <code>{left_hex.upper()}</code><small>{html.escape(left_label)}</small>
-    </div>
-    <div style="background:{right_hex};color:{right_text}">
-      <code>{right_hex.upper()}</code><small>{html.escape(right_label)}</small>
-    </div>
+{"".join(panels)}
   </div>
   <p>{conflict['body']}</p>
 </article>"""
@@ -1357,8 +1365,8 @@ def render_conflicts() -> str:
         <p class="kicker">Watch out</p>
         <h2>Where the values collide</h2>
       </div>
-      <p>Four places where two defensible values sit next to each other. Each one has bitten
-      a slide deck already.</p>
+      <p>Four places where one idea carries more than one defensible value. Each has bitten a
+      slide deck already.</p>
     </div>
     <div class="conflict-grid">
 {chr(10).join(cards)}
@@ -1410,7 +1418,7 @@ def render_page(systems: list[System], assets: dict[str, str]) -> str:
 
 <header class="hero">
   <div class="wrap">
-    <img class="hero-logo" src="{assets['edutap_logo_portrait']}" alt="eduTAP — no app, just tap!">
+    <img class="hero-logo" src="{assets['edutap_logo']}" alt="eduTAP — no app, just tap!">
     <h1>Four identities, one card.</h1>
     <p>eduTAP puts a student card on a phone. Doing that in public means borrowing the visual
     language of the alliance that started it, the university that hosts it, and the programme
