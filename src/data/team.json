@@ -19,31 +19,31 @@
   },
   {
     "name": "Simon Lund",
-    "orgs": ["LMU Munich", "EUGLOH"],
+    "orgs": ["pervios at LMU Munich / EUGLOH"],
     "roles": ["Developer"],
     "image": "../assets/team/simon-lund.jpg"
   },
   {
     "name": "Christine Baumgartner",
-    "orgs": ["HEIDI"],
+    "orgs": ["Project HEIDI", "HELIX-Pass"],
     "roles": ["Project Management HEIDI"],
     "image": "../assets/team/christine-baumgartner.jpg"
   },
   {
     "name": "Jens Klein",
-    "orgs": ["HEIDI"],
+    "orgs": ["Project HEIDI", "HELIX-Pass"],
     "roles": ["Developer"],
     "image": "../assets/team/jens-klein.jpg"
   },
   {
     "name": "Philip Auersperg",
-    "orgs": ["HEIDI"],
+    "orgs": ["Project HEIDI", "HELIX-Pass"],
     "roles": ["Developer"],
     "image": "../assets/team/zworkb-krone.jpg"
   },
   {
     "name": "Robert Niederreiter",
-    "orgs": ["HEIDI"],
+    "orgs": ["Project HEIDI", "HELIX-Pass"],
     "roles": ["Developer"],
     "image": "../assets/team/mock.png"
   }
