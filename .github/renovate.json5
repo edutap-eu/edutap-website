@@ -1,0 +1,76 @@
+// Configuration for the Mend Renovate GitHub App (https://docs.renovatebot.com).
+//
+// The app must be installed for the `edutap-eu` organisation (or at least for
+// this repository) — without it, this file has no effect. Renovate then opens
+// a "Dependency Dashboard" issue listing every pending update, and raises pull
+// requests according to the schedule below. There is no workflow file for this:
+// the hosted app runs Renovate on its own infrastructure.
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+
+  extends: [
+    "config:recommended",
+    // Keep the dashboard issue up to date even when no PR is open, so pending
+    // updates stay visible instead of piling up unnoticed.
+    ":dependencyDashboard",
+    // The repository uses Conventional Commits; Renovate should too.
+    ":semanticCommits",
+    // Security fixes bypass the schedule and are raised immediately.
+    ":enableVulnerabilityAlertsWithLabel(security)",
+  ],
+
+  timezone: "Europe/Berlin",
+
+  // One batched run per week keeps the noise low; the dashboard issue shows
+  // everything that is waiting in between.
+  schedule: ["before 06:00 on monday"],
+
+  labels: ["dependencies"],
+  prConcurrentLimit: 5,
+  prHourlyLimit: 0,
+
+  // Give a freshly published release a few days to be pulled if it is broken.
+  minimumReleaseAge: "3 days",
+
+  // Refresh package-lock.json transitively once a month, so indirect
+  // dependencies do not silently rot between direct-dependency updates.
+  lockFileMaintenance: {
+    enabled: true,
+    schedule: ["before 06:00 on the first monday of the month"],
+  },
+
+  packageRules: [
+    {
+      // Astro and its official integrations are released in lockstep and are
+      // only meaningful to review together.
+      groupName: "Astro",
+      matchPackageNames: ["astro", "@astrojs/**"],
+    },
+    {
+      groupName: "Tailwind CSS",
+      matchPackageNames: ["tailwindcss", "@tailwindcss/**"],
+    },
+    {
+      groupName: "Sentry",
+      matchPackageNames: ["@sentry/**"],
+    },
+    {
+      // Tooling that cannot affect the published site: batch it into a single
+      // PR instead of one per package.
+      groupName: "dev tooling (non-major)",
+      matchDepTypes: ["devDependencies"],
+      matchUpdateTypes: ["minor", "patch"],
+    },
+    {
+      groupName: "GitHub Actions",
+      matchManagers: ["github-actions"],
+    },
+    {
+      // The Node version in `.nvmrc` pins the runtime used locally and in CI.
+      // Only follow the LTS line — see https://endoflife.date/nodejs.
+      matchManagers: ["nvm"],
+      matchPackageNames: ["node"],
+      allowedVersions: "/^(\\d*[02468])$/",
+    },
+  ],
+}

@@ -102,7 +102,27 @@ short: "This is my first blog post" # short description shown on the news index 
 ---
 ```
 
+## Dependency updates
+
+Dependency updates are raised by [Renovate](https://docs.renovatebot.com), configured in
+[`.github/renovate.json5`](.github/renovate.json5). Renovate keeps an open "Dependency Dashboard" issue listing
+every pending update, and opens grouped pull requests once a week (Monday morning, Europe/Berlin). Security
+fixes ignore that schedule and are raised immediately, labelled `security`.
+
+Renovate runs as a hosted GitHub App, not as a workflow in this repository — **the configuration only takes effect
+once the [Mend Renovate app](https://github.com/apps/renovate) is installed for the organisation (or at least for
+this repository)**. Until then, `.github/renovate.json5` is inert.
+
+Updates are grouped so that packages which are only meaningful together end up in one pull request: Astro and its
+integrations, Tailwind CSS, Sentry, all non-major dev tooling, and GitHub Actions. Every pull request runs the same
+test suite as a push to `main`, so a broken update fails before it can be merged. Node in `.nvmrc` is only offered
+even-numbered (LTS) releases — see <https://endoflife.date/nodejs>.
+
 ## Deployment
+
+Every pull request and every push to a branch other than `main` runs the "Test Website" workflow
+(`.github/workflows/ci.yaml`): it type-checks the project (`npm run check`) and runs the test suite (which builds
+the site as part of its `pretest` step).
 
 Pushing to `main` triggers the "Deploy static content to Pages" GitHub Actions workflow
 (`.github/workflows/pages.yaml`), which installs dependencies, runs the test suite (which builds the site as part
