@@ -4,6 +4,7 @@ import Container from "../src/components/Container.astro";
 import Button from "../src/components/ui/Button.astro";
 import Card from "../src/components/ui/Card.astro";
 import Badge from "../src/components/ui/Badge.astro";
+import { variantClass } from "../src/lib/variants";
 
 describe("Container", () => {
   it("applies the lg max width by default", async () => {
@@ -19,6 +20,26 @@ describe("Container", () => {
     });
     expect(html).toContain("max-w-screen-xl");
   });
+
+  // Astro does not enforce prop types at runtime, so an unexpected size is a
+  // plain JS lookup miss - which used to put the literal "undefined" into the
+  // class attribute and drop the max width entirely. "__proto__" is the worse
+  // case: it resolves through the prototype chain to a truthy object, so a
+  // `?? fallback` would not catch it and "[object Object]" would end up in
+  // the markup.
+  it.each(["xl", "__proto__", "toString"])(
+    "falls back to the default width for size=%s",
+    async (size) => {
+      const container = await AstroContainer.create();
+      const html = await container.renderToString(Container, {
+        props: { size },
+      });
+      expect(html).toContain("max-w-screen-2xl");
+      expect(html).not.toContain("undefined");
+      expect(html).not.toContain("[object Object]");
+      expect(html).not.toContain("function");
+    },
+  );
 
   it("renders a custom element via the as prop", async () => {
     const container = await AstroContainer.create();
@@ -246,4 +267,57 @@ describe("Badge", () => {
       "text-foreground [a&amp;]:hover:bg-accent [a&amp;]:hover:text-accent-foreground",
     );
   });
+});
+
+describe("variant lookups", () => {
+  const table = { default: "class-default", other: "class-other" };
+
+  it("returns the entry for a known key", () => {
+    expect(variantClass(table, "other", "default")).toBe("class-other");
+  });
+
+  it("falls back for an unknown key", () => {
+    expect(variantClass(table, "nope", "default")).toBe("class-default");
+  });
+
+  // The reason this helper exists: a plain table[key] resolves these through
+  // the prototype chain and hands back an object or a function, which then
+  // stringifies into a class attribute.
+  it.each(["__proto__", "toString", "constructor", "hasOwnProperty"])(
+    "falls back for the prototype key %s",
+    (key) => {
+      expect(variantClass(table, key, "default")).toBe("class-default");
+    },
+  );
+
+  it("falls back for a non-string key", () => {
+    expect(variantClass(table, undefined, "default")).toBe("class-default");
+    expect(variantClass(table, 0, "default")).toBe("class-default");
+  });
+});
+
+describe("Button and Badge variants", () => {
+  it.each(["__proto__", "nope"])(
+    "keeps Button's markup clean for variant=%s",
+    async (variant) => {
+      const container = await AstroContainer.create();
+      const html = await container.renderToString(Button, {
+        props: { variant, size: variant },
+      });
+      expect(html).not.toContain("[object Object]");
+      expect(html).not.toContain("undefined");
+    },
+  );
+
+  it.each(["__proto__", "nope"])(
+    "keeps Badge's markup clean for variant=%s",
+    async (variant) => {
+      const container = await AstroContainer.create();
+      const html = await container.renderToString(Badge, {
+        props: { variant },
+      });
+      expect(html).not.toContain("[object Object]");
+      expect(html).not.toContain("undefined");
+    },
+  );
 });

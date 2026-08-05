@@ -1,5 +1,6 @@
 ---
 import { cn } from "../../lib/utils";
+import { variantClass } from "../../lib/variants";
 
 interface Props {
   variant?: "default" | "secondary" | "destructive" | "outline";
@@ -22,6 +23,9 @@ const variants = {
 } as const;
 ---
 
-<span data-slot="badge" class={cn(base, variants[variant], className)}>
+<span
+  data-slot="badge"
+  class={cn(base, variantClass(variants, variant, "default"), className)}
+>
   <slot />
 </span>
