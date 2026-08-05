@@ -20,6 +20,18 @@ describe("Container", () => {
     expect(html).toContain("max-w-screen-xl");
   });
 
+  // Astro does not enforce prop types at runtime, so an unexpected size is a
+  // plain JS lookup miss - which used to put the literal "undefined" into the
+  // class attribute and drop the max width entirely.
+  it("falls back to the default width for an unknown size", async () => {
+    const container = await AstroContainer.create();
+    const html = await container.renderToString(Container, {
+      props: { size: "xl" },
+    });
+    expect(html).toContain("max-w-screen-2xl");
+    expect(html).not.toContain("undefined");
+  });
+
   it("renders a custom element via the as prop", async () => {
     const container = await AstroContainer.create();
     const html = await container.renderToString(Container, {

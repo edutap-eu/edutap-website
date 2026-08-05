@@ -24,7 +24,8 @@ see your site update in real-time.
 
 The repository exposes its common workflows through a `Makefile`:
 
-- `make lint` — runs `astro check` (type-checks `.astro` files and content schemas).
+- `make lint` — runs `astro check` (type-checks `.astro` files and content schemas) and
+  `prettier --check .` (verifies formatting).
 - `make reformat` — runs `prettier --write .`.
 - `make test-local` — runs the test suite (`npm run test`).
 - `make build` — builds the production site into `dist/`.

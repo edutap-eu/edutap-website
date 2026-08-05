@@ -22,8 +22,11 @@ const widths = {
 } as const;
 
 // `Astro.props` is not statically typed here (see the note on `Props`), so
-// `size` arrives as `any` and has to be narrowed before it can index `widths`.
-const width = widths[size as Size];
+// `size` arrives as `any`: nothing stops a caller from passing "xl", and the
+// lookup would then yield undefined and render the literal string "undefined"
+// into the class list. Falling back to the default width keeps the container
+// laid out instead of subtly broken.
+const width = widths[size as Size] ?? widths.lg;
 
 // The original container.tsx composed classes with cva, which concatenates
 // rather than resolving conflicts. Container has no variants of its own to
