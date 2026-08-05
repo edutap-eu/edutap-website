@@ -23,7 +23,10 @@ const milestones = (await getCollection("history")).sort(byFileOrder);
     <Timeline>
       {
         milestones.map((entry, index) => (
-          <Milestone milestone={entry.data} side={index % 2 === 0 ? "left" : "right"} />
+          <Milestone
+            milestone={entry.data}
+            side={index % 2 === 0 ? "left" : "right"}
+          />
         ))
       }
     </Timeline>

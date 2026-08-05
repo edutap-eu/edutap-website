@@ -22,12 +22,12 @@ News posts are long-form articles with their own page, listed on the news index.
 1. Create a new Markdown file in `src/data/news-posts/`, for example `src/data/news-posts/my-post.md`.
 2. Add frontmatter with these fields (schema: the `news` collection in `src/content.config.ts`):
 
-   | Field   | Type                    | Notes                                            |
-   | ------- | ----------------------- | ------------------------------------------------- |
-   | `slug`  | `string`, starts with `/` | The post's URL path, e.g. `/my-first-blog-post`. |
-   | `date`  | `string`                 | `YYYY-MM-DD` or `YYYY-MM`.                        |
-   | `title` | `string`                 | Displayed as the page heading; don't repeat it in the body. |
-   | `short` | `string`                 | Short teaser shown on the news index page.        |
+   | Field   | Type                      | Notes                                                       |
+   | ------- | ------------------------- | ----------------------------------------------------------- |
+   | `slug`  | `string`, starts with `/` | The post's URL path, e.g. `/my-first-blog-post`.            |
+   | `date`  | `string`                  | `YYYY-MM-DD` or `YYYY-MM`.                                  |
+   | `title` | `string`                  | Displayed as the page heading; don't repeat it in the body. |
+   | `short` | `string`                  | Short teaser shown on the news index page.                  |
 
    ```yaml
    ---
@@ -49,12 +49,12 @@ Micro news are short items shown on the news index page without a dedicated page
 1. Open `src/data/micro-news.json`.
 2. Add an entry (schema: the `microNews` collection in `src/content.config.ts`):
 
-   | Field         | Type                      | Notes                                              |
-   | ------------- | ------------------------- | --------------------------------------------------- |
-   | `title`       | `string`                  |                                                       |
-   | `description` | `string`                  |                                                       |
-   | `date`        | `string`                  | `YYYY-MM-DD` or `YYYY-MM`.                           |
-   | `url`         | `string` (URL) or `null`  | Optional external link; use `null` if there is none. |
+   | Field         | Type                     | Notes                                                |
+   | ------------- | ------------------------ | ---------------------------------------------------- |
+   | `title`       | `string`                 |                                                      |
+   | `description` | `string`                 |                                                      |
+   | `date`        | `string`                 | `YYYY-MM-DD` or `YYYY-MM`.                           |
+   | `url`         | `string` (URL) or `null` | Optional external link; use `null` if there is none. |
 
    ```json
    {
@@ -87,12 +87,12 @@ Micro news are short items shown on the news index page without a dedicated page
 3. Add an entry to `src/data/presentations.json` (schema: the `presentations` collection in
    `src/content.config.ts`):
 
-   | Field         | Type                                              | Notes                                  |
-   | ------------- | -------------------------------------------------- | --------------------------------------- |
-   | `title`       | `string`                                            |                                          |
-   | `file`        | `string`, ends with `.pdf`                          | Filename only, no path.                 |
-   | `description` | `string`                                            | Optional.                               |
-   | `type`        | `"lightning"` \| `"conference"` \| `"webinar"`      |                                          |
+   | Field         | Type                                           | Notes                   |
+   | ------------- | ---------------------------------------------- | ----------------------- |
+   | `title`       | `string`                                       |                         |
+   | `file`        | `string`, ends with `.pdf`                     | Filename only, no path. |
+   | `description` | `string`                                       | Optional.               |
+   | `type`        | `"lightning"` \| `"conference"` \| `"webinar"` |                         |
 
    ```json
    {
@@ -113,11 +113,11 @@ Micro news are short items shown on the news index page without a dedicated page
 1. Add the portrait image (`.jpg` or `.png`) to `src/assets/team/`.
 2. Add an entry to `src/data/team.json` (schema: the `team` collection in `src/content.config.ts`):
 
-   | Field   | Type                          | Notes                                                |
-   | ------- | ----------------------------- | ------------------------------------------------------ |
-   | `name`  | `string`                       |                                                          |
-   | `orgs`  | `string[]`, at least one entry |                                                          |
-   | `roles` | `string[]`, at least one entry |                                                          |
+   | Field   | Type                           | Notes                                                          |
+   | ------- | ------------------------------ | -------------------------------------------------------------- |
+   | `name`  | `string`                       |                                                                |
+   | `orgs`  | `string[]`, at least one entry |                                                                |
+   | `roles` | `string[]`, at least one entry |                                                                |
    | `image` | `string`                       | Path relative to `src/`, e.g. `../assets/team/your-image.png`. |
 
    ```json
@@ -138,19 +138,19 @@ Milestones make up the roadmap and history timelines and share one schema (`mile
 `src/content.config.ts`). Add upcoming or in-progress milestones to `src/data/roadmap.json`; add already-reached
 milestones to `src/data/history.json`.
 
-| Field               | Type                                         | Notes                                                    |
-| ------------------- | --------------------------------------------- | --------------------------------------------------------- |
-| `title`             | `string`                                       |                                                             |
-| `date`              | `string`                                       | `YYYY-MM-DD` or `YYYY-MM`.                                 |
-| `dateLabel`         | `string`                                       | Optional. Original wording (e.g. `"Summer 2024"`) shown instead of the parsed date when present. |
-| `milestone_type`    | `string` or `null`                             | Defaults to `null` if omitted.                             |
-| `location`          | `string` or `null`                             | Defaults to `null` if omitted.                             |
-| `event_name`        | `string` or `null`                             | Defaults to `null` if omitted.                             |
-| `description`       | `string` or `null`                             | Defaults to `null` if omitted.                             |
-| `status`            | `"reached"` \| `"next"` \| `"future"`          | Required.                                                  |
-| `event_link`        | `string` (URL) or `null`                       | Defaults to `null` if omitted.                             |
-| `presentation_file` | `string` or `null`                             | Filename of a presentation PDF in `public/presentations/`, or `null`. |
-| `video_link`        | `string` (URL) or `null`                       | Defaults to `null` if omitted.                             |
+| Field               | Type                                  | Notes                                                                                            |
+| ------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `title`             | `string`                              |                                                                                                  |
+| `date`              | `string`                              | `YYYY-MM-DD` or `YYYY-MM`.                                                                       |
+| `dateLabel`         | `string`                              | Optional. Original wording (e.g. `"Summer 2024"`) shown instead of the parsed date when present. |
+| `milestone_type`    | `string` or `null`                    | Defaults to `null` if omitted.                                                                   |
+| `location`          | `string` or `null`                    | Defaults to `null` if omitted.                                                                   |
+| `event_name`        | `string` or `null`                    | Defaults to `null` if omitted.                                                                   |
+| `description`       | `string` or `null`                    | Defaults to `null` if omitted.                                                                   |
+| `status`            | `"reached"` \| `"next"` \| `"future"` | Required.                                                                                        |
+| `event_link`        | `string` (URL) or `null`              | Defaults to `null` if omitted.                                                                   |
+| `presentation_file` | `string` or `null`                    | Filename of a presentation PDF in `public/presentations/`, or `null`.                            |
+| `video_link`        | `string` (URL) or `null`              | Defaults to `null` if omitted.                                                                   |
 
 ```json
 {
@@ -175,10 +175,10 @@ Verify: run `npm run dev` and check <http://localhost:4321/roadmap> (for `roadma
 The header and footer navigation are both generated from `src/data/nav.json` (schema: the `nav` collection in
 `src/content.config.ts`).
 
-| Field  | Type     | Notes                                        |
-| ------ | -------- | --------------------------------------------- |
-| `to`   | `string` | The link target, e.g. `/history`.              |
-| `text` | `string` | The link label shown to visitors.              |
+| Field  | Type     | Notes                             |
+| ------ | -------- | --------------------------------- |
+| `to`   | `string` | The link target, e.g. `/history`. |
+| `text` | `string` | The link label shown to visitors. |
 
 ```json
 {

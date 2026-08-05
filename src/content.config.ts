@@ -1,4 +1,8 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+// `import { z } from "astro:content"` is deprecated and slated for removal;
+// Astro re-exports the zod version it validates with as `astro/zod`, so this
+// import stays in step with Astro instead of pinning a second copy of zod.
+import { z } from "astro/zod";
 import { file, glob } from "astro/loaders";
 
 /** Adds a stable, unique id to each entry of a plain JSON array. */
@@ -34,9 +38,9 @@ export const milestoneSchema = z.object({
   event_name: z.string().nullable().default(null),
   description: z.string().nullable().default(null),
   status: z.enum(["reached", "next", "future"]),
-  event_link: z.string().url().nullable().default(null),
+  event_link: z.url().nullable().default(null),
   presentation_file: z.string().nullable().default(null),
-  video_link: z.string().url().nullable().default(null),
+  video_link: z.url().nullable().default(null),
 });
 
 const history = defineCollection({
@@ -81,7 +85,9 @@ export const presentationSchema = z.object({
 });
 
 const presentations = defineCollection({
-  loader: file("src/data/presentations.json", { parser: indexed("presentation") }),
+  loader: file("src/data/presentations.json", {
+    parser: indexed("presentation"),
+  }),
   schema: presentationSchema,
 });
 
@@ -91,7 +97,7 @@ const microNews = defineCollection({
     title: z.string(),
     description: z.string(),
     date: isoDate,
-    url: z.string().url().nullable().default(null),
+    url: z.url().nullable().default(null),
   }),
 });
 
@@ -105,4 +111,12 @@ const news = defineCollection({
   }),
 });
 
-export const collections = { history, roadmap, team, presentations, microNews, news, nav };
+export const collections = {
+  history,
+  roadmap,
+  team,
+  presentations,
+  microNews,
+  news,
+  nav,
+};

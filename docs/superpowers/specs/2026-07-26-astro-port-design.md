@@ -54,15 +54,15 @@ direct link.
 
 These are fixed as part of the port because the affected code is being rewritten anyway:
 
-| Issue | Location | Fix |
-| --- | --- | --- |
-| daisyUI classes `btn`, `btn-sm`, `text-base-content/70` are used, but daisyUI is never registered as a Tailwind plugin — the timeline's Slides/Event/Video links render unstyled | `src/components/milestone.tsx:68,79` | Links get real styling via the new `Button.astro`; daisyUI is dropped |
-| `console.log(milestone)` runs for every milestone in production | `src/components/milestone.tsx:31` | Removed |
-| `useState`/`useEffect` mirror a value that never changes | `src/components/milestone.tsx:32-49` | Replaced by CSS status tokens |
-| Unescaped `&` in a commented-out `@import` makes the file invalid XML; strict SVG renderers fail to parse it | `static/logo.svg:6` | Escaped |
-| Dead files: empty `colors.css`, `favicon-square2.png.png` (doubled extension), `test.svg` | `static/` | Not carried over |
-| `Tabs` component is never imported anywhere | `src/components/ui/tabs.tsx` | Not carried over |
-| The newest entry has a typo in its key — `"type:"` instead of `"type"` — so it matches neither group filter and is invisible on the live presentations page | `src/data/presentations.json:24` | Key corrected; the new schema makes this class of error a build failure |
+| Issue                                                                                                                                                                            | Location                             | Fix                                                                     |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ | ----------------------------------------------------------------------- |
+| daisyUI classes `btn`, `btn-sm`, `text-base-content/70` are used, but daisyUI is never registered as a Tailwind plugin — the timeline's Slides/Event/Video links render unstyled | `src/components/milestone.tsx:68,79` | Links get real styling via the new `Button.astro`; daisyUI is dropped   |
+| `console.log(milestone)` runs for every milestone in production                                                                                                                  | `src/components/milestone.tsx:31`    | Removed                                                                 |
+| `useState`/`useEffect` mirror a value that never changes                                                                                                                         | `src/components/milestone.tsx:32-49` | Replaced by CSS status tokens                                           |
+| Unescaped `&` in a commented-out `@import` makes the file invalid XML; strict SVG renderers fail to parse it                                                                     | `static/logo.svg:6`                  | Escaped                                                                 |
+| Dead files: empty `colors.css`, `favicon-square2.png.png` (doubled extension), `test.svg`                                                                                        | `static/`                            | Not carried over                                                        |
+| `Tabs` component is never imported anywhere                                                                                                                                      | `src/components/ui/tabs.tsx`         | Not carried over                                                        |
+| The newest entry has a typo in its key — `"type:"` instead of `"type"` — so it matches neither group filter and is invisible on the live presentations page                      | `src/data/presentations.json:24`     | Key corrected; the new schema makes this class of error a build failure |
 
 Two further observations, left untouched because they are editorial rather than technical:
 `eduTAP-PloneConf2025.pdf` and `eduTAP-Poster-Charm-EU.pdf` sit in `static/presentations/`
@@ -71,14 +71,14 @@ without being referenced from `presentations.json`, and three team portraits
 
 ## 4. Stack
 
-| Package | Version | Note |
-| --- | --- | --- |
-| `astro` | 7.1.3 | |
-| `tailwindcss` + `@tailwindcss/vite` | 4.3.3 | `@astrojs/tailwind` is deprecated and must not be used |
-| `@astrojs/sitemap` | 3.7.3 | replaces `gatsby-plugin-sitemap` |
-| `@astrojs/mdx` | — | **not used.** Gatsby loaded `gatsby-plugin-mdx`, but the only post is plain `.md`; Astro handles Markdown natively |
-| `@sentry/astro` | 10.68.0 | replaces `@sentry/gatsby`, same DSN |
-| Node | 24 LTS | `.nvmrc` currently reads `lts/*`, which is unpinned and can shift without notice; pin it. Node 24 is supported until 2028-04-30 |
+| Package                             | Version | Note                                                                                                                            |
+| ----------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `astro`                             | 7.1.3   |                                                                                                                                 |
+| `tailwindcss` + `@tailwindcss/vite` | 4.3.3   | `@astrojs/tailwind` is deprecated and must not be used                                                                          |
+| `@astrojs/sitemap`                  | 3.7.3   | replaces `gatsby-plugin-sitemap`                                                                                                |
+| `@astrojs/mdx`                      | —       | **not used.** Gatsby loaded `gatsby-plugin-mdx`, but the only post is plain `.md`; Astro handles Markdown natively              |
+| `@sentry/astro`                     | 10.68.0 | replaces `@sentry/gatsby`, same DSN                                                                                             |
+| Node                                | 24 LTS  | `.nvmrc` currently reads `lts/*`, which is unpinned and can shift without notice; pin it. Node 24 is supported until 2028-04-30 |
 
 React, `react-pdf`, `react-vertical-timeline-component`, `lucide-react`, `daisyui`,
 `class-variance-authority`, and the Radix packages are all removed.
@@ -109,7 +109,10 @@ editing the editorial data, a `parser` callback generates ids on load:
 const history = defineCollection({
   loader: file("src/data/history.json", {
     parser: (raw) =>
-      JSON.parse(raw).map((entry, index) => ({ id: `history-${index}`, ...entry })),
+      JSON.parse(raw).map((entry, index) => ({
+        id: `history-${index}`,
+        ...entry,
+      })),
   }),
   schema: milestoneSchema,
 });
@@ -117,13 +120,13 @@ const history = defineCollection({
 
 ### Collections
 
-| Collection | Source | Notes |
-| --- | --- | --- |
-| `news` | `src/data/news-posts/*.md` via `glob()` | frontmatter: `slug`, `date`, `title`, `short` |
-| `microNews` | `src/data/micro-news.json` | currently `[]`; schema defined so the documented feature works once entries are added |
-| `team` | `src/data/team.json` | `name`, `orgs[]`, `roles[]`, `image` |
-| `presentations` | `src/data/presentations.json` | `title`, `file`, `description`, `type` |
-| `history`, `roadmap` | `src/data/*.json` | share one `milestoneSchema` |
+| Collection           | Source                                  | Notes                                                                                 |
+| -------------------- | --------------------------------------- | ------------------------------------------------------------------------------------- |
+| `news`               | `src/data/news-posts/*.md` via `glob()` | frontmatter: `slug`, `date`, `title`, `short`                                         |
+| `microNews`          | `src/data/micro-news.json`              | currently `[]`; schema defined so the documented feature works once entries are added |
+| `team`               | `src/data/team.json`                    | `name`, `orgs[]`, `roles[]`, `image`                                                  |
+| `presentations`      | `src/data/presentations.json`           | `title`, `file`, `description`, `type`                                                |
+| `history`, `roadmap` | `src/data/*.json`                       | share one `milestoneSchema`                                                           |
 
 ### Milestone date handling
 
@@ -143,11 +146,11 @@ const milestoneSchema = z.object({
 The four roadmap entries are converted conservatively. Rendering prefers `dateLabel` when
 present, so the visible output is unchanged:
 
-| Current value | `date` | `dateLabel` |
-| --- | --- | --- |
-| `"End of 2023"` | `2023-12-31` | `"End of 2023"` |
-| `"Summer 2024"` (twice) | `2024-07-01` | `"Summer 2024"` |
-| `"starting mid 2025"` | `2025-07-01` | `"starting mid 2025"` |
+| Current value           | `date`       | `dateLabel`           |
+| ----------------------- | ------------ | --------------------- |
+| `"End of 2023"`         | `2023-12-31` | `"End of 2023"`       |
+| `"Summer 2024"` (twice) | `2024-07-01` | `"Summer 2024"`       |
+| `"starting mid 2025"`   | `2025-07-01` | `"starting mid 2025"` |
 
 Note that all four roadmap dates are in the past and their `status` values are stale.
 Correcting this is editorial work, deliberately left out of the port.
@@ -181,11 +184,11 @@ thumbnail of the first page. Thumbnails are therefore pre-generated instead:
 line, alternating cards, coloured status dot. Status colours move into `global.css` as
 tokens, which also resolves the existing `TODO: make colors depend on ui theme`:
 
-| Status | Colour |
-| --- | --- |
+| Status    | Colour    |
+| --------- | --------- |
 | `reached` | `#12684A` |
-| `next` | `#3E99C0` |
-| `future` | `#24343D` |
+| `next`    | `#3E99C0` |
+| `future`  | `#24343D` |
 
 ### UI primitives
 
@@ -199,14 +202,14 @@ The current Tailwind tokens in `global.css` are slightly inaccurate oklch approx
 (`--primary` resolves to `#165793` rather than `#115794`); the port sets them to the exact
 values.
 
-| Role | Hex | EUGLOH variable |
-| --- | --- | --- |
+| Role                   | Hex       | EUGLOH variable     |
+| ---------------------- | --------- | ------------------- |
 | Wordmark "edu", wave 1 | `#115794` | `--secondColorDark` |
-| Claim, wave 2 | `#4097BE` | `--secondColor` |
-| Wave 3 | `#F07129` | `--mainColorLight` |
-| Wordmark "TAP", wave 4 | `#D76525` | `--mainColor` |
-| Background | `#F7F7FB` | `--backgroundColor` |
-| Border | `#E3E3EF` | `--borderColor` |
+| Claim, wave 2          | `#4097BE` | `--secondColor`     |
+| Wave 3                 | `#F07129` | `--mainColorLight`  |
+| Wordmark "TAP", wave 4 | `#D76525` | `--mainColor`       |
+| Background             | `#F7F7FB` | `--backgroundColor` |
+| Border                 | `#E3E3EF` | `--borderColor`     |
 
 The eduTAP mark already uses the EUGLOH palette exactly, including background and border.
 Erasmus+ currently uses `#0E3051` as its theme colour — not `#004494`, which is EU web blue.
@@ -245,12 +248,12 @@ No switch to `withastro/action` is needed; `upload-pages-artifact` works unchang
 
 ## 11. Risks
 
-| Risk | Mitigation |
-| --- | --- |
-| CSS timeline does not match the old library pixel-for-pixel | Manual side-by-side review against the running Gatsby build before merging; the timeline is the one component rebuilt from scratch |
-| Thumbnails go stale when someone adds a PDF without running the script | Documented in the README; a test asserts that every PDF has a matching thumbnail, so CI fails loudly |
-| Sentry behaves differently under Astro than under Gatsby | Verify events reach the LMU Sentry instance from a preview build before merging |
-| Astro 7 is recent; integrations may lag | Only three integrations are used, all first-party and current |
+| Risk                                                                   | Mitigation                                                                                                                         |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| CSS timeline does not match the old library pixel-for-pixel            | Manual side-by-side review against the running Gatsby build before merging; the timeline is the one component rebuilt from scratch |
+| Thumbnails go stale when someone adds a PDF without running the script | Documented in the README; a test asserts that every PDF has a matching thumbnail, so CI fails loudly                               |
+| Sentry behaves differently under Astro than under Gatsby               | Verify events reach the LMU Sentry instance from a preview build before merging                                                    |
+| Astro 7 is recent; integrations may lag                                | Only three integrations are used, all first-party and current                                                                      |
 
 ## 12. Definition of done
 

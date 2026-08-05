@@ -1,6 +1,14 @@
 ---
-interface Props {
-  size?: "sm" | "md" | "lg";
+type Size = "sm" | "md" | "lg";
+
+// Exported so TypeScript sees the interface as used: Astro applies it to
+// `Astro.props` implicitly, which the checker cannot follow, and otherwise
+// reports it as declared but never used. `as` stays a plain string - typing
+// it as a union of element names would make `<Tag>` below no longer resolve
+// to a single component for the checker.
+export interface Props {
+  size?: Size;
+  /** The element to render as, e.g. "section" or "footer". */
   as?: string;
   class?: string;
 }
@@ -13,7 +21,9 @@ const widths = {
   lg: "max-w-screen-2xl",
 } as const;
 
-const width = widths[size as "sm" | "md" | "lg"];
+// `Astro.props` is not statically typed here (see the note on `Props`), so
+// `size` arrives as `any` and has to be narrowed before it can index `widths`.
+const width = widths[size as Size];
 
 // The original container.tsx composed classes with cva, which concatenates
 // rather than resolving conflicts. Container has no variants of its own to

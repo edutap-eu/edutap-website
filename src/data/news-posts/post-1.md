@@ -10,5 +10,3 @@ Today, we are excited to announce that we added a blog to our website. We hope y
 ## Types of Posts
 
 The news section will be used for micro news as well as long form blog posts with a dedicated page for each post (like this one).
-
-

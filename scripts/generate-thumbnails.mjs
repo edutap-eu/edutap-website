@@ -14,7 +14,9 @@ const FORCE = process.argv.includes("--force");
 
 mkdirSync(TARGET, { recursive: true });
 
-const pdfs = readdirSync(SOURCE).filter((name) => extname(name).toLowerCase() === ".pdf");
+const pdfs = readdirSync(SOURCE).filter(
+  (name) => extname(name).toLowerCase() === ".pdf",
+);
 
 let created = 0;
 for (const pdf of pdfs) {
@@ -41,7 +43,9 @@ for (const pdf of pdfs) {
       tempStem,
     ]);
 
-    const rendered = readdirSync(TARGET).find((name) => name.startsWith(`${stem}.tmp`));
+    const rendered = readdirSync(TARGET).find((name) =>
+      name.startsWith(`${stem}.tmp`),
+    );
     if (!rendered) {
       throw new Error(`pdftoppm produced no output for ${pdf}`);
     }
@@ -51,7 +55,9 @@ for (const pdf of pdfs) {
     // Clean up the intermediate PNG even if pdftoppm produced no output or
     // cwebp throws, so a failed run doesn't leave a stray *.tmp-1.png behind
     // in a directory that is otherwise only ever committed .webp files.
-    const leftover = readdirSync(TARGET).find((name) => name.startsWith(`${stem}.tmp`));
+    const leftover = readdirSync(TARGET).find((name) =>
+      name.startsWith(`${stem}.tmp`),
+    );
     if (leftover) rmSync(join(TARGET, leftover));
   }
   created += 1;

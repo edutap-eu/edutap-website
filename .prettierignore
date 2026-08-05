@@ -1,0 +1,8 @@
+# Build output and caches.
+dist/
+.astro/
+
+# Generated artefacts, not hand-edited sources: the styleguide is a 1 MB
+# self-contained export produced from `tools/`, the lockfile is npm's.
+edutap-styleguide.html
+package-lock.json

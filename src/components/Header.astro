@@ -7,10 +7,15 @@ import GithubMark from "./GithubMark.astro";
 const pathname = Astro.url.pathname;
 ---
 
-<header class="backdrop-blur-md z-50 sticky top-0 bg-white/80 border-b border-gray-100">
+<header
+  class="backdrop-blur-md z-50 sticky top-0 bg-white/80 border-b border-gray-100"
+>
   <Container class="py-4 transition-all duration-300">
     <div class="flex items-center justify-between">
-      <a href="/" class="font-bold text-2xl transition-all duration-300 text-black">
+      <a
+        href="/"
+        class="font-bold text-2xl transition-all duration-300 text-black"
+      >
         <span class="px-2 mr-1 rounded-sm bg-primary text-white">edu</span>
         <span class="text-accent">TAP</span>
       </a>
