@@ -1,4 +1,6 @@
 ---
+import { variantClass } from "../lib/variants";
+
 type Size = "sm" | "md" | "lg";
 
 // Exported so TypeScript sees the interface as used: Astro applies it to
@@ -22,11 +24,10 @@ const widths = {
 } as const;
 
 // `Astro.props` is not statically typed here (see the note on `Props`), so
-// `size` arrives as `any`: nothing stops a caller from passing "xl", and the
-// lookup would then yield undefined and render the literal string "undefined"
-// into the class list. Falling back to the default width keeps the container
-// laid out instead of subtly broken.
-const width = widths[size as Size] ?? widths.lg;
+// `size` arrives as `any` and nothing stops a caller from passing "xl" - or
+// "__proto__". variantClass() keeps the lookup on the table's own keys and
+// falls back to the default width. See src/lib/variants.ts.
+const width = variantClass(widths, size, "lg");
 
 // The original container.tsx composed classes with cva, which concatenates
 // rather than resolving conflicts. Container has no variants of its own to

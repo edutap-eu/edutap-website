@@ -1,5 +1,6 @@
 ---
 import { cn } from "../../lib/utils";
+import { variantClass } from "../../lib/variants";
 
 interface Props {
   variant?:
@@ -43,7 +44,15 @@ const sizes = {
   icon: "size-9",
 } as const;
 
-const classes = cn(base, variants[variant], sizes[size], className);
+// Looked up through variantClass() rather than directly: props are not
+// type-enforced at runtime, and an unknown or prototype key would otherwise
+// stringify into the class attribute. See src/lib/variants.ts.
+const classes = cn(
+  base,
+  variantClass(variants, variant, "default"),
+  variantClass(sizes, size, "default"),
+  className,
+);
 ---
 
 {
