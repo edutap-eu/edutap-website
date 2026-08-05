@@ -34,9 +34,12 @@
 
   // Refresh package-lock.json transitively once a month, so indirect
   // dependencies do not silently rot between direct-dependency updates.
+  // "on the first monday of the month" is not parseable by Renovate's
+  // schedule syntax and made the whole configuration invalid; the day of the
+  // month is. Verified with `npx --package renovate renovate-config-validator`.
   lockFileMaintenance: {
     enabled: true,
-    schedule: ["before 06:00 on the first monday of the month"],
+    schedule: ["before 06:00 on the first day of the month"],
   },
 
   packageRules: [

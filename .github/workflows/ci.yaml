@@ -12,8 +12,12 @@ on:
 permissions:
   contents: read
 
+# Keyed on the branch, not on `github.ref`: a branch with an open pull request
+# fires both triggers, and `github.ref` differs between them
+# (refs/pull/N/merge vs refs/heads/<branch>), so the two runs would not cancel
+# each other and every push would be built twice.
 concurrency:
-  group: ci-${{ github.ref }}
+  group: ci-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 
 jobs:

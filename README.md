@@ -114,15 +114,18 @@ once the [Mend Renovate app](https://github.com/apps/renovate) is installed for 
 this repository)**. Until then, `.github/renovate.json5` is inert.
 
 Updates are grouped so that packages which are only meaningful together end up in one pull request: Astro and its
-integrations, Tailwind CSS, Sentry, all non-major dev tooling, and GitHub Actions. Every pull request runs the same
-test suite as a push to `main`, so a broken update fails before it can be merged. Node in `.nvmrc` is only offered
-even-numbered (LTS) releases — see <https://endoflife.date/nodejs>.
+integrations, Tailwind CSS, Sentry, all non-major dev tooling, and GitHub Actions. Every pull request is
+type-checked, format-checked and tested by the "Test Website" workflow (see below), so a broken update fails
+before it can be merged. Node in `.nvmrc` is only offered even-numbered (LTS) releases —
+see <https://endoflife.date/nodejs>.
 
 ## Deployment
 
 Every pull request and every push to a branch other than `main` runs the "Test Website" workflow
-(`.github/workflows/ci.yaml`): it type-checks the project (`npm run check`) and runs the test suite (which builds
-the site as part of its `pretest` step).
+(`.github/workflows/ci.yaml`): it type-checks the project (`npm run check`), verifies formatting
+(`npm run format:check`) and runs the test suite (which builds the site as part of its `pretest` step). The deploy
+workflow below runs the tests but not those two checks, since a change reaching `main` has already passed them
+here.
 
 Pushing to `main` triggers the "Deploy static content to Pages" GitHub Actions workflow
 (`.github/workflows/pages.yaml`), which installs dependencies, runs the test suite (which builds the site as part
