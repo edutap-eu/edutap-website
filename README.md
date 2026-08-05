@@ -125,9 +125,9 @@ see <https://endoflife.date/nodejs>.
 Every pull request and every push to a branch other than `main` runs the "Test Website" workflow
 (`.github/workflows/ci.yaml`): it type-checks the project (`npm run check`), verifies formatting
 (`npm run format:check`) and runs the test suite (which builds the site as part of its `pretest` step). The deploy
-workflow below runs the tests but not those two checks, since a change reaching `main` has already passed them
-here.
+workflow below runs the same three, so a direct push to `main` is held to the same standard.
 
 Pushing to `main` triggers the "Deploy static content to Pages" GitHub Actions workflow
-(`.github/workflows/pages.yaml`), which installs dependencies, runs the test suite (which builds the site as part
-of its `pretest` step), and publishes `dist/` to GitHub Pages.
+(`.github/workflows/pages.yaml`), which runs the same checks as CI — type check, format check and the test suite,
+which builds the site as part of its `pretest` step — and then publishes `dist/` to GitHub Pages. It repeats the
+checks rather than trusting the pull request, because `main` can also be pushed to directly.

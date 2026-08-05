@@ -28,14 +28,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: 24
+          # Follows .nvmrc rather than repeating the version here, where it
+          # would silently drift once .nvmrc is bumped.
+          node-version-file: ".nvmrc"
           cache: npm
       - name: Install dependencies
         run: npm ci
+      - name: Type-check content and components
+        run: npm run check
+      - name: Check formatting
+        run: npm run format:check
       - name: Run tests
         run: npm run test
       - name: Upload artifact
