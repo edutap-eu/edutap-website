@@ -1,0 +1,42 @@
+name: Test Website
+
+# The Pages workflow only runs on pushes to `main`, i.e. after a merge. This
+# workflow gives every pull request — including the ones Renovate opens for
+# dependency updates — the same check beforehand.
+on:
+  pull_request:
+  push:
+    branches-ignore: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Keyed on the branch, not on `github.ref`: a branch with an open pull request
+# fires both triggers, and `github.ref` differs between them
+# (refs/pull/N/merge vs refs/heads/<branch>), so the two runs would not cancel
+# each other and every push would be built twice.
+concurrency:
+  group: ci-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Type-check content and components
+        run: npm run check
+      - name: Check formatting
+        run: npm run format:check
+      - name: Run tests
+        # `pretest` builds the site, so a broken build fails here too.
+        run: npm run test
