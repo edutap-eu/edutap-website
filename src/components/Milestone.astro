@@ -101,18 +101,31 @@ const hasMeta = Boolean(event_name || location);
     </div>
 
     {milestone_type && <span class="text-black/70">{milestone_type}</span>}
-    <h2 class="mt-0 mb-4 text-base font-normal md:text-3xl" style="color:#303e49">
+    <h2
+      class="mt-0 mb-4 text-base font-normal md:text-3xl"
+      style="color:#303e49"
+    >
       {title}
     </h2>
     {description && <p class="mt-5 text-xl font-light">{description}</p>}
 
-    {(hasLinks || hasMeta) && <div class="mt-4 mb-3 border-t border-border-subtle" />}
+    {
+      (hasLinks || hasMeta) && (
+        <div class="mt-4 mb-3 border-t border-border-subtle" />
+      )
+    }
 
     {
       hasLinks && (
         <div class="flex flex-wrap gap-2 py-3">
           {event_link && (
-            <Button variant="outline" size="sm" href={event_link} target="_blank" rel="noreferrer">
+            <Button
+              variant="outline"
+              size="sm"
+              href={event_link}
+              target="_blank"
+              rel="noreferrer"
+            >
               Event-Website
             </Button>
           )}
@@ -128,7 +141,13 @@ const hasMeta = Boolean(event_name || location);
             </Button>
           )}
           {video_link && (
-            <Button variant="outline" size="sm" href={video_link} target="_blank" rel="noreferrer">
+            <Button
+              variant="outline"
+              size="sm"
+              href={video_link}
+              target="_blank"
+              rel="noreferrer"
+            >
               YouTube-Video
             </Button>
           )}

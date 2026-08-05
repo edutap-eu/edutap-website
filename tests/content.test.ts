@@ -38,7 +38,9 @@ describe("content collections", () => {
     // Assert a known value, not just "is a Date" — a schema that silently
     // coerces prose would pass the type check while inventing the value.
     const history = await getCollection("history");
-    const first = history.find((entry) => entry.data.title === "First Involvement");
+    const first = history.find(
+      (entry) => entry.data.title === "First Involvement",
+    );
     expect(first?.data.date.toISOString().slice(0, 10)).toBe("2020-07-01");
   });
 

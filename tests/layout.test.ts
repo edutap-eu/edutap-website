@@ -8,7 +8,13 @@ describe("NavLinks", () => {
     const html = await container.renderToString(NavLinks, {
       props: { pathname: "/" },
     });
-    for (const label of ["Overview", "News", "History", "Presentations", "About"]) {
+    for (const label of [
+      "Overview",
+      "News",
+      "History",
+      "Presentations",
+      "About",
+    ]) {
       expect(html).toContain(label);
     }
   });

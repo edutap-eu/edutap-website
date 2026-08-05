@@ -10,7 +10,10 @@ describe("presentation thumbnails", () => {
     expect(pdfs.length).toBeGreaterThan(0);
 
     const missing = pdfs.filter(
-      (pdf) => !existsSync(`public/presentations/thumbs/${basename(pdf, ".pdf")}.webp`),
+      (pdf) =>
+        !existsSync(
+          `public/presentations/thumbs/${basename(pdf, ".pdf")}.webp`,
+        ),
     );
     expect(missing).toEqual([]);
   });

@@ -20,17 +20,17 @@ Every task's requirements implicitly include this section.
 - **Language is English.** All site copy, documentation, and commit messages.
 - **Exact brand colours.** These values are authoritative and must be used literally:
 
-  | Token | Hex |
-  | --- | --- |
-  | `--color-primary` | `#115794` |
-  | `--color-secondary` | `#4097BE` |
-  | `--color-accent` | `#D76525` |
-  | `--color-accent-light` | `#F07129` |
-  | `--color-surface` | `#F7F7FB` |
-  | `--color-border-subtle` | `#E3E3EF` |
+  | Token                    | Hex       |
+  | ------------------------ | --------- |
+  | `--color-primary`        | `#115794` |
+  | `--color-secondary`      | `#4097BE` |
+  | `--color-accent`         | `#D76525` |
+  | `--color-accent-light`   | `#F07129` |
+  | `--color-surface`        | `#F7F7FB` |
+  | `--color-border-subtle`  | `#E3E3EF` |
   | `--color-status-reached` | `#12684A` |
-  | `--color-status-next` | `#3E99C0` |
-  | `--color-status-future` | `#24343D` |
+  | `--color-status-next`    | `#3E99C0` |
+  | `--color-status-future`  | `#24343D` |
 
 - **Commit after every task** using Conventional Commits. Never `git push` — the project owner does that.
 - **Work on branch `feature/astro-port`.** It already exists and holds the spec.
@@ -49,25 +49,25 @@ They are replaced by `astro-icon` with `@iconify-json/lucide`, which inlines the
 
 **Created:**
 
-| Path | Responsibility |
-| --- | --- |
-| `astro.config.mjs` | Integrations, site URL, Vite plugins |
-| `src/content.config.ts` | All five collections and their Zod schemas |
-| `src/layouts/BaseLayout.astro` | `<html>` shell, `<head>` metadata, header, footer |
-| `src/components/Container.astro` | Width-constrained wrapper (replaces the `cva` container) |
-| `src/components/ui/Button.astro` | Link/button styling primitive |
-| `src/components/ui/Card.astro`, `Badge.astro`, `Separator.astro` | Markup primitives |
-| `src/components/Header.astro`, `NavLinks.astro` | Site header and navigation |
-| `src/components/Footer.astro`, `FooterNavColumn.astro` | Site footer |
-| `src/components/Timeline.astro`, `Milestone.astro` | CSS timeline replacing the React library |
-| `src/components/Presentation.astro` | Presentation card with static thumbnail |
-| `src/components/NewsItem.astro` | News list entry |
-| `src/components/landing/*.astro` | Six homepage sections |
-| `src/pages/*.astro` | Nine routes plus 404 |
-| `src/lib/team-images.ts` | Maps `team.json` image paths to imported assets |
-| `scripts/generate-thumbnails.mjs` | PDF first page → WebP |
-| `tests/*.test.ts` | Route, content, metadata, link and thumbnail tests |
-| `Makefile` | `lint`, `reformat`, `test-local` |
+| Path                                                             | Responsibility                                           |
+| ---------------------------------------------------------------- | -------------------------------------------------------- |
+| `astro.config.mjs`                                               | Integrations, site URL, Vite plugins                     |
+| `src/content.config.ts`                                          | All five collections and their Zod schemas               |
+| `src/layouts/BaseLayout.astro`                                   | `<html>` shell, `<head>` metadata, header, footer        |
+| `src/components/Container.astro`                                 | Width-constrained wrapper (replaces the `cva` container) |
+| `src/components/ui/Button.astro`                                 | Link/button styling primitive                            |
+| `src/components/ui/Card.astro`, `Badge.astro`, `Separator.astro` | Markup primitives                                        |
+| `src/components/Header.astro`, `NavLinks.astro`                  | Site header and navigation                               |
+| `src/components/Footer.astro`, `FooterNavColumn.astro`           | Site footer                                              |
+| `src/components/Timeline.astro`, `Milestone.astro`               | CSS timeline replacing the React library                 |
+| `src/components/Presentation.astro`                              | Presentation card with static thumbnail                  |
+| `src/components/NewsItem.astro`                                  | News list entry                                          |
+| `src/components/landing/*.astro`                                 | Six homepage sections                                    |
+| `src/pages/*.astro`                                              | Nine routes plus 404                                     |
+| `src/lib/team-images.ts`                                         | Maps `team.json` image paths to imported assets          |
+| `scripts/generate-thumbnails.mjs`                                | PDF first page → WebP                                    |
+| `tests/*.test.ts`                                                | Route, content, metadata, link and thumbnail tests       |
+| `Makefile`                                                       | `lint`, `reformat`, `test-local`                         |
 
 **Deleted at the end (Task 13):** everything Gatsby — `gatsby-*.ts`, all `.tsx` files, `src/images/`, `static/`, `sentry.config.ts`, and the Gatsby dependencies.
 
@@ -356,7 +356,9 @@ describe("content collections", () => {
     // Assert a known value, not just "is a Date" — a schema that silently
     // coerces prose would pass the type check while inventing the value.
     const history = await getCollection("history");
-    const first = history.find((entry) => entry.data.title === "First Involvement");
+    const first = history.find(
+      (entry) => entry.data.title === "First Involvement",
+    );
     expect(first?.data.date.toISOString().slice(0, 10)).toBe("2020-07-01");
   });
 
@@ -451,7 +453,9 @@ const team = defineCollection({
 });
 
 const presentations = defineCollection({
-  loader: file("src/data/presentations.json", { parser: indexed("presentation") }),
+  loader: file("src/data/presentations.json", {
+    parser: indexed("presentation"),
+  }),
   schema: z.object({
     title: z.string(),
     file: z.string().endsWith(".pdf"),
@@ -480,7 +484,14 @@ const news = defineCollection({
   }),
 });
 
-export const collections = { history, roadmap, team, presentations, microNews, news };
+export const collections = {
+  history,
+  roadmap,
+  team,
+  presentations,
+  microNews,
+  news,
+};
 ```
 
 Two notes on the data this schema meets:
@@ -691,13 +702,17 @@ describe("Container", () => {
 
   it("honours the size prop", async () => {
     const container = await AstroContainer.create();
-    const html = await container.renderToString(Container, { props: { size: "md" } });
+    const html = await container.renderToString(Container, {
+      props: { size: "md" },
+    });
     expect(html).toContain("max-w-screen-xl");
   });
 
   it("renders a custom element via the as prop", async () => {
     const container = await AstroContainer.create();
-    const html = await container.renderToString(Container, { props: { as: "section" } });
+    const html = await container.renderToString(Container, {
+      props: { as: "section" },
+    });
     expect(html).toContain("<section");
   });
 });
@@ -732,22 +747,22 @@ tokens already there. Take every value from `git show c6611e2:src/styles/global.
 except `primary`, `secondary` and `accent`, which take the exact brand hex:
 
 ```css
-  --color-background: oklch(1 0 0);
-  --color-foreground: oklch(0.145 0 0);
-  --color-card: oklch(1 0 0);
-  --color-card-foreground: oklch(0.145 0 0);
-  --color-popover: oklch(1 0 0);
-  --color-popover-foreground: oklch(0.145 0 0);
-  --color-primary-foreground: oklch(0.985 0 0);
-  --color-secondary-foreground: oklch(0.205 0 0);
-  --color-muted: oklch(0.97 0 0);
-  --color-muted-foreground: oklch(0.556 0 0);
-  --color-accent-foreground: oklch(0.985 0 0);
-  --color-destructive: oklch(62.19% 0.2046 30.28);
-  --color-border: oklch(0.922 0 0);
-  --color-input: oklch(0.922 0 0);
-  --color-ring: oklch(0.708 0 0);
-  --radius: 0.625rem;
+--color-background: oklch(1 0 0);
+--color-foreground: oklch(0.145 0 0);
+--color-card: oklch(1 0 0);
+--color-card-foreground: oklch(0.145 0 0);
+--color-popover: oklch(1 0 0);
+--color-popover-foreground: oklch(0.145 0 0);
+--color-primary-foreground: oklch(0.985 0 0);
+--color-secondary-foreground: oklch(0.205 0 0);
+--color-muted: oklch(0.97 0 0);
+--color-muted-foreground: oklch(0.556 0 0);
+--color-accent-foreground: oklch(0.985 0 0);
+--color-destructive: oklch(62.19% 0.2046 30.28);
+--color-border: oklch(0.922 0 0);
+--color-input: oklch(0.922 0 0);
+--color-ring: oklch(0.708 0 0);
+--radius: 0.625rem;
 ```
 
 `--color-primary`, `--color-secondary` and `--color-accent` already hold the exact hex
@@ -758,9 +773,9 @@ Tailwind 4 also removed the `max-w-screen-*` utilities the original Container re
 add:
 
 ```css
-  --container-screen-lg: 1024px;
-  --container-screen-xl: 1280px;
-  --container-screen-2xl: 1400px;
+--container-screen-lg: 1024px;
+--container-screen-xl: 1280px;
+--container-screen-2xl: 1400px;
 ```
 
 The 1400px value for `2xl` matches the `TODO` comment in the pre-port `global.css`.
@@ -777,13 +792,13 @@ wrong — fix it before writing components against it.
 Read each source file and reproduce its class strings character-for-character. Only the
 component mechanics change, never the classes.
 
-| Source | Target | Mechanical changes |
-| --- | --- | --- |
-| `src/components/container.tsx` | `Container.astro` | `cva` variants become a lookup object; `as` prop stays |
-| `src/components/ui/button.tsx` | `Button.astro` | `asChild` disappears — renders `<a>` when `href` is passed, else `<button>`. Keep all six variants and five sizes. |
-| `src/components/ui/card.tsx` | `Card.astro` | The seven exported sub-components become named slots (`title`, `description`, `action`, `footer`) plus the default slot |
-| `src/components/ui/badge.tsx` | `Badge.astro` | Variants preserved |
-| `src/components/ui/separator.tsx` | `Separator.astro` | Radix primitive becomes a plain `div` with `role="separator"` |
+| Source                            | Target            | Mechanical changes                                                                                                      |
+| --------------------------------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `src/components/container.tsx`    | `Container.astro` | `cva` variants become a lookup object; `as` prop stays                                                                  |
+| `src/components/ui/button.tsx`    | `Button.astro`    | `asChild` disappears — renders `<a>` when `href` is passed, else `<button>`. Keep all six variants and five sizes.      |
+| `src/components/ui/card.tsx`      | `Card.astro`      | The seven exported sub-components become named slots (`title`, `description`, `action`, `footer`) plus the default slot |
+| `src/components/ui/badge.tsx`     | `Badge.astro`     | Variants preserved                                                                                                      |
+| `src/components/ui/separator.tsx` | `Separator.astro` | Radix primitive becomes a plain `div` with `role="separator"`                                                           |
 
 Preserve the `data-slot` attributes — they are referenced by sibling selectors such as
 `has-[data-slot=card-action]`.
@@ -829,7 +844,13 @@ describe("NavLinks", () => {
     const html = await container.renderToString(NavLinks, {
       props: { pathname: "/" },
     });
-    for (const label of ["Overview", "News", "History", "Presentations", "About"]) {
+    for (const label of [
+      "Overview",
+      "News",
+      "History",
+      "Presentations",
+      "About",
+    ]) {
       expect(html).toContain(label);
     }
   });
@@ -862,11 +883,13 @@ interface Props {
 }
 
 const { pathname } = Astro.props;
-const normalise = (path: string) => (path !== "/" ? path.replace(/\/$/, "") : path);
+const normalise = (path: string) =>
+  path !== "/" ? path.replace(/\/$/, "") : path;
 const current = normalise(pathname);
 
 const base = "font-medium hover:text-primary transition-colors text-black/70";
-const active = "text-primary font-bold underline decoration-2 underline-offset-6";
+const active =
+  "text-primary font-bold underline decoration-2 underline-offset-6";
 ---
 
 <nav class="items-center space-x-6">
@@ -919,10 +942,15 @@ import GithubMark from "./GithubMark.astro";
 const pathname = Astro.url.pathname;
 ---
 
-<header class="backdrop-blur-md z-50 sticky top-0 bg-white/80 border-b border-gray-100">
+<header
+  class="backdrop-blur-md z-50 sticky top-0 bg-white/80 border-b border-gray-100"
+>
   <Container class="py-4 transition-all duration-300">
     <div class="flex items-center justify-between">
-      <a href="/" class="font-bold text-2xl transition-all duration-300 text-black">
+      <a
+        href="/"
+        class="font-bold text-2xl transition-all duration-300 text-black"
+      >
         <span class="px-2 mr-1 rounded-sm bg-primary text-white">edu</span>
         <span class="text-accent">TAP</span>
       </a>
@@ -1080,15 +1108,15 @@ Six presentational sections, all static. This is mechanical JSX-to-Astro convers
 
 **Conversion rules** — apply to every component in this task:
 
-| Gatsby / React | Astro |
-| --- | --- |
-| `className=` | `class=` |
-| `<Link to="/x">` | `<a href="/x">` |
-| `{cond && <X/>}` | same, works in `.astro` |
-| `<XIcon className="c"/>` from lucide | `<Icon name="lucide:x" class="c"/>` from `astro-icon/components` |
-| `useStaticQuery(graphql…)` | `await getCollection("…")` in the frontmatter |
-| `<Card><CardHeader><CardTitle>T</CardTitle></CardHeader><CardContent>C</CardContent></Card>` | `<Card><span slot="title">T</span>C</Card>` |
-| `key={index}` on mapped elements | drop it — Astro needs no keys |
+| Gatsby / React                                                                               | Astro                                                            |
+| -------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `className=`                                                                                 | `class=`                                                         |
+| `<Link to="/x">`                                                                             | `<a href="/x">`                                                  |
+| `{cond && <X/>}`                                                                             | same, works in `.astro`                                          |
+| `<XIcon className="c"/>` from lucide                                                         | `<Icon name="lucide:x" class="c"/>` from `astro-icon/components` |
+| `useStaticQuery(graphql…)`                                                                   | `await getCollection("…")` in the frontmatter                    |
+| `<Card><CardHeader><CardTitle>T</CardTitle></CardHeader><CardContent>C</CardContent></Card>` | `<Card><span slot="title">T</span>C</Card>`                      |
+| `key={index}` on mapped elements                                                             | drop it — Astro needs no keys                                    |
 
 - [ ] **Step 1: Write the failing test**
 
@@ -1134,7 +1162,9 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
  */
 export function resolveTeamImage(path: string): ImageMetadata {
   const filename = path.split("/").pop();
-  const match = Object.entries(images).find(([key]) => key.endsWith(`/${filename}`));
+  const match = Object.entries(images).find(([key]) =>
+    key.endsWith(`/${filename}`),
+  );
   if (!match) {
     throw new Error(
       `team.json references "${path}", but no such image exists in src/assets/team/`,
@@ -1172,14 +1202,17 @@ Convert each file under `src/components/landing/` using the rules table above. S
 - `call-to-action.tsx` (45 lines) — the `isHovering` state at line 7 is **dropped**. It swapped the GitHub mark between its white and dark variant so the logo stayed legible when `hover:bg-white` inverted the button. Reproduce that in CSS by rendering both marks and toggling them with a `group` hover:
 
   ```astro
-  <a href="https://github.com/edutap-eu" class="group inline-flex items-center px-8 py-4 rounded border-2 border-white hover:bg-white hover:text-black">
+  <a
+    href="https://github.com/edutap-eu"
+    class="group inline-flex items-center px-8 py-4 rounded border-2 border-white hover:bg-white hover:text-black"
+  >
     <GithubMark class="mr-3 h-5 w-5 group-hover:hidden" inverted />
     <GithubMark class="mr-3 h-5 w-5 hidden group-hover:inline-block" />
     <span class="font-bold">Contribute on GitHub / eduTAP-eu</span>
   </a>
   ```
 
-  This also fixes a bug in the original: both links shared one state, so hovering either one turned *both* marks dark — leaving the un-hovered button's logo black on black, effectively invisible. Scoping the hover to each link with `group` makes them independent. Note the fix in the commit message.
+  This also fixes a bug in the original: both links shared one state, so hovering either one turned _both_ marks dark — leaving the un-hovered button's logo black on black, effectively invisible. Scoping the hover to each link with `group` makes them independent. Note the fix in the commit message.
 
 - [ ] **Step 5: Write `src/pages/index.astro`**
 
@@ -1384,7 +1417,11 @@ const hasMeta = Boolean(event_name || location);
     {status === "reached" && <span class="text-2xl leading-none">✓</span>}
   </div>
 
-  <div class={side === "left" ? "md:col-start-1 md:text-right" : "md:col-start-2 md:row-start-1"}>
+  <div
+    class={side === "left"
+      ? "md:col-start-1 md:text-right"
+      : "md:col-start-2 md:row-start-1"}
+  >
     <div
       class="rounded-lg bg-white p-6 shadow-sm text-left"
       style={`border:2px solid ${statusColour}`}
@@ -1393,13 +1430,23 @@ const hasMeta = Boolean(event_name || location);
       <h2 class="mb-4 text-2xl font-bold md:text-3xl">{title}</h2>
       {description && <p class="text-xl font-light">{description}</p>}
 
-      {(hasLinks || hasMeta) && <div class="mt-4 mb-3 border-t border-border-subtle"></div>}
+      {
+        (hasLinks || hasMeta) && (
+          <div class="mt-4 mb-3 border-t border-border-subtle" />
+        )
+      }
 
       {
         hasLinks && (
           <div class="flex flex-wrap gap-2 py-3">
             {event_link && (
-              <Button variant="outline" size="sm" href={event_link} target="_blank" rel="noreferrer">
+              <Button
+                variant="outline"
+                size="sm"
+                href={event_link}
+                target="_blank"
+                rel="noreferrer"
+              >
                 Event-Website
               </Button>
             )}
@@ -1415,7 +1462,13 @@ const hasMeta = Boolean(event_name || location);
               </Button>
             )}
             {video_link && (
-              <Button variant="outline" size="sm" href={video_link} target="_blank" rel="noreferrer">
+              <Button
+                variant="outline"
+                size="sm"
+                href={video_link}
+                target="_blank"
+                rel="noreferrer"
+              >
                 YouTube-Video
               </Button>
             )}
@@ -1468,7 +1521,10 @@ const milestones = (await getCollection("history")).sort(
     <Timeline>
       {
         milestones.map((entry, index) => (
-          <Milestone milestone={entry.data} side={index % 2 === 0 ? "left" : "right"} />
+          <Milestone
+            milestone={entry.data}
+            side={index % 2 === 0 ? "left" : "right"}
+          />
         ))
       }
     </Timeline>
@@ -1535,7 +1591,10 @@ describe("presentation thumbnails", () => {
     expect(pdfs.length).toBeGreaterThan(0);
 
     const missing = pdfs.filter(
-      (pdf) => !existsSync(`public/presentations/thumbs/${basename(pdf, ".pdf")}.webp`),
+      (pdf) =>
+        !existsSync(
+          `public/presentations/thumbs/${basename(pdf, ".pdf")}.webp`,
+        ),
     );
     expect(missing).toEqual([]);
   });
@@ -1579,9 +1638,19 @@ for (const pdf of pdfs) {
   // pdftoppm appends "-1" for the page number, so render to a temp stem first.
   const tempStem = join(TARGET, `${stem}.tmp`);
   execFileSync("pdftoppm", [
-    "-png", "-r", "96", "-f", "1", "-l", "1",
-    "-scale-to-x", String(WIDTH), "-scale-to-y", "-1",
-    join(SOURCE, pdf), tempStem,
+    "-png",
+    "-r",
+    "96",
+    "-f",
+    "1",
+    "-l",
+    "1",
+    "-scale-to-x",
+    String(WIDTH),
+    "-scale-to-y",
+    "-1",
+    join(SOURCE, pdf),
+    tempStem,
   ]);
 
   const rendered = readdirSync(TARGET).find((name) =>
@@ -1604,7 +1673,7 @@ If `cwebp` is unavailable, `sharp` is already a dependency and can replace that 
 - [ ] **Step 5: Generate the thumbnails and verify the test passes**
 
 Run: `npm run thumbnails && npm run test -- tests/thumbnails.test.ts`
-Expected: `35 thumbnail(s) created, 35 PDF(s) total.` then PASS. Spot-check three WebP files visually — a blank or black thumbnail means the PDF's first page is a cover that needs no special handling, but a *broken* render must be investigated.
+Expected: `35 thumbnail(s) created, 35 PDF(s) total.` then PASS. Spot-check three WebP files visually — a blank or black thumbnail means the PDF's first page is a cover that needs no special handling, but a _broken_ render must be investigated.
 
 - [ ] **Step 6: Write `Presentation.astro`**
 
@@ -1644,7 +1713,11 @@ const thumbPath = `/presentations/thumbs/${file.replace(/\.pdf$/i, ".webp")}`;
 
   <div class="flex flex-col flex-grow p-4">
     <h3 class="text-xl font-semibold mb-2 line-clamp-2">{title}</h3>
-    {description && <p class="text-gray-600 flex-grow line-clamp-3">{description}</p>}
+    {
+      description && (
+        <p class="text-gray-600 flex-grow line-clamp-3">{description}</p>
+      )
+    }
   </div>
 </a>
 ```
@@ -1654,7 +1727,7 @@ const thumbPath = `/presentations/thumbs/${file.replace(/\.pdf$/i, ".webp")}`;
 Ports `src/pages/presentations.tsx` including both groups: "Lightning Talks" filters `type === "lightning"`, "Conference & Webinar Talks" filters `type === "conference" || type === "webinar"`. Copy the heading and grid classes verbatim from lines 30–66.
 
 **Sort explicitly — do not rely on load order.** `getCollection` returns entries sorted by
-`id` as a *string*, not in JSON file order. The ids generated by `indexed()` are
+`id` as a _string_, not in JSON file order. The ids generated by `indexed()` are
 `presentation-0` … `presentation-32`, so a string sort yields `-0, -1, -10, -11, …, -2, -20`,
 scrambling all 33 cards. Task 7 hit this on the history timeline. Sort by the numeric suffix
 to restore the file order the editors maintain:
@@ -1819,7 +1892,9 @@ const items = [
       ) : (
         <div class="py-12 text-center">
           <h3 class="text-lg font-medium text-gray-500 mb-2">No news yet</h3>
-          <p class="text-gray-400">Check back later for updates on the eduTAP project.</p>
+          <p class="text-gray-400">
+            Check back later for updates on the eduTAP project.
+          </p>
         </div>
       )
     }
@@ -1991,7 +2066,7 @@ describe("routes", () => {
 
 - [ ] **Step 2: Write the collection ordering test**
 
-`getCollection` sorts by `id` as a *string*, not in JSON file order. This bit the history
+`getCollection` sorts by `id` as a _string_, not in JSON file order. This bit the history
 timeline in Task 7, and with 33 presentations a string sort yields `-0, -1, -10, -11, …, -2`.
 Both pages now sort by the numeric id suffix; this test stops that regressing, and pins the
 id format the sort depends on.
@@ -2015,7 +2090,9 @@ describe("collection ordering", () => {
         expect(entry.id).toMatch(/^[a-z-]+-\d+$/);
       }
       const suffixes = entries.map((e) => Number(e.id.split("-").pop()));
-      expect([...suffixes].sort((a, b) => a - b)).toEqual([...new Set(suffixes)].sort((a, b) => a - b));
+      expect([...suffixes].sort((a, b) => a - b)).toEqual(
+        [...new Set(suffixes)].sort((a, b) => a - b),
+      );
     },
   );
 
@@ -2111,19 +2188,19 @@ git commit -m "test: add route, metadata and internal link coverage"
 Three changes to `.github/workflows/pages.yaml`: pin Node, run tests before building, and upload `dist` instead of `public`.
 
 ```yaml
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: npm
-      - name: Install dependencies
-        run: npm ci
-      - name: Run tests
-        run: npm run build && npm run test
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: "dist"
+- name: Setup Node
+  uses: actions/setup-node@v4
+  with:
+    node-version: 24
+    cache: npm
+- name: Install dependencies
+  run: npm ci
+- name: Run tests
+  run: npm run build && npm run test
+- name: Upload artifact
+  uses: actions/upload-pages-artifact@v3
+  with:
+    path: "dist"
 ```
 
 Leave the trigger, permissions, concurrency and `deploy-pages` steps untouched.

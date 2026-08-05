@@ -10,7 +10,9 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
  */
 export function resolveTeamImage(path: string): ImageMetadata {
   const filename = path.split("/").pop();
-  const match = Object.entries(images).find(([key]) => key.endsWith(`/${filename}`));
+  const match = Object.entries(images).find(([key]) =>
+    key.endsWith(`/${filename}`),
+  );
   if (!match) {
     throw new Error(
       `team.json references "${path}", but no such image exists in src/assets/team/`,

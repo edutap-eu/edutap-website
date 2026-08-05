@@ -2,6 +2,7 @@
 
 lint:
 	npm run check
+	npm run format:check
 
 reformat:
 	npm run format
