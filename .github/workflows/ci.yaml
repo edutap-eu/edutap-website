@@ -31,6 +31,8 @@ jobs:
         run: npm ci
       - name: Type-check content and components
         run: npm run check
+      - name: Check formatting
+        run: npm run format:check
       - name: Run tests
         # `pretest` builds the site, so a broken build fails here too.
         run: npm run test
