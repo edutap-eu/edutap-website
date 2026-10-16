@@ -4,7 +4,7 @@ import { getCollection } from "astro:content";
 
 /**
  * `getCollection` sorts entries by `id` as a *string*, not in JSON file
- * order: with 33 presentations that yields "-0, -1, -10, -11, ..., -2, -20",
+ * order: with 34 presentations that yields "-0, -1, -10, -11, ..., -2, -20",
  * scrambling every card. This bit the history timeline and, separately, the
  * presentations page - both times an entry-count assertion stayed green
  * while the order was silently wrong, because counting entries can't see
@@ -102,11 +102,11 @@ describe("collection ordering", () => {
     const source: Presentation[] = JSON.parse(
       readFileSync("src/data/presentations.json", "utf8"),
     );
-    expect(source).toHaveLength(33);
+    expect(source).toHaveLength(34);
 
     // presentations.astro renders two groups - "Lightning Talks" first, then
     // "Conference & Webinar Talks" - each internally kept in file order. A
-    // plain "sorted by file order" check across all 33 would miss a bug that
+    // plain "sorted by file order" check across all 34 would miss a bug that
     // only scrambles within one group, so the groups are checked separately
     // and in the same sequence the page renders them.
     const lightning = source
@@ -128,7 +128,7 @@ describe("collection ordering", () => {
     const sorted = (await getCollection("presentations")).sort(byFileOrder);
     expect(sorted[0].data.title).toBe("Lightning Talk: eduTAP");
     expect(sorted[0].data.file).toBe("Lightning_Talk_eduTAP_v3.pdf");
-    expect(sorted).toHaveLength(33);
+    expect(sorted).toHaveLength(34);
   });
 
   it("history sorted by file order begins with the first involvement", async () => {
