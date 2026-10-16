@@ -1,0 +1,38 @@
+name: zizmor
+
+# Audits the workflow files for GitHub-Actions-specific weaknesses: template
+# injection, credentials persisted by checkout, overly broad permissions,
+# unpinned actions. Overlaps with CodeQL's `actions` language, but checks
+# more of these rules. Findings go to Security → Code scanning.
+on:
+  pull_request:
+    paths: [".github/workflows/**"]
+  push:
+    branches: ["main"]
+    paths: [".github/workflows/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  zizmor:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    env:
+      # The action defaults to the latest release, which would change the
+      # rules under a green pipeline. Renovate bumps this through the
+      # `customManagers:githubActionsVersions` preset.
+      # renovate: datasource=pypi depName=zizmor
+      ZIZMOR_VERSION: "1.30.1"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Run zizmor
+        uses: zizmorcore/zizmor-action@85b2b9fb8e3325e7a23d7d0a9d7ba5ae0f999e3e # v0.7.1
+        with:
+          version: ${{ env.ZIZMOR_VERSION }}

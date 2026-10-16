@@ -1,42 +1,65 @@
 name: Test Website
 
-# The Pages workflow only runs on pushes to `main`, i.e. after a merge. This
-# workflow gives every pull request — including the ones Renovate opens for
-# dependency updates — the same check beforehand.
+# Every branch push and every pull request — including the ones Renovate
+# opens for dependency updates — is checked before it reaches `main`. The
+# Pages workflow calls this workflow (`workflow_call`) before it deploys, so
+# a push to `main` is held to the same standard without repeating the steps.
 on:
   pull_request:
   push:
     branches-ignore: ["main"]
+  workflow_call:
   workflow_dispatch:
 
 permissions:
   contents: read
 
-# Keyed on the branch, not on `github.ref`: a branch with an open pull request
-# fires both triggers, and `github.ref` differs between them
-# (refs/pull/N/merge vs refs/heads/<branch>), so the two runs would not cancel
-# each other and every push would be built twice.
+# One run per event and branch; a newer push supersedes an older run of the
+# same event only. Until 2026-10 the group ignored the event, so the
+# pull_request run cancelled the push run for the same commit, and GitHub
+# listed the cancelled run as a failed "test" check on every pull request.
 concurrency:
-  group: ci-${{ github.head_ref || github.ref_name }}
+  group: ci-${{ github.event_name }}-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 
 jobs:
   test:
+    # A branch in this repository is already tested by its push run; the
+    # pull_request run only adds a second, identical "test" check. It is kept
+    # for pull requests from forks, which have no push run here.
+    if: >-
+      github.event_name != 'pull_request'
+      || github.event.pull_request.head.repo.full_name != github.repository
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
       - name: Setup Node
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
           node-version-file: ".nvmrc"
           cache: npm
       - name: Install dependencies
         run: npm ci
-      - name: Type-check content and components
-        run: npm run check
-      - name: Check formatting
-        run: npm run format:check
+      # The same Make targets as locally — repeating the commands here would
+      # let CI and local checks drift apart.
+      - name: Type check and format check
+        run: make lint
       - name: Run tests
         # `pretest` builds the site, so a broken build fails here too.
-        run: npm run test
+        run: make test-local
+
+  dependency-review:
+    # Compares the dependencies of the pull request against its base and
+    # fails on a newly introduced dependency with a known critical
+    # vulnerability. Known vulnerabilities already on `main` do not fail it —
+    # those are Renovate's job (security PRs, weekly lock file maintenance).
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Review dependency changes
+        uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294 # v5.0.0
+        with:
+          fail-on-severity: critical
