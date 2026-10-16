@@ -8,11 +8,8 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 # Allow one concurrent deployment
 concurrency:
@@ -20,17 +17,35 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # Single deploy job since we're just deploying
+  # The checks of every pull request, run again on what is about to be
+  # deployed. A failure here stops the deploy.
+  #
+  # zizmor suggests the newer self-repository form `$/…` (GitHub changelog,
+  # 2026-07-30). The changelog names reusable workflow calls but shows no
+  # example for them, and this call can only be tested on `main` — where a
+  # mistake stops the deploy. Switch once the form is documented for
+  # `jobs.<id>.uses`.
+  test:
+    uses: ./.github/workflows/ci.yaml # zizmor: ignore[self-repository]
+
   deploy:
+    needs: test
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    # Only this job may deploy to Pages.
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
       - name: Setup Node
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
           # Follows .nvmrc rather than repeating the version here, where it
           # would silently drift once .nvmrc is bumped.
@@ -38,16 +53,12 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
-      - name: Type-check content and components
-        run: npm run check
-      - name: Check formatting
-        run: npm run format:check
-      - name: Run tests
-        run: npm run test
+      - name: Build
+        run: make build
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
         with:
           path: "dist"
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4

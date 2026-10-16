@@ -1,0 +1,51 @@
+name: CodeQL
+
+# Static analysis of the site's TypeScript/JavaScript and of the workflow
+# files themselves. Findings appear under Security → Code scanning and as
+# annotations on pull requests.
+#
+# A workflow file instead of GitHub's "default setup": this way languages,
+# triggers and the action version are visible and reviewable in the
+# repository, and Renovate keeps the action current.
+on:
+  pull_request:
+  push:
+    branches: ["main"]
+  schedule:
+    # Weekly, so new queries also run against code that has not changed.
+    - cron: "17 5 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: codeql-${{ github.event_name }}-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    name: analyze (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ["javascript-typescript", "actions"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@6f2ac81f5cd81fe351a197ba0b00d91d03cd2aee # v4.39.0
+        with:
+          languages: ${{ matrix.language }}
+          # Neither language needs a build to be analysed.
+          build-mode: none
+      - name: Analyze
+        uses: github/codeql-action/analyze@6f2ac81f5cd81fe351a197ba0b00d91d03cd2aee # v4.39.0
+        with:
+          category: "/language:${{ matrix.language }}"
