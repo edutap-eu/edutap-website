@@ -1,0 +1,17 @@
+eduTAP Logo — Export 2026-10-26
+
+Abstand Bildmarke–Wortmarke: ca. 119 statt 179 Einheiten,
+also zwei Drittel der vorherigen Bildvorlage.
+
+SVG: reine Vektorpfade, ohne eingebettete Rasterbilder oder externe Fonts.
+Die Konturen wurden aus dem freigegebenen Bildentwurf nachgezeichnet.
+Die Schrift ist Lato Bold aus dem bereitgestellten Styleguide, als Pfade:
+keine Fontinstallation erforderlich.
+Farben: #115794, #4097BE, #F07129, #D76525.
+Die Wortmarke und das freie Signet haben einen transparenten Hintergrund.
+Das Favicon behält die helle, abgerundete Kachel der Vorlage.
+
+PNG-Wort-Bild-Marke: 512, 1024 und 2048 Pixel Breite.
+PNG-Signet: 256, 512 und 1024 Pixel Kantenlänge.
+PNG-Favicon: 16, 32, 48, 64, 128, 256 und 512 Pixel Kantenlänge.
+16 Pixel ist eine stark reduzierte Darstellung; 32 Pixel oder SVG bevorzugen.
