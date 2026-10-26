@@ -24,8 +24,8 @@ const pathname = Astro.url.pathname;
         >
       </a>
 
-      <!-- inline navigation on >= md -->
-      <div class="hidden md:flex">
+      <!-- inline navigation on >= lg -->
+      <div class="hidden lg:flex">
         <NavLinks pathname={pathname} />
       </div>
 
@@ -62,8 +62,8 @@ const pathname = Astro.url.pathname;
     </div>
   </Container>
 
-  <!-- scrolling navigation on < md -->
-  <div class="flex md:hidden overflow-auto no-scrollbar py-4 px-4">
+  <!-- scrolling navigation on < lg -->
+  <div class="flex lg:hidden overflow-auto no-scrollbar py-4 px-4">
     <NavLinks pathname={pathname} />
   </div>
 </header>
