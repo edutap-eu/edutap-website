@@ -3,10 +3,10 @@ import { getCollection } from "astro:content";
 import { milestoneSchema, presentationSchema } from "../src/content.config";
 
 describe("content collections", () => {
-  it("loads all 33 presentations with unique ids", async () => {
+  it("loads all 34 presentations with unique ids", async () => {
     const entries = await getCollection("presentations");
-    expect(entries).toHaveLength(33);
-    expect(new Set(entries.map((e) => e.id)).size).toBe(33);
+    expect(entries).toHaveLength(34);
+    expect(new Set(entries.map((e) => e.id)).size).toBe(34);
   });
 
   it("gives every presentation a valid type", async () => {
