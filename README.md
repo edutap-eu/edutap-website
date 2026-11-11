@@ -106,28 +106,39 @@ short: "This is my first blog post" # short description shown on the news index 
 ## Dependency updates
 
 Dependency updates are raised by [Renovate](https://docs.renovatebot.com), configured in
-[`.github/renovate.json5`](.github/renovate.json5). Renovate keeps an open "Dependency Dashboard" issue listing
-every pending update, and opens grouped pull requests once a week (Monday morning, Europe/Berlin). Security
-fixes ignore that schedule and are raised immediately, labelled `security`.
+[`.github/renovate.json5`](.github/renovate.json5). That file only holds what is specific to this repository (the
+Astro, Tailwind CSS and Sentry groups); everything else comes from the shared eduTAP preset
+[`renovate-config.json5` in edutap-eu/.github](https://github.com/edutap-eu/.github/blob/main/renovate-config.json5):
+pull requests on Mondays (Europe/Berlin), weekly lock file maintenance, GitHub Actions pinned to commit SHAs, grouped
+dev tooling, and Node in `.nvmrc` only on even-numbered (LTS) releases — see <https://endoflife.date/nodejs>.
+Security fixes ignore the schedule and are raised immediately, labelled `security`; Renovate takes them from
+GitHub's advisories and from [osv.dev](https://osv.dev).
 
-Renovate runs as a hosted GitHub App, not as a workflow in this repository — **the configuration only takes effect
-once the [Mend Renovate app](https://github.com/apps/renovate) is installed for the organisation (or at least for
-this repository)**. Until then, `.github/renovate.json5` is inert.
+Renovate keeps an open "Dependency Dashboard" issue listing every pending update. It runs as the hosted
+[Mend Renovate app](https://github.com/apps/renovate), not as a workflow in this repository — without the app,
+`.github/renovate.json5` is inert.
 
-Updates are grouped so that packages which are only meaningful together end up in one pull request: Astro and its
-integrations, Tailwind CSS, Sentry, all non-major dev tooling, and GitHub Actions. Every pull request is
-type-checked, format-checked and tested by the "Test Website" workflow (see below), so a broken update fails
-before it can be merged. Node in `.nvmrc` is only offered even-numbered (LTS) releases —
-see <https://endoflife.date/nodejs>.
+## Checks and security
 
-## Deployment
+| Workflow                                        | Runs on                                    | What it does                                                                                    |
+| ----------------------------------------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| "Test Website" (`ci.yaml`)                      | every push to a branch, every pull request | `make lint` (type check, format check) and `make test-local` (build and tests)                  |
+| ↳ `dependency-review`                           | pull requests                              | fails if the pull request adds a dependency with a known **critical** vulnerability             |
+| "CodeQL" (`codeql.yaml`)                        | pull requests, `main`, weekly              | static analysis of TypeScript/JavaScript and of the workflow files                              |
+| "zizmor" (`zizmor.yaml`)                        | changes to `.github/workflows/`            | audits the workflows for injection, broad permissions, unpinned actions                         |
+| "Deploy static content to Pages" (`pages.yaml`) | pushes to `main`                           | calls "Test Website" first, then builds and publishes `dist/`; a failing check stops the deploy |
 
-Every pull request and every push to a branch other than `main` runs the "Test Website" workflow
-(`.github/workflows/ci.yaml`): it type-checks the project (`npm run check`), verifies formatting
-(`npm run format:check`) and runs the test suite (which builds the site as part of its `pretest` step). The deploy
-workflow below runs the same three, so a direct push to `main` is held to the same standard.
+The CI calls the same Make targets as local work, so the two cannot drift apart. A branch of this repository is
+tested by its push run only; the pull request run of "Test Website" is skipped for it and kept for pull requests
+from forks. CodeQL and zizmor report to **Security → Code scanning**; they annotate but do not block.
 
-Pushing to `main` triggers the "Deploy static content to Pages" GitHub Actions workflow
-(`.github/workflows/pages.yaml`), which runs the same checks as CI — type check, format check and the test suite,
-which builds the site as part of its `pretest` step — and then publishes `dist/` to GitHub Pages. It repeats the
-checks rather than trusting the pull request, because `main` can also be pushed to directly.
+### Repository settings no file can set
+
+These live in the repository settings, not in a diff. Whoever recreates the repository has to set them again.
+
+- **Secret scanning with push protection** is on: a push containing a recognised secret is rejected before it
+  reaches the history.
+- **Ruleset "main"**: changes reach `main` only through a pull request; force pushes and deleting the branch are
+  blocked. The "Test Website" `test` check and `dependency-review` are required once they exist on `main`.
+- **Dependabot alerts** are on, Dependabot security _updates_ are off — fixes come from Renovate alone, so there is
+  one source of update pull requests.
